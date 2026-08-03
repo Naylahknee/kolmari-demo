@@ -30,6 +30,31 @@
   a { color: #17305b; text-decoration: none; }
   .rail { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
   .rail > * { scroll-snap-align: start; flex: none; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  img, video, iframe { max-width: 100%; }
+  a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  .rail { -webkit-overflow-scrolling: touch; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .rail::-webkit-scrollbar { display: none; }
+  @media (max-width: 620px) {
+    header { position: sticky; top: 0; z-index: 20; padding: 13px 16px !important; gap: 8px !important; }
+    header > a:last-child { min-height: 44px; display: inline-flex; align-items: center; text-align: right; }
+    [data-mobile="greenbook-main"] { padding: 28px 16px calc(48px + env(safe-area-inset-bottom)) !important; }
+    [data-mobile="greenbook-main"] > h1 { font-size: clamp(26px, 8.5vw, 32px) !important; line-height: 1.15; overflow-wrap: anywhere; }
+    [data-mobile="greenbook-main"] section { margin-top: 34px !important; }
+    [data-mobile="greenbook-main"] section[style*="background:#17305b"] { padding: 21px 18px !important; border-radius: 14px !important; }
+    [data-mobile="greenbook-main"] [style*="grid-template-columns:repeat(auto-fit"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-mobile="greenbook-main"] blockquote { font-size: 16px !important; line-height: 1.55 !important; overflow-wrap: anywhere; }
+    [data-mobile="greenbook-main"] [aria-label*="Threads quote"] { width: 44px !important; height: 44px !important; }
+    [data-mobile="greenbook-main"] a { overflow-wrap: anywhere; }
+  }
+  @media (max-width: 380px) {
+    header span[style*="font-size:18px"] { display: none; }
+    [data-mobile="greenbook-main"] { padding-inline: 13px !important; }
+    [data-mobile="greenbook-main"] section[style*="background:#17305b"] { padding-inline: 15px !important; }
+  }
 </style>
 </helmet>
 
@@ -48,7 +73,7 @@
     <a href="app.html?from=greenbook" style="margin-left:auto;font-size:13px;font-weight:600;color:#42536e">&larr; Back to dashboard</a>
   </header>
 
-  <div style="max-width:960px;margin:0 auto;padding:40px 24px 64px">
+  <div data-mobile="greenbook-main" style="max-width:960px;margin:0 auto;padding:40px 24px 64px">
 
     <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">Greenbook</p>
     <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em">Research before you commit</h1>
