@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xwsd371zfp");
+</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Greenbook · Kolmari</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/kolmari-favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/kolmari-favicon-512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
+<meta name="theme-color" content="#0D1B39" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
+  a { color: #17305b; text-decoration: none; }
+  .rail { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
+  .rail > * { scroll-snap-align: start; flex: none; }
+</style>
+</helmet>
+
+<div style="font-family:Geist,system-ui,sans-serif;color:#17305b;background:#f7f8fb;min-height:100vh">
+
+  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px">
+    <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
+    A working preview of Kolmari — the real product isn't launched yet
+  </div>
+
+  <header style="padding:16px 32px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #e7ebf1;background:#fff">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
+      <img src="assets/kolmari-butterfly.png" alt="" width="26" height="19" style="display:block;width:26px;height:19px;object-fit:contain" />
+      <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
+    </a>
+    <a href="app.html" style="margin-left:auto;font-size:13px;font-weight:600;color:#42536e">&larr; Back to dashboard</a>
+  </header>
+
+  <div style="max-width:960px;margin:0 auto;padding:40px 24px 64px">
+
+    <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">Greenbook</p>
+    <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em">Research before you commit</h1>
+    <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#5a6a83;max-width:64ch">The belonging and community side of a move matters as much as the paperwork. Start with what your passport already gets you, then hear from people who've actually done this.</p>
+
+    <div style="margin-top:28px;background:#17305b;color:#fff;border-radius:16px;padding:26px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between">
+      <div style="min-width:0;max-width:52ch">
+        <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#f3c516">Start here</p>
+        <h2 style="margin:8px 0 0;font-family:Poppins,sans-serif;font-size:20px;font-weight:700">Check your Passport Index ranking</h2>
+        <p style="margin:7px 0 0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)">Before comparing visa routes, see how many countries you can already enter visa-free with the passport you hold. It changes which routes are worth your time.</p>
+      </div>
+      <a href="https://www.passportindex.org" target="_blank" rel="noopener noreferrer" style="flex:none;font-size:13.5px;font-weight:700;color:#17305b;background:#f3c516;padding:12px 22px;border-radius:999px" style-hover="background:#ffd633">Open Passport Index &#8599;</a>
+    </div>
+
+    <div style="margin-top:44px">
+      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">From the club</p>
+      <h2 style="margin:6px 0 0;font-family:Poppins,sans-serif;font-size:22px;font-weight:700">People who've made the move</h2>
+      <p style="margin:6px 0 18px;font-size:13.5px;color:#6b7a92">Placeholder quotes — real member stories go here once Kolmari Club is live.</p>
+      <div class="rail">
+        <sc-for list="{{ stories }}" as="s" hint-placeholder-count="5">
+          <div style="width:260px;background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:18px">
+            <p style="margin:0;font-size:13.5px;line-height:1.55;color:#17305b">&ldquo;{{ s.quote }}&rdquo;</p>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px">
+              <span style="width:30px;height:30px;border-radius:9999px;background:#eef1f6;display:grid;place-items:center;font-size:11px;font-weight:700;color:#8090a8">{{ s.initials }}</span>
+              <div style="min-width:0">
+                <div style="font-size:12.5px;font-weight:700;color:#17305b">{{ s.name }}</div>
+                <div style="font-size:11.5px;color:#8090a8">{{ s.place }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="margin-top:44px">
+      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">Watch and learn</p>
+      <h2 style="margin:6px 0 0;font-family:Poppins,sans-serif;font-size:22px;font-weight:700">Expat video diaries</h2>
+      <p style="margin:6px 0 18px;font-size:13.5px;color:#6b7a92">Placeholder — real creator videos go here.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
+        <sc-for list="{{ videos }}" as="v" hint-placeholder-count="4">
+          <div style="border:1px solid #e7ebf1;border-radius:12px;overflow:hidden;background:#fff">
+            <div style="aspect-ratio:16/9;background:#eef1f6;display:flex;align-items:center;justify-content:center;color:#8090a8">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36"><path d="M8 5v14l11-7z"></path></svg>
+            </div>
+            <div style="padding:12px 13px">
+              <div style="font-size:13px;font-weight:700;color:#17305b">{{ v.title }}</div>
+              <div style="font-size:11.5px;color:#8090a8;margin-top:2px">{{ v.sub }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      stories: [
+        { quote: 'The hardest part was believing the numbers would actually work. They did.', initials: 'MR', name: 'M.R.', place: 'Moved to Portugal' },
+        { quote: 'I wish someone had told me about the apostille timeline before I booked flights.', initials: 'JT', name: 'J.T.', place: 'Moved to Mexico' },
+        { quote: 'Right of Abode changed the entire calculation for us as a family.', initials: 'AO', name: 'A.O.', place: 'Moved to Ghana' },
+        { quote: 'The community was more useful than any spreadsheet in the first three months.', initials: 'KP', name: 'K.P.', place: 'Moved to Portugal' },
+        { quote: 'Slower than I expected, cheaper than I feared.', initials: 'DL', name: 'D.L.', place: 'Moved to Mexico' },
+      ],
+      videos: [
+        { title: 'Why I moved to Portugal', sub: '4 min · placeholder' },
+        { title: 'Mexico, one year later', sub: '6 min · placeholder' },
+        { title: 'Building a life in Ghana', sub: '5 min · placeholder' },
+        { title: 'What nobody tells you about apostilles', sub: '8 min · placeholder' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
