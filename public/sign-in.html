@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sign in · Kolmari</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/kolmari-favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/kolmari-favicon-512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
+<meta name="theme-color" content="#0D1B39" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
+  a { color: #17305b; text-decoration: none; }
+  a:hover { color: #0f2140; }
+  ::selection { background: #f3c516; color: #17305b; }
+  input::placeholder { color: #9aa6b8; }
+</style>
+</helmet>
+
+<div style="font-family:Geist,system-ui,sans-serif;color:#17305b;min-height:100vh;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))">
+
+  <div style="display:flex;flex-direction:column;padding:32px clamp(24px,6vw,88px) 40px;background:#f7f8fb">
+    <a href="landing.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
+      <img src="assets/kolmari-butterfly.png" alt="" width="28" height="20" style="display:block;width:28px;height:20px;object-fit:contain" />
+      <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
+    </a>
+
+    <div style="margin:auto 0;width:100%;max-width:420px;padding:48px 0">
+      <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:34px;line-height:1.1;letter-spacing:-.02em">Welcome back</h1>
+      <p style="margin:12px 0 0;font-size:15px;line-height:1.6;color:#42536e">Pick up your plan where you left off.</p>
+      <p style="margin:8px 0 0;font-size:12.5px;line-height:1.5;color:#9a7d0a">Demo mode: sign in with demo@kolmari.com / kolmari2026</p>
+
+      <form onSubmit="{{ submit }}" style="display:flex;flex-direction:column;gap:16px;margin-top:32px">
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-size:13px;font-weight:600;color:#42536e">Email</span>
+          <input type="email" name="email" autoComplete="email" placeholder="you@email.com" required="{{ true }}" style="font-family:inherit;font-size:15px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:12px;padding:13px 15px;outline:none" style-focus="border-color:#f3c516;box-shadow:0 0 0 3px rgba(243,197,22,.25)" />
+        </label>
+        <label style="display:flex;flex-direction:column;gap:7px">
+          <span style="display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;color:#42536e">Password <a href="#reset" style="font-size:12px;font-weight:500;color:#9a7d0a">Forgot?</a></span>
+          <input type="password" name="password" autoComplete="current-password" placeholder="••••••••" required="{{ true }}" style="font-family:inherit;font-size:15px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:12px;padding:13px 15px;outline:none" style-focus="border-color:#f3c516;box-shadow:0 0 0 3px rgba(243,197,22,.25)" />
+        </label>
+        <label style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:#42536e;cursor:pointer">
+          <input type="checkbox" checked="{{ remember }}" onChange="{{ toggleRemember }}" style="width:16px;height:16px;accent-color:#f3c516;margin:0" />
+          Keep me signed in on this device
+        </label>
+        <sc-if value="{{ authErr }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0;font-size:13px;line-height:1.5;color:#b3261e;background:#fdecea;border:1px solid #f5c6c3;border-radius:9px;padding:10px 13px">That email or password doesn't match the demo account. Use demo@kolmari.com / kolmari2026.</p>
+        </sc-if>
+        <button type="submit" style="margin-top:4px;font-family:inherit;font-size:15px;font-weight:600;color:#17305b;background:#f3c516;border:none;border-radius:999px;padding:14px 26px;cursor:pointer" style-hover="background:#ffd633">Sign in</button>
+      </form>
+
+      <div style="display:flex;align-items:center;gap:14px;margin:26px 0">
+        <div style="flex:1;height:1px;background:#e4e8f0"></div>
+        <span style="font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9aa6b8">or</span>
+        <div style="flex:1;height:1px;background:#e4e8f0"></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="#" onClick="{{ notReady }}" title="Not wired up yet — use email above" aria-disabled="{{ true }}" style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:14.5px;font-weight:600;background:#fff;border:1px solid #dde3ec;border-radius:999px;padding:13px 22px;opacity:.55;cursor:not-allowed">Continue with Google</a>
+        <a href="#" onClick="{{ notReady }}" title="Not wired up yet — use email above" aria-disabled="{{ true }}" style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:14.5px;font-weight:600;background:#fff;border:1px solid #dde3ec;border-radius:999px;padding:13px 22px;opacity:.55;cursor:not-allowed">Continue with a sign-in link</a>
+      </div>
+
+      <p style="margin:28px 0 0;font-size:14px;color:#42536e">New to Kolmari? <a href="landing.html#how" style="font-weight:600;color:#9a7d0a">Start your plan</a></p>
+    </div>
+
+    <p style="margin:0;font-size:12.5px;color:#7a879c">© Kolmari · <a href="#terms" style="color:#7a879c">Terms</a> · <a href="#privacy" style="color:#7a879c">Privacy</a></p>
+  </div>
+
+  <div style="position:relative;background:#0d1b39;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,5vw,64px);min-height:520px">
+    <div style="position:absolute;inset:0">
+      <image-slot id="kol-signin-art" shape="rect" placeholder="Drop the sign-in photo — coastline, terrace, arrival"></image-slot>
+    </div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,27,57,.55) 0%,rgba(13,27,57,.8) 100%)"></div>
+    <div style="position:relative;max-width:420px">
+      <img src="assets/kolmari-butterfly.png" alt="" width="30" height="22" style="display:block;width:30px;height:22px;object-fit:contain;margin-bottom:20px" />
+      <p style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-style:italic;font-size:26px;line-height:1.3;color:#fff;text-wrap:pretty">Your plan is still where you left it — routes, costs, and the next step.</p>
+      <p style="margin:16px 0 0;font-size:14.5px;line-height:1.6;color:#b9c6dc">Kolmari keeps every destination you compared and every document you gathered in one place.</p>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { remember: true, authErr: false };
+  renderVals() {
+    return {
+      remember: this.state.remember,
+      toggleRemember: () => this.setState(s => ({ remember: !s.remember })),
+      submit: (e) => {
+        e.preventDefault();
+        const email = (e.target.email.value || '').trim().toLowerCase();
+        const password = e.target.password.value || '';
+        if (email === 'demo@kolmari.com' && password === 'kolmari2026') {
+          window.location.href = 'index.html';
+        } else {
+          this.setState({ authErr: true });
+        }
+      },
+      authErr: this.state.authErr,
+      notReady: (e) => e.preventDefault(),
+    };
+  }
+}
+</script>
+</body>
+</html>
