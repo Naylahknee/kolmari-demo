@@ -30,6 +30,31 @@
   a { color: #17305b; text-decoration: none; }
   .rail { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x mandatory; }
   .rail > * { scroll-snap-align: start; flex: none; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  img, video, iframe { max-width: 100%; }
+  a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  .rail { -webkit-overflow-scrolling: touch; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .rail::-webkit-scrollbar { display: none; }
+  @media (max-width: 620px) {
+    header { position: sticky; top: 0; z-index: 20; padding: 13px 16px !important; gap: 8px !important; }
+    header > a:last-child { min-height: 44px; display: inline-flex; align-items: center; text-align: right; }
+    [data-mobile="greenbook-main"] { padding: 28px 16px calc(48px + env(safe-area-inset-bottom)) !important; }
+    [data-mobile="greenbook-main"] > h1 { font-size: clamp(26px, 8.5vw, 32px) !important; line-height: 1.15; overflow-wrap: anywhere; }
+    [data-mobile="greenbook-main"] section { margin-top: 34px !important; }
+    [data-mobile="greenbook-main"] section[style*="background:#17305b"] { padding: 21px 18px !important; border-radius: 14px !important; }
+    [data-mobile="greenbook-main"] [style*="grid-template-columns:repeat(auto-fit"] { grid-template-columns: minmax(0,1fr) !important; }
+    [data-mobile="greenbook-main"] blockquote { font-size: 16px !important; line-height: 1.55 !important; overflow-wrap: anywhere; }
+    [data-mobile="greenbook-main"] [aria-label*="Threads quote"] { width: 44px !important; height: 44px !important; }
+    [data-mobile="greenbook-main"] a { overflow-wrap: anywhere; }
+  }
+  @media (max-width: 380px) {
+    header span[style*="font-size:18px"] { display: none; }
+    [data-mobile="greenbook-main"] { padding-inline: 13px !important; }
+    [data-mobile="greenbook-main"] section[style*="background:#17305b"] { padding-inline: 15px !important; }
+  }
 </style>
 </helmet>
 
@@ -45,62 +70,83 @@
       <img src="assets/kolmari-butterfly.png" alt="" width="26" height="19" style="display:block;width:26px;height:19px;object-fit:contain" />
       <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
     </a>
-    <a href="app.html" style="margin-left:auto;font-size:13px;font-weight:600;color:#42536e">&larr; Back to dashboard</a>
+    <a href="app.html?from=greenbook" style="margin-left:auto;font-size:13px;font-weight:600;color:#42536e">&larr; Back to dashboard</a>
   </header>
 
-  <div style="max-width:960px;margin:0 auto;padding:40px 24px 64px">
+  <div data-mobile="greenbook-main" style="max-width:960px;margin:0 auto;padding:40px 24px 64px">
 
     <p style="margin:0 0 8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">Greenbook</p>
     <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:32px;letter-spacing:-.02em">Research before you commit</h1>
     <p style="margin:10px 0 0;font-size:15px;line-height:1.6;color:#5a6a83;max-width:64ch">The belonging and community side of a move matters as much as the paperwork. Start with what your passport already gets you, then hear from people who've actually done this.</p>
 
-    <div style="margin-top:28px;background:#17305b;color:#fff;border-radius:16px;padding:26px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between">
-      <div style="min-width:0;max-width:52ch">
-        <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#f3c516">Start here</p>
-        <h2 style="margin:8px 0 0;font-family:Poppins,sans-serif;font-size:20px;font-weight:700">Check your Passport Index ranking</h2>
-        <p style="margin:7px 0 0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)">Before comparing visa routes, see how many countries you can already enter visa-free with the passport you hold. It changes which routes are worth your time.</p>
+    <section style="margin-top:28px;background:#17305b;color:#fff;border-radius:16px;padding:26px 28px">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-start;gap:18px;justify-content:space-between">
+        <div style="min-width:0;max-width:56ch">
+          <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:#f3c516">Matched-country research</p>
+          <h2 style="margin:8px 0 0;font-family:Poppins,sans-serif;font-size:20px;font-weight:700">Passport Index for your matches</h2>
+          <p style="margin:7px 0 0;font-size:13px;line-height:1.6;color:rgba(255,255,255,.82)">Open the country page for every destination in your current match set. These links update from the matched-country list used by this page.</p>
+        </div>
+        <span style="flex:none;font-size:11px;font-weight:700;color:#f3c516;padding:5px 10px;border-radius:999px;background:rgba(243,197,22,.12)">{{ passportCount }} matches</span>
       </div>
-      <a href="https://www.passportindex.org" target="_blank" rel="noopener noreferrer" style="flex:none;font-size:13.5px;font-weight:700;color:#17305b;background:#f3c516;padding:12px 22px;border-radius:999px" style-hover="background:#ffd633">Open Passport Index &#8599;</a>
-    </div>
-
-    <div style="margin-top:44px">
-      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">From the club</p>
-      <h2 style="margin:6px 0 0;font-family:Poppins,sans-serif;font-size:22px;font-weight:700">People who've made the move</h2>
-      <p style="margin:6px 0 18px;font-size:13.5px;color:#6b7a92">Placeholder quotes — real member stories go here once Kolmari Club is live.</p>
-      <div class="rail">
-        <sc-for list="{{ stories }}" as="s" hint-placeholder-count="5">
-          <div style="width:260px;background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:18px">
-            <p style="margin:0;font-size:13.5px;line-height:1.55;color:#17305b">&ldquo;{{ s.quote }}&rdquo;</p>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:14px">
-              <span style="width:30px;height:30px;border-radius:9999px;background:#eef1f6;display:grid;place-items:center;font-size:11px;font-weight:700;color:#8090a8">{{ s.initials }}</span>
-              <div style="min-width:0">
-                <div style="font-size:12.5px;font-weight:700;color:#17305b">{{ s.name }}</div>
-                <div style="font-size:11.5px;color:#8090a8">{{ s.place }}</div>
-              </div>
-            </div>
-          </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:18px">
+        <sc-for list="{{ passportLinks }}" as="p" hint-placeholder-count="3">
+          <a href="{{ p.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:10px;padding:12px 13px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);color:#fff" style-hover="background:rgba(243,197,22,.14);border-color:rgba(243,197,22,.55)">
+            <span style="width:34px;height:25px;border-radius:5px;background:#f3c516;color:#0d1b39;font-size:10px;font-weight:800;display:grid;place-items:center;flex:none">{{ p.cc }}</span>
+            <span style="min-width:0;flex:1"><span style="font-size:13px;font-weight:700;display:block">{{ p.name }}</span><span style="font-size:10.5px;color:#9fb0cc;display:block;margin-top:1px">Passport Index country page</span></span>
+            <span aria-hidden="true" style="font-size:16px;color:#f3c516">↗</span>
+          </a>
         </sc-for>
       </div>
-    </div>
+    </section>
 
-    <div style="margin-top:44px">
+    <section style="margin-top:44px">
+      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">From The Internet</p>
+      <h2 style="margin:6px 0 0;font-family:Poppins,sans-serif;font-size:22px;font-weight:700">Relocation conversations on Threads</h2>
+      <p style="margin:6px 0 18px;font-size:13.5px;color:#6b7a92">Public posts connected to your matched destinations. Open the source thread for the full conversation and context.</p>
+      <div style="position:relative;background:#fff;border:1px solid #e7ebf1;border-radius:16px;box-shadow:0 8px 28px -22px rgba(13,27,57,.5);padding:22px 22px 18px;min-height:190px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:31px;height:31px;border-radius:9999px;background:#17305b;color:#f3c516;display:grid;place-items:center;font-size:13px;font-weight:800;flex:none">@</span>
+          <span style="min-width:0;flex:1"><span style="font-size:12.5px;font-weight:700;color:#17305b;display:block">{{ story.source }}</span><span style="font-size:11px;color:#8090a8;display:block">{{ story.place }}</span></span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:#fbeeb6;color:#7a5c05">{{ story.countryLabel }}</span>
+        </div>
+        <blockquote style="margin:17px 0 0;font-family:Poppins,sans-serif;font-size:18px;font-weight:600;line-height:1.55;letter-spacing:-.01em;color:#17305b">&ldquo;{{ story.quote }}&rdquo;</blockquote>
+        <a href="{{ story.url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:11.5px;font-weight:700;color:#3a5a94">Open source thread <span aria-hidden="true">↗</span></a>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid #eef1f6">
+          <div style="display:flex;align-items:center;gap:6px">
+            <sc-for list="{{ storyDots }}" as="d" hint-placeholder-count="4"><button sc-camel-on-click="{{ d.go }}" aria-label="{{ d.label }}" aria-current="{{ d.current }}" style="{{ d.style }}"></button></sc-for>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:11px;color:#8090a8;margin-right:3px">{{ storyPosition }}</span>
+            <button sc-camel-on-click="{{ prevStory }}" aria-label="Previous Threads quote" style="width:34px;height:34px;border-radius:9999px;border:1px solid #dbe1ea;background:#fff;color:#17305b;display:grid;place-items:center" style-hover="border-color:#f3c516;background:#fdf8e3">←</button>
+            <button sc-camel-on-click="{{ nextStory }}" aria-label="Next Threads quote" style="width:34px;height:34px;border-radius:9999px;border:1px solid #17305b;background:#17305b;color:#fff;display:grid;place-items:center" style-hover="background:#0f2140">→</button>
+          </div>
+        </div>
+      </div>
+      <p style="margin:10px 0 0;font-size:10.5px;line-height:1.5;color:#aab4c4">Public social posts are personal experiences, not verified relocation advice. Quotes are brief excerpts and link to their original context.</p>
+    </section>
+
+    <section style="margin-top:44px">
       <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#c99a00">Watch and learn</p>
       <h2 style="margin:6px 0 0;font-family:Poppins,sans-serif;font-size:22px;font-weight:700">Expat video diaries</h2>
-      <p style="margin:6px 0 18px;font-size:13.5px;color:#6b7a92">Placeholder — real creator videos go here.</p>
+      <p style="margin:6px 0 18px;font-size:13.5px;color:#6b7a92">Firsthand relocation stories and practical document guidance for your matches.</p>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">
         <sc-for list="{{ videos }}" as="v" hint-placeholder-count="4">
-          <div style="border:1px solid #e7ebf1;border-radius:12px;overflow:hidden;background:#fff">
-            <div style="aspect-ratio:16/9;background:#eef1f6;display:flex;align-items:center;justify-content:center;color:#8090a8">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36"><path d="M8 5v14l11-7z"></path></svg>
-            </div>
-            <div style="padding:12px 13px">
-              <div style="font-size:13px;font-weight:700;color:#17305b">{{ v.title }}</div>
-              <div style="font-size:11.5px;color:#8090a8;margin-top:2px">{{ v.sub }}</div>
-            </div>
-          </div>
+          <a href="{{ v.url }}" target="_blank" rel="noopener noreferrer" style="display:flex;flex-direction:column;border:1px solid #e7ebf1;border-radius:12px;overflow:hidden;background:#fff;color:inherit;transition:.16s" style-hover="border-color:#f3c516;transform:translateY(-2px);box-shadow:0 8px 22px -14px rgba(16,34,68,.45)">
+            <span style="position:relative;display:block;aspect-ratio:16/9;background:#eef1f6;overflow:hidden">
+              <img src="{{ v.thumb }}" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover">
+              <span style="position:absolute;inset:0;background:linear-gradient(to top,rgba(13,27,57,.44),rgba(13,27,57,0) 60%)"></span>
+              <span style="position:absolute;left:11px;bottom:10px;width:34px;height:34px;border-radius:9999px;background:#f3c516;color:#0d1b39;display:grid;place-items:center;box-shadow:0 4px 12px rgba(13,27,57,.3)"><svg viewBox="0 0 24 24" fill="currentColor" width="17" height="17"><path d="M8 5v14l11-7z"></path></svg></span>
+            </span>
+            <span style="display:flex;flex-direction:column;gap:6px;padding:12px 13px 14px;flex:1">
+              <span style="font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#7a5c05">{{ v.topic }}</span>
+              <span style="font-size:13px;font-weight:700;line-height:1.4;color:#17305b">{{ v.title }}</span>
+              <span style="font-size:11.5px;color:#8090a8;margin-top:auto">{{ v.sub }}</span>
+            </span>
+          </a>
         </sc-for>
       </div>
-    </div>
+      <p style="margin:10px 0 0;font-size:10.5px;line-height:1.5;color:#aab4c4">Videos open on YouTube. Kolmari curates these sources but does not endorse every claim made by a creator.</p>
+    </section>
 
   </div>
 </div>
@@ -108,21 +154,68 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
+  state = { storyIndex: 0 };
+
   renderVals() {
+    const catalog = {
+      pt: { cc: 'PT', name: 'Portugal' },
+      mx: { cc: 'MX', name: 'Mexico' },
+      gh: { cc: 'GH', name: 'Ghana' },
+    };
+    let matchedKeys = ['pt', 'mx', 'gh'];
+    try {
+      const saved = JSON.parse(localStorage.getItem('kolmari:matched-countries') || '[]');
+      if (Array.isArray(saved) && saved.length) {
+        const valid = saved.filter(k => catalog[k]);
+        if (valid.length) matchedKeys = valid;
+      }
+    } catch (e) {}
+
+    const passportLinks = matchedKeys.map(k => ({
+      cc: catalog[k].cc,
+      name: catalog[k].name,
+      url: 'https://www.passportindex.org/?country=' + k,
+    }));
+
+    const allStories = [
+      { country: 'pt', countryLabel: 'Portugal', quote: 'A friend of mine moved there last year. She has a great community there.', source: 'Threads discussion', place: 'Thread hosted by @glographics', url: 'https://www.threads.net/@glographics/post/DE-DbcpRzNo' },
+      { country: 'mx', countryLabel: 'Mexico', quote: 'I moved to Mexico and miss some food items.', source: 'Threads discussion', place: 'Thread hosted by @drjolenebrighten', url: 'https://www.threads.net/@drjolenebrighten/post/C7bUmuouCsY' },
+      { country: 'gh', countryLabel: 'Ghana', quote: "Three years ago I moved to Ghana full-time. It didn't make sense to many, but I knew it was the right step.", source: '@misssilverspoon on Threads', place: 'Living and building in Ghana', url: 'https://www.threads.net/@misssilverspoon' },
+      { country: 'mx', countryLabel: 'Mexico', quote: 'Mexico has been a life changing experience. It was something I prayed hard about before God answered.', source: '@justbeingkissha on Threads', place: 'A personal relocation reflection', url: 'https://www.threads.net/@justbeingkissha' },
+    ];
+    const stories = allStories.filter(s => matchedKeys.indexOf(s.country) >= 0);
+    const storyIndex = stories.length ? (this.state.storyIndex || 0) % stories.length : 0;
+    const story = stories[storyIndex] || allStories[0];
+    const goStory = i => () => this.setState({ storyIndex: i });
+    const nextStory = () => this.setState({ storyIndex: (storyIndex + 1) % stories.length });
+    const prevStory = () => this.setState({ storyIndex: (storyIndex - 1 + stories.length) % stories.length });
+    const storyDots = stories.map((s, i) => ({
+      label: 'Show quote ' + (i + 1) + ' about ' + s.countryLabel,
+      current: i === storyIndex ? 'true' : null,
+      go: goStory(i),
+      style: 'width:' + (i === storyIndex ? '20px' : '7px') + ';height:7px;border-radius:9999px;transition:.16s;background:' + (i === storyIndex ? '#f3c516' : '#dbe1ea'),
+    }));
+
+    const allVideos = [
+      { country: 'pt', topic: 'Why I moved to Portugal', id: 'hMEzTv8jCCw', title: 'Finding peace and community as a Black American in Portugal', sub: 'YouTube · Portugal' },
+      { country: 'mx', topic: 'Mexico, one year later', id: 'ffDNt7f8KdY', title: 'Living in Mexico: Expat Life, Local Culture & What to Expect', sub: 'YouTube · Mexico' },
+      { country: 'gh', topic: 'Building a life in Ghana', id: 'Ef2rwOO_IOQ', title: 'How To Move To Ghana With Family | My Journey To The Motherland', sub: 'YouTube · Ghana' },
+      { country: 'all', topic: 'What nobody tells you about apostilles', id: 'r7bM-FpsMiI', title: 'What is an Apostille and Why Do You Need One?', sub: 'YouTube · Documents' },
+    ];
+    const videos = allVideos.filter(v => v.country === 'all' || matchedKeys.indexOf(v.country) >= 0).map(v => Object.assign({}, v, {
+      url: 'https://www.youtube.com/watch?v=' + v.id,
+      thumb: 'https://i.ytimg.com/vi/' + v.id + '/hqdefault.jpg',
+    }));
+
     return {
-      stories: [
-        { quote: 'The hardest part was believing the numbers would actually work. They did.', initials: 'MR', name: 'M.R.', place: 'Moved to Portugal' },
-        { quote: 'I wish someone had told me about the apostille timeline before I booked flights.', initials: 'JT', name: 'J.T.', place: 'Moved to Mexico' },
-        { quote: 'Right of Abode changed the entire calculation for us as a family.', initials: 'AO', name: 'A.O.', place: 'Moved to Ghana' },
-        { quote: 'The community was more useful than any spreadsheet in the first three months.', initials: 'KP', name: 'K.P.', place: 'Moved to Portugal' },
-        { quote: 'Slower than I expected, cheaper than I feared.', initials: 'DL', name: 'D.L.', place: 'Moved to Mexico' },
-      ],
-      videos: [
-        { title: 'Why I moved to Portugal', sub: '4 min · placeholder' },
-        { title: 'Mexico, one year later', sub: '6 min · placeholder' },
-        { title: 'Building a life in Ghana', sub: '5 min · placeholder' },
-        { title: 'What nobody tells you about apostilles', sub: '8 min · placeholder' },
-      ],
+      passportLinks,
+      passportCount: String(passportLinks.length),
+      story,
+      storyDots,
+      storyPosition: (storyIndex + 1) + ' of ' + stories.length,
+      nextStory,
+      prevStory,
+      videos,
     };
   }
 }

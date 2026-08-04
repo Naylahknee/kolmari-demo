@@ -31,6 +31,45 @@
   a { color: #17305b; text-decoration: none; }
   a:hover { color: #0f2140; }
   ::selection { background: #f3c516; color: #17305b; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  img, image-slot { max-width: 100%; }
+  a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  [data-mobile="mobile-login"], [data-mobile="menu-toggle"] { display: none; }
+  @media (max-width: 780px) {
+    header > div { position: relative; padding: 10px 16px !important; gap: 10px !important; }
+    [data-mobile="mobile-login"] { display: inline-flex !important; align-items: center; min-height: 44px; margin-left: auto; padding: 8px 4px; }
+    [data-mobile="menu-toggle"] { display: grid !important; flex: none; }
+    header nav { display: none !important; position: absolute; top: calc(100% + 8px); left: 16px; right: 16px; z-index: 30; margin-left: 0 !important; padding: 10px; flex-direction: column; align-items: stretch !important; gap: 2px !important; background: #fff; border: 1px solid #dfe5ee; border-radius: 14px; box-shadow: 0 18px 44px -22px rgba(13,27,57,.55); }
+    header nav[data-open="true"] { display: flex !important; }
+    header nav a { display: flex !important; align-items: center; min-height: 44px; padding: 10px 12px !important; border-radius: 9px; font-size: 14px !important; }
+    header nav a:hover { background: #f4f6f9; }
+    header nav [data-mobile="desktop-login"] { display: none !important; }
+    header nav a:last-child { justify-content: center; margin-top: 4px; white-space: nowrap; }
+    #top { padding: 44px 18px 0 !important; }
+    #top > div { gap: 30px !important; }
+    #top h1 { font-size: clamp(36px, 11vw, 48px) !important; overflow-wrap: anywhere; }
+    #top [style*="height:420px"] { height: 290px !important; border-radius: 18px !important; }
+    #how, #club { padding: 64px 18px !important; }
+    #questions { padding: 64px 18px !important; }
+    #how h2, #questions h2 { font-size: clamp(28px, 8vw, 34px) !important; }
+    #club [style*="padding:38px 34px"] { padding: 28px 22px !important; }
+    #club h2 { font-size: 26px !important; }
+    section[style*="background:#0f2140"] [style*="padding:64px 32px"] { padding: 48px 18px !important; }
+    section[style*="background:#0f2140"] h2 { font-size: 29px !important; }
+    footer { padding: 26px 18px !important; }
+    footer > div { justify-content: center !important; text-align: center; }
+  }
+  @media (max-width: 430px) {
+    #top { padding-top: 36px !important; }
+    #top h1 { font-size: 35px !important; }
+    #top [style*="margin-top:32px"] > a { width: 100%; text-align: center; }
+    #top [style*="height:420px"] { height: 240px !important; }
+    #how, #club, #questions { padding-top: 52px !important; padding-bottom: 52px !important; }
+    #questions button { padding: 20px 18px 22px !important; min-height: 48px; }
+  }
 </style>
 </helmet>
 
@@ -40,18 +79,23 @@
     <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
     A working preview of Kolmari — the real product isn't launched yet
   </div>
-  <header style="position:sticky;top:0;z-index:20;background:rgba(247,248,251,.88);backdrop-filter:blur(10px);border-bottom:1px solid #e4e8f0">
-    <div style="max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:28px">
-      <a href="#top" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
+  <header style="position:sticky;top:0;z-index:20;background:rgba(247,248,251,.94);backdrop-filter:blur(10px);border-bottom:1px solid #e4e8f0">
+    <div data-mobile="header-inner" style="max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;gap:28px">
+      <a href="#top" sc-camel-on-click="{{ closeMenu }}" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
         <img src="assets/kolmari-butterfly.png" alt="" width="28" height="20" style="display:block;width:28px;height:20px;object-fit:contain" />
         <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
       </a>
-      <nav style="margin-left:auto;display:flex;align-items:center;gap:26px">
-        <a href="#how" style="font-size:14px;font-weight:500;color:#42536e">How it works</a>
-        <a href="#questions" style="font-size:14px;font-weight:500;color:#42536e">Why Kolmari</a>
-        <a href="#club" style="font-size:14px;font-weight:500;color:#42536e">Kolmari Club</a>
-        <a href="access.html" style="font-size:14px;font-weight:500;color:#42536e">Have a code?</a>
-        <a href="quiz.html" style="background:#f3c516;color:#17305b;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px" style-hover="background:#ffd633">Get started</a>
+      <a data-mobile="mobile-login" href="access.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:13px;font-weight:700;color:#17305b">Log in</a>
+      <button data-mobile="menu-toggle" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuExpanded }}" aria-controls="landing-navigation" aria-label="{{ menuLabel }}" style="width:44px;height:44px;border:1px solid #dbe1ea;border-radius:10px;background:#fff;color:#17305b;place-items:center;cursor:pointer">
+        <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></sc-if>
+        <sc-if value="{{ menuIsOpen }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></sc-if>
+      </button>
+      <nav id="landing-navigation" data-mobile="header-nav" data-open="{{ menuExpanded }}" aria-label="Primary navigation" style="margin-left:auto;display:flex;align-items:center;gap:26px">
+        <a href="#how" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:500;color:#42536e">How it works</a>
+        <a href="#questions" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:500;color:#42536e">Why Kolmari</a>
+        <a href="#club" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:500;color:#42536e">Kolmari Club</a>
+        <a data-mobile="desktop-login" href="access.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:600;color:#42536e">Log in</a>
+        <a href="quiz.html" sc-camel-on-click="{{ closeMenu }}" style="background:#f3c516;color:#17305b;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px" style-hover="background:#ffd633">Get started</a>
       </nav>
     </div>
   </header>
@@ -185,11 +229,18 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180}}">
 class Component extends DCLogic {
-  state = { open: null };
+  state = { open: null, menuOpen: false };
   pick(i) { this.setState(s => ({ open: s.open === i ? null : i })); }
   renderVals() {
     const withClosed = (arr) => arr.map(o => ({ ...o, closed: !o.open }));
+    const menuIsOpen = !!this.state.menuOpen;
     return {
+      menuIsOpen,
+      menuClosed: !menuIsOpen,
+      menuExpanded: menuIsOpen ? 'true' : 'false',
+      menuLabel: menuIsOpen ? 'Close navigation menu' : 'Open navigation menu',
+      toggleMenu: () => this.setState(state => ({ menuOpen: !state.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
       steps: [
         { n: '1', t: 'Choose a destination', slot: 'kol-land-step1', ph: 'Drop a globe or map photo',
           d: 'Compare countries, routes, and monthly costs side by side — with the same numbers behind every screen.' },

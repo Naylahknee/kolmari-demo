@@ -29,10 +29,29 @@
   body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
   a { color: #17305b; text-decoration: none; }
   ::selection { background: #f3c516; color: #17305b; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  button, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  [data-mobile="quiz-page"] { min-height: 100dvh !important; }
+  @media (max-width: 600px) {
+    header { padding: 14px 18px !important; }
+    [data-mobile="quiz-shell"] { align-items: flex-start !important; padding: 18px 16px calc(32px + env(safe-area-inset-bottom)) !important; }
+    [data-mobile="quiz-shell"] h1 { font-size: clamp(24px, 7.5vw, 28px) !important; line-height: 1.2; overflow-wrap: anywhere; }
+    [data-mobile="quiz-shell"] button, [data-mobile="quiz-shell"] a { min-height: 48px; }
+    [data-mobile="quiz-actions"] { flex-wrap: wrap; align-items: stretch !important; }
+    [data-mobile="quiz-actions"] > button:first-child { flex: 1 1 100%; text-align: center; }
+    [data-mobile="quiz-actions"] > button:last-child { flex: 1 1 100%; text-align: center; }
+  }
+  @media (max-width: 380px) {
+    [data-mobile="quiz-shell"] { padding-inline: 13px !important; }
+    [data-mobile="quiz-shell"] [style*="flex-wrap:wrap"] button { flex: 1 1 100%; text-align: center; }
+  }
 </style>
 </helmet>
 
-<div style="font-family:Geist,system-ui,sans-serif;color:#17305b;background:#f7f8fb;min-height:100vh;display:flex;flex-direction:column">
+<div data-mobile="quiz-page" style="font-family:Geist,system-ui,sans-serif;color:#17305b;background:#f7f8fb;min-height:100vh;display:flex;flex-direction:column">
 
   <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px">
     <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
@@ -46,7 +65,7 @@
     </a>
   </header>
 
-  <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:16px 20px 48px">
+  <div data-mobile="quiz-shell" style="flex:1;display:flex;align-items:center;justify-content:center;padding:16px 20px 48px">
     <div style="width:100%;max-width:560px">
 
       <div style="display:flex;gap:7px;margin-bottom:28px">
@@ -110,7 +129,7 @@
             <button sc-camel-on-click="{{ o.go }}" style="{{ o.style }}" style-hover="border-color:#17305b">{{ o.label }}</button>
           </sc-for>
         </div>
-        <div style="display:flex;gap:10px;align-items:center">
+        <div data-mobile="quiz-actions" style="display:flex;gap:10px;align-items:center">
           <button sc-camel-on-click="{{ submit }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
           <button sc-camel-on-click="{{ back }}" style="font-size:13px;font-weight:600;color:#7a879c;background:none;border:none;padding:6px 0;cursor:pointer">&larr; Back</button>
         </div>

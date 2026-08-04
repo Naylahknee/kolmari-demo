@@ -29,10 +29,21 @@
   body { background: #0d1b39; -webkit-font-smoothing: antialiased; }
   ::selection { background: #f3c516; color: #17305b; }
   input::placeholder { color: #7a879c; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  button, input { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  [data-mobile="access-page"] { min-height: 100dvh !important; padding: max(18px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom)) !important; }
+  @media (max-width: 420px) {
+    [data-mobile="access-page"] { align-items: flex-start !important; padding-top: max(72px, env(safe-area-inset-top)) !important; }
+    [data-mobile="access-page"] h1 { font-size: 22px !important; }
+    [data-mobile="access-page"] input, [data-mobile="access-page"] button { min-height: 50px; width: 100%; }
+  }
 </style>
 </helmet>
 
-<div style="font-family:Geist,system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
+<div data-mobile="access-page" style="font-family:Geist,system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px">
   <div style="width:100%;max-width:380px;text-align:center">
     <img src="assets/kolmari-butterfly.png" alt="" width="34" height="25" style="display:block;width:34px;height:25px;object-fit:contain;margin:0 auto 18px" />
     <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:24px;color:#fff">Enter your access code</h1>
