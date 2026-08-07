@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./cc-api.js"></script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xwsd371zfp");
+</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Command Center · Kolmari</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/kolmari-favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/kolmari-favicon-512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
+<meta name="theme-color" content="#0D1B39" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
+  a { color: #17305b; text-decoration: none; }
+  ::selection { background: #f3c516; color: #17305b; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  button, a, input { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  input, textarea, button { font-family: inherit; }
+  textarea { resize: vertical; }
+  [data-cc="sidebar"] { width: 232px; flex: 0 0 232px; }
+  @media (max-width: 860px) {
+    [data-cc="sidebar"] { display: none !important; }
+    [data-cc="grid"] { grid-template-columns: 1fr !important; }
+  }
+  @media (max-width: 560px) {
+    [data-cc="main"] { padding: 18px 15px 60px !important; }
+    [data-cc="header"] { padding: 12px 16px !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family:Geist,system-ui,sans-serif;color:#17305b;min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px">
+    <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
+    A working preview of Kolmari — placeholder demo, not the live product
+  </div>
+
+  <header data-cc="header" style="padding:14px 26px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e7ebf1">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
+      <img src="assets/kolmari-butterfly.png" alt="" width="26" height="19" style="display:block;width:26px;height:19px;object-fit:contain" />
+      <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:8px">
+      <a href="app.html" style="font-size:13px;font-weight:600;color:#42536e;padding:8px 14px;border:1px solid #dde3ec;border-radius:999px">Open full dashboard</a>
+      <a href="index.html" style="font-size:13px;font-weight:600;color:#7a879c;padding:8px 12px">Sign out</a>
+    </div>
+  </header>
+
+  <div style="flex:1;display:flex;align-items:stretch">
+
+    <aside data-cc="sidebar" style="background:#fff;border-right:1px solid #e7ebf1;padding:22px 16px;display:flex;flex-direction:column;gap:4px">
+      <p style="margin:0 0 10px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9aa6b8">Planning</p>
+      <span style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#17305b;background:#fdf1c2;border:1px solid #f3d97a;border-radius:10px;padding:10px 12px">Command Center</span>
+      <a href="app.html" style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#42536e;border-radius:10px;padding:10px 12px" style-hover="background:#f4f6fa">Dashboard</a>
+      <a href="explore.html" style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#42536e;border-radius:10px;padding:10px 12px" style-hover="background:#f4f6fa">Greenbook</a>
+      <div style="margin-top:auto;padding-top:16px">
+        <p style="margin:0;font-size:11.5px;line-height:1.5;color:#9aa6b8">Compare destinations against what your household actually needs. Everything here saves automatically.</p>
+      </div>
+    </aside>
+
+    <main data-cc="main" style="flex:1;min-width:0;padding:26px 30px 70px;max-width:1100px;margin:0 auto;width:100%">
+
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:14px;color:#7a879c">Loading your Command Center…</p>
+      </sc-if>
+
+      <sc-if value="{{ error }}" hint-placeholder-val="{{ true }}">
+        <div style="margin-bottom:18px;padding:12px 15px;background:#fdecea;border:1px solid #f5c6c3;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <span style="font-size:13.5px;color:#b3261e">{{ error }}</span>
+          <button sc-camel-on-click="{{ dismissError }}" style="font-size:12px;font-weight:600;color:#b3261e;background:none;border:none;cursor:pointer">Dismiss</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ ready }}" hint-placeholder-val="{{ true }}">
+
+        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:20px">
+          <div>
+            <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:27px;letter-spacing:-.02em">Relocation Command Center</h1>
+            <p style="margin:8px 0 0;font-size:14px;color:#5a6a83;max-width:560px">Compare the places you're considering against work, visa, schools, safety, community — and what each person in your household needs.</p>
+          </div>
+        </div>
+
+        <div style="background:#0d1b39;border-radius:16px;padding:20px 22px;color:#fff;margin-bottom:22px">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
+            <div>
+              <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f3c516">Overall progress</p>
+              <p style="margin:6px 0 0;font-size:14px;color:#c8d3e6">{{ overallLabel }}</p>
+            </div>
+            <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:34px;line-height:1">{{ overallPct }}%</span>
+          </div>
+          <div style="margin-top:14px;height:8px;background:rgba(255,255,255,.14);border-radius:5px;overflow:hidden">
+            <div style="{{ overallBarStyle }}"></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:24px">
+          <input value="{{ newDestName }}" sc-camel-on-input="{{ setNewDestName }}" sc-camel-on-key-down="{{ addDestOnEnter }}" placeholder="Add a destination — e.g. Lisbon, Mexico City" style="flex:1;min-width:220px;font-size:14.5px;color:#17305b;background:#fff;border:1.5px solid #dde3ec;border-radius:12px;padding:12px 15px;outline:none" style-focus="border-color:#f3c516;box-shadow:0 0 0 3px rgba(243,197,22,.2)" />
+          <button sc-camel-on-click="{{ addDestination }}" style="font-size:14px;font-weight:700;color:#17305b;background:#f3c516;border:none;border-radius:999px;padding:12px 22px;cursor:pointer" style-hover="background:#ffd633">Add destination</button>
+        </div>
+
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="text-align:center;padding:48px 24px;background:#fff;border:1px dashed #cfd7e3;border-radius:16px">
+            <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:20px">No destinations yet</h2>
+            <p style="margin:10px auto 0;max-width:400px;font-size:14px;color:#5a6a83;line-height:1.6">Add the first place you're considering above. We'll set up a research checklist across all five categories so you can start comparing right away.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasDestinations }}" hint-placeholder-val="{{ true }}">
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">
+            <sc-for list="{{ destTabs }}" as="d" hint-placeholder-count="3">
+              <button sc-camel-on-click="{{ d.select }}" style="{{ d.style }}">{{ d.label }}</button>
+            </sc-for>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+            <div>
+              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:22px">{{ selDestName }}</h2>
+              <p style="margin:5px 0 0;font-size:13px;color:#5a6a83">{{ selDestLabel }}</p>
+            </div>
+            <button sc-camel-on-click="{{ deleteSelectedDest }}" style="font-size:12.5px;font-weight:600;color:#b3261e;background:#fff;border:1px solid #f2cfcb;border-radius:999px;padding:8px 14px;cursor:pointer">Remove destination</button>
+          </div>
+
+          <div data-cc="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:26px">
+            <sc-for list="{{ categoryCards }}" as="cat" hint-placeholder-count="5">
+              <div style="background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:16px 17px">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+                  <h3 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:15.5px">{{ cat.label }}</h3>
+                  <span style="font-size:12px;font-weight:600;color:#5a6a83">{{ cat.countLabel }}</span>
+                </div>
+                <div style="margin:11px 0 13px;height:6px;background:#eef1f6;border-radius:4px;overflow:hidden">
+                  <div style="{{ cat.barStyle }}"></div>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:7px">
+                  <sc-for list="{{ cat.items }}" as="item" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:flex-start;gap:9px">
+                      <input type="checkbox" checked="{{ item.checked }}" sc-camel-on-change="{{ item.toggle }}" style="width:17px;height:17px;margin-top:1px;accent-color:#f3c516;cursor:pointer;flex:0 0 auto" />
+                      <span style="{{ item.textStyle }}">{{ item.text }}</span>
+                      <button sc-camel-on-click="{{ item.remove }}" aria-label="Remove item" style="margin-left:auto;font-size:15px;line-height:1;color:#c2ccda;background:none;border:none;cursor:pointer;flex:0 0 auto">×</button>
+                    </div>
+                  </sc-for>
+                </div>
+
+                <div style="display:flex;gap:7px;margin-top:11px">
+                  <input value="{{ cat.newText }}" sc-camel-on-input="{{ cat.setNewText }}" sc-camel-on-key-down="{{ cat.addOnEnter }}" placeholder="Add an item…" style="flex:1;min-width:0;font-size:13px;color:#17305b;background:#f7f8fb;border:1px solid #e4e8f0;border-radius:9px;padding:8px 10px;outline:none" style-focus="border-color:#f3c516" />
+                  <button sc-camel-on-click="{{ cat.addItem }}" style="font-size:13px;font-weight:600;color:#17305b;background:#eef1f6;border:none;border-radius:9px;padding:8px 12px;cursor:pointer">Add</button>
+                </div>
+
+                <textarea value="{{ cat.noteDraft }}" sc-camel-on-input="{{ cat.setNote }}" sc-camel-on-blur="{{ cat.saveNote }}" placeholder="Notes for this category…" rows="2" style="margin-top:10px;width:100%;font-size:13px;color:#42536e;background:#fbfcfe;border:1px solid #e4e8f0;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background:#fff;border:1px solid #e7ebf1;border-radius:16px;padding:18px 19px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:18px">Who's moving</h2>
+              <span style="font-size:12.5px;color:#7a879c">How {{ selDestName }} works for each person</span>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+              <sc-for list="{{ members }}" as="m" hint-placeholder-count="2">
+                <div style="border:1px solid #eef1f6;border-radius:12px;padding:13px 14px;background:#fbfcfe">
+                  <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+                    <p style="margin:0;font-size:14.5px;font-weight:700;color:#17305b">{{ m.nameLabel }}</p>
+                    <button sc-camel-on-click="{{ m.remove }}" style="font-size:12px;font-weight:600;color:#b3261e;background:none;border:none;cursor:pointer">Remove</button>
+                  </div>
+                  <textarea value="{{ m.needsDraft }}" sc-camel-on-input="{{ m.setNeeds }}" sc-camel-on-blur="{{ m.saveNeeds }}" placeholder="What this person needs (e.g. school continuity, an established friend group)…" rows="2" style="margin-top:9px;width:100%;font-size:13px;color:#42536e;background:#fff;border:1px solid #e4e8f0;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
+                  <textarea value="{{ m.noteDraft }}" sc-camel-on-input="{{ m.setNote }}" sc-camel-on-blur="{{ m.saveNote }}" placeholder="{{ m.notePlaceholder }}" rows="2" style="margin-top:8px;width:100%;font-size:13px;color:#42536e;background:#fff;border:1px solid #e4e8f0;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid #eef1f6;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <input value="{{ mfName }}" sc-camel-on-input="{{ setMfName }}" placeholder="Name" style="flex:2;min-width:120px;font-size:13.5px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:9px;padding:9px 11px;outline:none" style-focus="border-color:#f3c516" />
+              <input value="{{ mfAge }}" sc-camel-on-input="{{ setMfAge }}" type="number" placeholder="Age" style="flex:0 0 82px;width:82px;font-size:13.5px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:9px;padding:9px 11px;outline:none" style-focus="border-color:#f3c516" />
+              <button sc-camel-on-click="{{ addMember }}" style="font-size:13.5px;font-weight:700;color:#17305b;background:#f3c516;border:none;border-radius:999px;padding:9px 18px;cursor:pointer" style-hover="background:#ffd633">Add person</button>
+            </div>
+          </div>
+
+        </sc-if>
+
+      </sc-if>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    loading: true,
+    error: '',
+    household: null,
+    categories: [],
+    members: [],
+    destinations: [],
+    items: [],
+    notes: [],
+    memberNotes: [],
+    selectedDest: null,
+    newDestName: '',
+    newItem: {},          // key: destId|cat -> text
+    noteDraft: {},        // key: destId|cat -> text
+    needsDraft: {},       // key: memberId -> text
+    memberNoteDraft: {},  // key: memberId|destId -> text
+    mfName: '',
+    mfAge: '',
+  };
+
+  componentDidMount() {
+    this.refresh().catch((e) => this.setState({ loading: false, error: e.message }));
+  }
+
+  // Rebuild draft maps from server data, preserving any keys the user is
+  // already editing (never clobber an in-progress edit).
+  buildDrafts(data, prev) {
+    const noteDraft = Object.assign({}, prev.noteDraft || {});
+    (data.notes || []).forEach((n) => {
+      const k = n.destination_id + '|' + n.category;
+      if (!(k in noteDraft)) noteDraft[k] = n.body || '';
+    });
+    (data.destinations || []).forEach((d) => {
+      (data.categories || []).forEach((c) => {
+        const k = d.id + '|' + c.key;
+        if (!(k in noteDraft)) noteDraft[k] = '';
+      });
+    });
+
+    const needsDraft = Object.assign({}, prev.needsDraft || {});
+    (data.members || []).forEach((m) => {
+      if (!(m.id in needsDraft)) needsDraft[m.id] = m.needs || '';
+    });
+
+    const memberNoteDraft = Object.assign({}, prev.memberNoteDraft || {});
+    (data.memberNotes || []).forEach((mn) => {
+      const k = mn.member_id + '|' + mn.destination_id;
+      if (!(k in memberNoteDraft)) memberNoteDraft[k] = mn.body || '';
+    });
+    (data.members || []).forEach((m) => {
+      (data.destinations || []).forEach((d) => {
+        const k = m.id + '|' + d.id;
+        if (!(k in memberNoteDraft)) memberNoteDraft[k] = '';
+      });
+    });
+
+    return { noteDraft, needsDraft, memberNoteDraft };
+  }
+
+  async refresh(patch) {
+    const data = await window.CCApi.getState();
+    this.setState((s) => {
+      const drafts = this.buildDrafts(data, s);
+      let sel = (patch && patch.selectedDest) || s.selectedDest;
+      if (!sel || !data.destinations.some((d) => d.id === sel)) {
+        sel = data.destinations[0] ? data.destinations[0].id : null;
+      }
+      return Object.assign(
+        {
+          loading: false,
+          error: '',
+          household: data.household,
+          categories: data.categories,
+          members: data.members,
+          destinations: data.destinations,
+          items: data.items,
+          notes: data.notes,
+          memberNotes: data.memberNotes,
+          selectedDest: sel,
+        },
+        drafts,
+        patch || {}
+      );
+    });
+  }
+
+  fail(e) {
+    this.setState({ error: (e && e.message) || 'Something went wrong' });
+  }
+
+  // ---- Destinations ----
+  addDestination() {
+    const name = (this.state.newDestName || '').trim();
+    if (!name) return;
+    this.setState({ newDestName: '' });
+    window.CCApi.addDestination(name)
+      .then((res) => this.refresh({ selectedDest: res.id }))
+      .catch((e) => this.fail(e));
+  }
+  deleteSelectedDest() {
+    const id = this.state.selectedDest;
+    if (!id) return;
+    if (!window.confirm('Remove this destination and everything under it?')) return;
+    window.CCApi.deleteDestination(id).then(() => this.refresh({ selectedDest: null })).catch((e) => this.fail(e));
+  }
+
+  // ---- Items ----
+  toggleItem(item) {
+    const checked = !item.checked;
+    this.setState((s) => ({ items: s.items.map((i) => (i.id === item.id ? Object.assign({}, i, { checked: checked }) : i)) }));
+    window.CCApi.updateItem(item.id, { checked: checked }).then(() => this.refresh()).catch((e) => { this.fail(e); this.refresh(); });
+  }
+  addItem(destId, cat) {
+    const k = destId + '|' + cat;
+    const text = (this.state.newItem[k] || '').trim();
+    if (!text) return;
+    this.setState((s) => ({ newItem: Object.assign({}, s.newItem, { [k]: '' }) }));
+    window.CCApi.addItem(destId, cat, text).then(() => this.refresh()).catch((e) => this.fail(e));
+  }
+  deleteItem(id) {
+    window.CCApi.deleteItem(id).then(() => this.refresh()).catch((e) => this.fail(e));
+  }
+
+  // ---- Notes ----
+  saveNote(destId, cat) {
+    const k = destId + '|' + cat;
+    window.CCApi.saveNote(destId, cat, this.state.noteDraft[k] || '').catch((e) => this.fail(e));
+  }
+
+  // ---- Members ----
+  saveNeeds(memberId) {
+    window.CCApi.updateMember(memberId, { needs: this.state.needsDraft[memberId] || '' }).catch((e) => this.fail(e));
+  }
+  deleteMember(memberId) {
+    if (!window.confirm('Remove this person?')) return;
+    window.CCApi.deleteMember(memberId).then(() => this.refresh()).catch((e) => this.fail(e));
+  }
+  saveMemberNote(memberId, destId) {
+    const k = memberId + '|' + destId;
+    window.CCApi.saveMemberNote(memberId, destId, this.state.memberNoteDraft[k] || '').catch((e) => this.fail(e));
+  }
+  addMember() {
+    const name = (this.state.mfName || '').trim();
+    if (!name) return;
+    const age = this.state.mfAge;
+    this.setState({ mfName: '', mfAge: '' });
+    window.CCApi.addMember({ name: name, age: age, needs: '' }).then(() => this.refresh()).catch((e) => this.fail(e));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const self = this;
+    const ready = !s.loading;
+    const hasDest = ready && s.destinations.length > 0;
+
+    const itemsFor = (destId, catKey) => s.items.filter((i) => i.destination_id === destId && i.category === catKey);
+    const pct = (checked, total) => (total ? Math.round((checked / total) * 100) : 0);
+    const barStyle = (p, color) => 'height:100%;width:' + p + '%;background:' + (color || '#f3c516') + ';border-radius:inherit;transition:width .2s';
+
+    // Overall (household-wide across all destinations)
+    const totalItems = s.items.length;
+    const checkedItems = s.items.filter((i) => i.checked).length;
+    const overallPct = pct(checkedItems, totalItems);
+
+    // Selected destination
+    let selDest = s.destinations.find((d) => d.id === s.selectedDest) || s.destinations[0] || null;
+    const selId = selDest ? selDest.id : null;
+
+    const destTabStyle = (active) =>
+      'font-size:13.5px;font-weight:600;color:' + (active ? '#17305b' : '#42536e') + ';background:' + (active ? '#fdf1c2' : '#fff') +
+      ';border:1.5px solid ' + (active ? '#f3c516' : '#dde3ec') + ';border-radius:999px;padding:8px 16px;cursor:pointer';
+
+    const destTabs = s.destinations.map((d) => ({
+      label: d.name,
+      style: destTabStyle(d.id === selId),
+      select: () => self.setState({ selectedDest: d.id }),
+    }));
+
+    // Selected destination roll-up label
+    let selChecked = 0, selTotal = 0;
+    if (selId) {
+      const its = s.items.filter((i) => i.destination_id === selId);
+      selTotal = its.length;
+      selChecked = its.filter((i) => i.checked).length;
+    }
+
+    // Category cards for the selected destination
+    const categoryCards = (s.categories || []).map((c) => {
+      const its = selId ? itemsFor(selId, c.key) : [];
+      const done = its.filter((i) => i.checked).length;
+      const p = pct(done, its.length);
+      const nk = selId + '|' + c.key;
+      return {
+        key: c.key,
+        label: c.label,
+        countLabel: done + '/' + its.length,
+        barStyle: barStyle(p),
+        items: its.map((i) => ({
+          text: i.text,
+          checked: i.checked,
+          textStyle: 'font-size:13px;line-height:1.45;color:' + (i.checked ? '#9aa6b8' : '#17305b') + (i.checked ? ';text-decoration:line-through' : ''),
+          toggle: () => self.toggleItem(i),
+          remove: () => self.deleteItem(i.id),
+        })),
+        newText: s.newItem[nk] || '',
+        setNewText: (e) => self.setState((st) => ({ newItem: Object.assign({}, st.newItem, { [nk]: e.target.value }) })),
+        addItem: () => self.addItem(selId, c.key),
+        addOnEnter: (e) => { if (e.key === 'Enter') self.addItem(selId, c.key); },
+        noteDraft: s.noteDraft[nk] || '',
+        setNote: (e) => { const v = e.target.value; self.setState((st) => ({ noteDraft: Object.assign({}, st.noteDraft, { [nk]: v }) })); },
+        saveNote: () => self.saveNote(selId, c.key),
+      };
+    });
+
+    // Members panel (per-selected-destination notes)
+    const members = s.members.map((m) => {
+      const nk = m.id + '|' + selId;
+      const ageTxt = (m.age === 0 || m.age) ? ', ' + m.age : '';
+      return {
+        nameLabel: m.name + ageTxt,
+        needsDraft: s.needsDraft[m.id] || '',
+        setNeeds: (e) => { const v = e.target.value; self.setState((st) => ({ needsDraft: Object.assign({}, st.needsDraft, { [m.id]: v }) })); },
+        saveNeeds: () => self.saveNeeds(m.id),
+        noteDraft: s.memberNoteDraft[nk] || '',
+        notePlaceholder: 'How does ' + (selDest ? selDest.name : 'this place') + ' address this for ' + m.name + '?',
+        setNote: (e) => { const v = e.target.value; self.setState((st) => ({ memberNoteDraft: Object.assign({}, st.memberNoteDraft, { [nk]: v }) })); },
+        saveNote: () => self.saveMemberNote(m.id, selId),
+        remove: () => self.deleteMember(m.id),
+      };
+    });
+
+    return {
+      loading: s.loading,
+      error: s.error,
+      ready: ready,
+      dismissError: () => self.setState({ error: '' }),
+      hasDestinations: hasDest,
+      isEmpty: ready && s.destinations.length === 0,
+
+      overallPct: overallPct,
+      overallLabel: checkedItems + ' of ' + totalItems + ' checklist items done across ' + s.destinations.length + ' destination' + (s.destinations.length === 1 ? '' : 's'),
+      overallBarStyle: barStyle(overallPct),
+
+      newDestName: s.newDestName,
+      setNewDestName: (e) => self.setState({ newDestName: e.target.value }),
+      addDestOnEnter: (e) => { if (e.key === 'Enter') self.addDestination(); },
+      addDestination: () => self.addDestination(),
+
+      destTabs: destTabs,
+      selDestName: selDest ? selDest.name : '',
+      selDestLabel: selTotal ? (selChecked + ' of ' + selTotal + ' done · ' + pct(selChecked, selTotal) + '%') : 'No checklist items yet',
+      deleteSelectedDest: () => self.deleteSelectedDest(),
+
+      categoryCards: categoryCards,
+      members: members,
+
+      mfName: s.mfName,
+      setMfName: (e) => self.setState({ mfName: e.target.value }),
+      mfAge: s.mfAge,
+      setMfAge: (e) => self.setState({ mfAge: e.target.value }),
+      addMember: () => self.addMember(),
+    };
+  }
+}
+</script>
+</body>
+</html>
