@@ -1,8 +1,16 @@
 {
   "name": "steep-limit-80e2",
   "compatibility_date": "2026-08-01",
+  "main": "src/index.js",
   "assets": {
-    "directory": "./public"
-  }
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kolmari-data",
+      "database_id": "5369f592-7da8-47a2-95b9-668e18c8ed2a"
+    }
+  ]
 }
- 
