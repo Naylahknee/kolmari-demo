@@ -13,6 +13,7 @@ const CATEGORIES = [
   { key: "schools", label: "Schools" },
   { key: "safety", label: "Neighborhood & Safety" },
   { key: "community", label: "Community" },
+  { key: "health", label: "Health & Food" },
 ];
 const CATEGORY_KEYS = CATEGORIES.map((c) => c.key);
 
@@ -43,6 +44,12 @@ const DEFAULT_ITEMS = {
     "Find expat and local community groups",
     "Identify language or cultural onboarding steps",
     "Pick one in-person meetup to attend",
+  ],
+  health: [
+    "Confirm access to needed medications and nearby pharmacies",
+    "Find specialists for existing conditions (e.g. cardiology, allergy)",
+    "Check allergy-friendly food options and labeling (see Food & Health fit)",
+    "Understand health insurance / public coverage eligibility",
   ],
 };
 

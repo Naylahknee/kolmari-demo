@@ -30,10 +30,22 @@ exist everywhere; the flag is a research prompt, not a veto.
 - Filter selections persist to `localStorage` under `kolmari:foodfilter`
   (`{archetypes:[], allergens:[]}`), following the `kolmari:quiz` / `kolmari:access` pattern.
 - Microsoft Clarity snippet included (project `xwsd371zfp`), matching the other pages.
-- Country data is a `COUNTRIES` array inline in the page script. Add a destination by
-  appending an object with the same shape — no other file needs touching.
+- Country data + taxonomy live in a **shared module, `public/food-data.js`** (`window.KolmariFood`),
+  used by both `food.html` and `command-center.html` so they never drift. Add a destination by
+  appending one object to the `COUNTRIES` array there — no other file needs touching.
 - Linked from the Command Center sidebar. Wiring it into `app.html`'s own sidebar needs a safe
-  seam into that generated bundle (a follow-on).
+  seam into that generated bundle — and `app.html` renders from hardcoded constants with no
+  localStorage/data seam, so that path requires the (absent) bundle source (a follow-on).
+
+## Command Center integration
+`command-center.html` loads `food-data.js` and, for the selected destination, resolves its
+name to a country (`KolmariFood.resolveCountry`, with a city/synonym alias map so "Lisbon",
+"CDMX", "Dubai" resolve) and shows a **Food & health fit** panel: archetype tags, allergen
+prevalence, a heart note, confidence badge, and editorial disclosure. Allergens flagged on the
+Food & Health page (`kolmari:foodfilter`) are highlighted with a "heads up" when they're common
+in that country's everyday food. Unmatched destinations show a prompt linking to the filter.
+This is the "Command Center informs related data" flow (`app.html` can't be fed without its
+build source, so the Command Center is the hub instead).
 
 ## Per-country fields
 `archetypes[]`, `allergenPrevalence{}`, `labelingLaw{text, sourceUrl?}`, `cardioNote`,
@@ -73,6 +85,12 @@ version that overrides git-based deploys. Verify in the Deployments tab after pu
 
 ## Not yet built (follow-ons)
 - Prefill filters from the onboarding quiz answers.
-- Surface a tracked destination's food/health tags inside the Command Center (match
-  destination name → `COUNTRIES`); optional 6th "health" checklist category.
-- Discoverability from `app.html`'s own sidebar.
+- Discoverability from `app.html`'s own sidebar (blocked without the bundle source).
+
+## Done since the handoff
+- Built as DC Logic (not vanilla) and linked from the Command Center sidebar.
+- Food-fit panel per destination inside the Command Center (`food-data.js` shared module).
+- **6th "Health & Food" checklist category** in the Command Center (`CATEGORIES` +
+  `DEFAULT_ITEMS.health` in `src/index.js`). New destinations seed health defaults; the one
+  pre-existing destination was backfilled in D1. Categories are server-driven, so the
+  frontend renders the new card automatically once the Worker deploys.
