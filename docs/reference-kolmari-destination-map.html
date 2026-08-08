@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kolmari · Destination Map Module</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+<style>
+  :root {
+    --bg: #FDFCF9;
+    --ink: #1F2937;
+    --ink-soft: #6B7280;
+    --line: rgba(31,41,55,0.12);
+    --accent: #C2703D;        /* swap these three to Kolmari brand tokens */
+    --accent-soft: #F5E3D3;
+    --accent-deep: #8A4B24;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    height: 100vh;
+  }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; grid-template-rows: 45vh 55vh; }
+    aside { order: 2; }
+    #map { order: 1; }
+  }
+  aside {
+    overflow-y: auto;
+    border-right: 1px solid var(--line);
+    padding: 22px;
+  }
+  h1 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600; margin: 0 0 4px; }
+  .sub { font-size: 13px; color: var(--ink-soft); margin: 0 0 18px; }
+  .toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+  .toggle button {
+    flex: 1; padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .toggle button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .dest {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: #fff;
+    transition: border-color .15s, background .15s;
+  }
+  .dest:hover { border-color: var(--accent); }
+  .dest.on { border-color: var(--accent); background: var(--accent-soft); }
+  .dest h3 { font-size: 15px; margin: 0; }
+  .dest .meta { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+  .dest .tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .dest .tag {
+    font-size: 11px; font-weight: 600;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .dest .cost { font-weight: 700; color: var(--accent-deep); }
+  #map { width: 100%; height: 100%; }
+  .origin-note {
+    font-size: 12px; color: var(--ink-soft);
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+  }
+  .token-warn {
+    display: none;
+    position: fixed; inset: 0;
+    background: var(--bg);
+    z-index: 999;
+    padding: 60px 24px;
+    text-align: center;
+    font-size: 15px;
+  }
+  .token-warn.show { display: block; }
+  .token-warn code { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; }
+</style>
+</head>
+<body>
+
+<div class="token-warn" id="tokenWarn">
+  <h1>Add your Mapbox token</h1>
+  <p>Open this file and paste your public token (starts with <code>pk.</code>) into <code>MAPBOX_TOKEN</code> at the top of the script.<br>
+  Free at account.mapbox.com → Tokens.</p>
+</div>
+
+<div class="layout">
+  <aside>
+    <h1>Your matched destinations</h1>
+    <p class="sub">Tap a match to draw the route from where you are to where you could be.</p>
+    <div class="origin-note" id="originNote">Origin: Sacramento, CA (demo default). Wire this to the Kolmari user profile.</div>
+    <div class="toggle">
+      <button class="on" id="tgIntl" onclick="setDataset('intl')">International</button>
+      <button id="tgUs" onclick="setDataset('us')">Within the US</button>
+    </div>
+    <div id="destList"></div>
+  </aside>
+  <div id="map"></div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG
+   ============================================================ */
+// Paste your Mapbox public token here. In production, restrict it
+// to your Kolmari domains under Token settings → URL restrictions.
+const MAPBOX_TOKEN = "";
+
+// Kolmari user origin. Replace with the logged-in user's saved
+// location from your D1/Neon profile record.
+const ORIGIN = { name: "Sacramento, CA", lon: -121.4944, lat: 38.5816 };
+
+/* ============================================================
+   STARTER DESTINATION DATA
+   Replace with a fetch to your Worker endpoint, e.g.
+   GET /api/destinations?userId=... returning this same shape.
+   costIndex: rough cost of living vs US average = 100.
+   These are placeholder figures for layout and demo purposes.
+   Swap in Kolmari's real matching data before launch.
+   ============================================================ */
+const DATA = {
+  intl: [
+    { name: "Lisbon", country: "Portugal", lon: -9.1393, lat: 38.7223, costIndex: 62, visa: "D7 + digital nomad visa", tags: ["EU access", "English-friendly", "Coastal"] },
+    { name: "Porto", country: "Portugal", lon: -8.6291, lat: 41.1579, costIndex: 55, visa: "D7 + digital nomad visa", tags: ["Lower cost than Lisbon", "Walkable"] },
+    { name: "Valencia", country: "Spain", lon: -0.3763, lat: 39.4699, costIndex: 58, visa: "Spain digital nomad visa", tags: ["Beach city", "Healthcare", "Family-friendly"] },
+    { name: "Mexico City", country: "Mexico", lon: -99.1332, lat: 19.4326, costIndex: 48, visa: "Temporary resident visa", tags: ["Big-city energy", "Direct US flights"] },
+    { name: "Mérida", country: "Mexico", lon: -89.5926, lat: 20.9674, costIndex: 42, visa: "Temporary resident visa", tags: ["Safety standout", "Expat community"] },
+    { name: "Playa del Carmen", country: "Mexico", lon: -87.0739, lat: 20.6296, costIndex: 52, visa: "Temporary resident visa", tags: ["Beach", "Remote-work scene"] },
+    { name: "Medellín", country: "Colombia", lon: -75.5812, lat: 6.2442, costIndex: 40, visa: "Colombia digital nomad visa", tags: ["Spring climate", "Fast internet"] },
+    { name: "San José", country: "Costa Rica", lon: -84.0907, lat: 9.9281, costIndex: 60, visa: "Rentista + nomad visa", tags: ["Stability", "Nature access"] },
+    { name: "Panama City", country: "Panama", lon: -79.5199, lat: 8.9824, costIndex: 58, visa: "Friendly Nations visa", tags: ["USD currency", "Banking hub"] },
+    { name: "Accra", country: "Ghana", lon: -0.1870, lat: 5.6037, costIndex: 50, visa: "Right of Abode pathway", tags: ["Diaspora hub", "Year of Return legacy"] },
+    { name: "Chiang Mai", country: "Thailand", lon: 98.9853, lat: 18.7883, costIndex: 35, visa: "DTV long-stay visa", tags: ["Lowest cost", "Nomad classic"] },
+    { name: "Tbilisi", country: "Georgia", lon: 44.8271, lat: 41.7151, costIndex: 38, visa: "365-day visa-free entry", tags: ["Easiest entry", "Low tax option"] }
+  ],
+  us: [
+    { name: "Atlanta", country: "Georgia, US", lon: -84.3880, lat: 33.7490, costIndex: 95, visa: "No visa needed", tags: ["Black business hub", "Major airport"] },
+    { name: "Houston", country: "Texas, US", lon: -95.3698, lat: 29.7604, costIndex: 92, visa: "No visa needed", tags: ["No state income tax", "Diverse"] },
+    { name: "Raleigh-Durham", country: "North Carolina, US", lon: -78.6382, lat: 35.7796, costIndex: 96, visa: "No visa needed", tags: ["Tech + research jobs", "Green"] },
+    { name: "Tampa", country: "Florida, US", lon: -82.4572, lat: 27.9506, costIndex: 98, visa: "No visa needed", tags: ["No state income tax", "Coastal"] },
+    { name: "Huntsville", country: "Alabama, US", lon: -86.5861, lat: 34.7304, costIndex: 85, visa: "No visa needed", tags: ["Affordability leader", "Aerospace jobs"] },
+    { name: "Columbus", country: "Ohio, US", lon: -82.9988, lat: 39.9612, costIndex: 90, visa: "No visa needed", tags: ["Midwest value", "Growing"] },
+    { name: "San Antonio", country: "Texas, US", lon: -98.4936, lat: 29.4241, costIndex: 89, visa: "No visa needed", tags: ["Family cost of living", "Culture"] },
+    { name: "Greenville", country: "South Carolina, US", lon: -82.3940, lat: 34.8526, costIndex: 91, visa: "No visa needed", tags: ["Small-city charm", "Walkable core"] }
+  ]
+};
+
+/* ============================================================
+   MAP
+   ============================================================ */
+let map, currentSet = "intl", selectedIdx = null, markers = [];
+
+if (!MAPBOX_TOKEN) {
+  document.getElementById("tokenWarn").classList.add("show");
+} else {
+  mapboxgl.accessToken = MAPBOX_TOKEN;
+  map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/light-v11",  // shows country + admin boundary lines by default
+    center: [-40, 25],
+    zoom: 1.7,
+    projection: "mercator"
+  });
+  map.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+  map.on("load", () => {
+    // Origin marker
+    new mapboxgl.Marker({ color: "#1F2937" })
+      .setLngLat([ORIGIN.lon, ORIGIN.lat])
+      .setPopup(new mapboxgl.Popup({ offset: 20 }).setText("You are here: " + ORIGIN.name))
+      .addTo(map);
+
+    // Route line source + layers (empty until a destination is picked)
+    map.addSource("route", { type: "geojson", data: emptyFC() });
+    map.addLayer({
+      id: "route-glow",
+      type: "line",
+      source: "route",
+      paint: { "line-color": "#C2703D", "line-width": 7, "line-opacity": 0.25 }
+    });
+    map.addLayer({
+      id: "route-line",
+      type: "line",
+      source: "route",
+      paint: { "line-color": "#C2703D", "line-width": 2.5, "line-dasharray": [0.5, 1.5] }
+    });
+
+    // Faint web of lines to every current match
+    map.addSource("web", { type: "geojson", data: emptyFC() });
+    map.addLayer({
+      id: "web-lines",
+      type: "line",
+      source: "web",
+      paint: { "line-color": "#C2703D", "line-width": 1, "line-opacity": 0.18 }
+    }, "route-glow");
+
+    renderDataset();
+  });
+}
+
+function emptyFC() { return { type: "FeatureCollection", features: [] }; }
+
+/* Great-circle arc between two points, 80 segments.
+   Gives the curved "flight path" look instead of a flat line. */
+function greatCircle(a, b, segments = 80) {
+  const toRad = d => d * Math.PI / 180, toDeg = r => r * 180 / Math.PI;
+  const lat1 = toRad(a.lat), lon1 = toRad(a.lon);
+  const lat2 = toRad(b.lat), lon2 = toRad(b.lon);
+  const d = 2 * Math.asin(Math.sqrt(
+    Math.sin((lat2-lat1)/2)**2 +
+    Math.cos(lat1)*Math.cos(lat2)*Math.sin((lon2-lon1)/2)**2
+  ));
+  if (d === 0) return [[a.lon, a.lat], [b.lon, b.lat]];
+  const coords = [];
+  let prevLon = null;
+  for (let i = 0; i <= segments; i++) {
+    const f = i / segments;
+    const A = Math.sin((1-f)*d) / Math.sin(d);
+    const B = Math.sin(f*d) / Math.sin(d);
+    const x = A*Math.cos(lat1)*Math.cos(lon1) + B*Math.cos(lat2)*Math.cos(lon2);
+    const y = A*Math.cos(lat1)*Math.sin(lon1) + B*Math.cos(lat2)*Math.sin(lon2);
+    const z = A*Math.sin(lat1) + B*Math.sin(lat2);
+    let lon = toDeg(Math.atan2(y, x));
+    const lat = toDeg(Math.atan2(z, Math.sqrt(x*x + y*y)));
+    // unwrap across the antimeridian so the line doesn't snap across the map
+    if (prevLon !== null) {
+      while (lon - prevLon > 180) lon -= 360;
+      while (lon - prevLon < -180) lon += 360;
+    }
+    prevLon = lon;
+    coords.push([lon, lat]);
+  }
+  return coords;
+}
+
+function lineFeature(a, b) {
+  return { type: "Feature", geometry: { type: "LineString", coordinates: greatCircle(a, b) } };
+}
+
+/* ============================================================
+   LIST + INTERACTION
+   ============================================================ */
+function setDataset(key) {
+  currentSet = key;
+  selectedIdx = null;
+  document.getElementById("tgIntl").classList.toggle("on", key === "intl");
+  document.getElementById("tgUs").classList.toggle("on", key === "us");
+  renderDataset();
+}
+
+function renderDataset() {
+  const list = DATA[currentSet];
+  // list panel
+  document.getElementById("destList").innerHTML = list.map((d, i) => `
+    <div class="dest ${i === selectedIdx ? "on" : ""}" onclick="selectDest(${i})">
+      <h3>${d.name}, ${d.country}</h3>
+      <div class="meta"><span class="cost">Cost index ${d.costIndex}</span> · vs US avg 100 · ${d.visa}</div>
+      <div class="tags">${d.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+    </div>
+  `).join("");
+
+  if (!map || !map.getSource("web")) return;
+
+  // markers
+  markers.forEach(m => m.remove());
+  markers = list.map((d, i) => {
+    const mk = new mapboxgl.Marker({ color: "#C2703D", scale: 0.8 })
+      .setLngLat([d.lon, d.lat])
+      .setPopup(new mapboxgl.Popup({ offset: 20 }).setHTML(`<b>${d.name}</b><br>${d.visa}`))
+      .addTo(map);
+    mk.getElement().style.cursor = "pointer";
+    mk.getElement().addEventListener("click", () => selectDest(i));
+    return mk;
+  });
+
+  // faint web of all match lines
+  map.getSource("web").setData({
+    type: "FeatureCollection",
+    features: list.map(d => lineFeature(ORIGIN, d))
+  });
+  map.getSource("route").setData(emptyFC());
+
+  // fit view
+  const b = new mapboxgl.LngLatBounds();
+  b.extend([ORIGIN.lon, ORIGIN.lat]);
+  list.forEach(d => b.extend([d.lon, d.lat]));
+  map.fitBounds(b, { padding: 70, duration: 900 });
+}
+
+function selectDest(i) {
+  selectedIdx = i;
+  const d = DATA[currentSet][i];
+  document.querySelectorAll(".dest").forEach((el, idx) => el.classList.toggle("on", idx === i));
+  if (!map || !map.getSource("route")) return;
+  map.getSource("route").setData({ type: "FeatureCollection", features: [lineFeature(ORIGIN, d)] });
+  const b = new mapboxgl.LngLatBounds();
+  b.extend([ORIGIN.lon, ORIGIN.lat]);
+  b.extend([d.lon, d.lat]);
+  map.fitBounds(b, { padding: 90, duration: 900 });
+}
+</script>
+</body>
+</html>
