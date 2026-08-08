@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "xwsd371zfp");
+</script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Food & Health Fit · Kolmari</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/kolmari-favicon-32.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="assets/kolmari-favicon-512.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
+<meta name="theme-color" content="#0D1B39" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; }
+  body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
+  a { color: #17305b; text-decoration: none; }
+  ::selection { background: #f3c516; color: #17305b; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+  body { overflow-x: hidden; }
+  button, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
+  @media (max-width: 640px) {
+    [data-cc="main"] { padding: 18px 15px 60px !important; }
+    [data-cc="grid"] { grid-template-columns: 1fr !important; }
+  }
+</style>
+</helmet>
+
+<div style="font-family:Geist,system-ui,sans-serif;color:#17305b;min-height:100vh;display:flex;flex-direction:column">
+
+  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px">
+    <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
+    A working preview of Kolmari — placeholder demo, not the live product
+  </div>
+
+  <header style="padding:14px 26px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e7ebf1">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
+      <img src="assets/kolmari-butterfly.png" alt="" width="26" height="19" style="display:block;width:26px;height:19px;object-fit:contain" />
+      <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:8px">
+      <a href="command-center.html" style="font-size:13px;font-weight:600;color:#42536e;padding:8px 14px;border:1px solid #dde3ec;border-radius:999px">Command Center</a>
+      <a href="explore.html" style="font-size:13px;font-weight:600;color:#7a879c;padding:8px 12px">Greenbook</a>
+    </div>
+  </header>
+
+  <main data-cc="main" style="flex:1;min-width:0;padding:26px 30px 70px;max-width:1080px;margin:0 auto;width:100%">
+
+    <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:27px;letter-spacing:-.02em">Food &amp; Health Fit</h1>
+    <p style="margin:8px 0 0;font-size:14px;color:#5a6a83;max-width:640px">Pick the food cultures that fit your health, and flag the allergens you cook around. Nothing gets hidden — flagged allergens just move riskier countries down the list, so you see the trade-offs instead of a single score that buries them.</p>
+
+    <div style="margin-top:16px;padding:12px 15px;background:#fdf1c2;border:1px solid #f3d97a;border-radius:12px">
+      <p style="margin:0;font-size:12.5px;line-height:1.6;color:#5a4a12"><strong>Editorial guidance, not medical or legal advice.</strong> These are Kolmari editorial assessments of everyday cuisine and packaged-food labeling. Confidence is uneven (shown on each card). Verify official sources before making a relocation decision that hinges on a severe allergy.</p>
+    </div>
+
+    <!-- Filters -->
+    <div style="margin-top:22px;background:#fff;border:1px solid #e7ebf1;border-radius:16px;padding:18px 19px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+        <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:16px">Food-culture fit</h2>
+        <span style="font-size:12px;color:#7a879c">Tap the patterns that suit you</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+        <sc-for list="{{ archetypeChips }}" as="a" hint-placeholder-count="9">
+          <button sc-camel-on-click="{{ a.toggle }}" title="{{ a.desc }}" style="{{ a.style }}">{{ a.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="height:1px;background:#eef1f6;margin:16px 0"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+        <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:16px">Allergens to flag</h2>
+        <span style="font-size:12px;color:#7a879c">Flagged = ranked toward safety, never removed</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+        <sc-for list="{{ allergenChips }}" as="a" hint-placeholder-count="6">
+          <button sc-camel-on-click="{{ a.toggle }}" style="{{ a.style }}">{{ a.label }}</button>
+        </sc-for>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap">
+        <span style="font-size:13px;color:#5a6a83">{{ summaryLabel }}</span>
+        <button sc-camel-on-click="{{ clearAll }}" style="font-size:12.5px;font-weight:600;color:#42536e;background:#f4f6fa;border:1px solid #e4e8f0;border-radius:999px;padding:8px 14px;cursor:pointer">Clear all</button>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div data-cc="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px">
+      <sc-for list="{{ cards }}" as="c" hint-placeholder-count="6">
+        <div style="background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:17px 18px;display:flex;flex-direction:column">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+            <div>
+              <h3 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:17px">{{ c.name }}</h3>
+              <p style="margin:4px 0 0;font-size:12px;color:#7a879c">{{ c.matchLabel }}</p>
+            </div>
+            <span style="{{ c.confidenceStyle }}">{{ c.confidenceLabel }}</span>
+          </div>
+
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:11px">
+            <sc-for list="{{ c.archetypeTags }}" as="t" hint-placeholder-count="3">
+              <span style="{{ t.style }}">{{ t.label }}</span>
+            </sc-for>
+          </div>
+
+          <div style="margin-top:12px">
+            <p style="margin:0 0 6px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9aa6b8">Allergen prevalence in everyday food</p>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ c.allergenRows }}" as="r" hint-placeholder-count="6">
+                <span style="{{ r.style }}">{{ r.label }}</span>
+              </sc-for>
+            </div>
+          </div>
+
+          <p style="margin:12px 0 0;font-size:12.5px;line-height:1.55;color:#42536e"><strong style="color:#17305b">Heart note.</strong> {{ c.cardioNote }}</p>
+          <p style="margin:9px 0 0;font-size:12.5px;line-height:1.55;color:#42536e"><strong style="color:#17305b">Labeling.</strong> {{ c.labelingText }}
+            <sc-if value="{{ c.sourceUrl }}" hint-placeholder-val="{{ true }}">
+              <a href="{{ c.sourceUrl }}" target="_blank" rel="noopener" style="color:#9a7d0a;font-weight:600">source</a>
+            </sc-if>
+          </p>
+
+          <p style="margin:13px 0 0;padding-top:11px;border-top:1px solid #f0f2f6;font-size:11px;line-height:1.5;color:#9aa6b8">{{ c.disclosure }}</p>
+        </div>
+      </sc-for>
+    </div>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const ARCHETYPES = [
+  { key: 'mediterranean', label: 'Mediterranean', desc: 'Olive oil, fish, vegetables, legumes' },
+  { key: 'farm-to-table', label: 'Farm-to-table', desc: 'Fresh, local, seasonal produce' },
+  { key: 'seafood-forward', label: 'Seafood-forward', desc: 'Fish and shellfish are everyday staples' },
+  { key: 'plant-forward', label: 'Plant-forward', desc: 'Vegetables, grains and legumes lead the plate' },
+  { key: 'strict-allergen-labeling', label: 'Strict allergen labeling', desc: 'Packaged food must declare major allergens' },
+  { key: 'low-processed-food', label: 'Low processed food', desc: 'Cooking-from-scratch is the norm' },
+  { key: 'dairy-heavy', label: 'Dairy-heavy', desc: 'Cheese, yogurt and milk are central' },
+  { key: 'nut-heavy', label: 'Nut-heavy', desc: 'Peanuts or tree nuts run through everyday cooking' },
+  { key: 'high-processed-food', label: 'High processed food', desc: 'Packaged and fast food are widespread' },
+];
+
+const ALLERGENS = [
+  { key: 'shellfish', label: 'Shellfish' },
+  { key: 'treeNuts', label: 'Tree nuts' },
+  { key: 'peanuts', label: 'Peanuts' },
+  { key: 'dairy', label: 'Dairy' },
+  { key: 'gluten', label: 'Gluten' },
+  { key: 'eggs', label: 'Eggs' },
+];
+
+const EU_LAW = 'EU Regulation 1169/2011 requires the 14 major allergens to be declared on packaged food and disclosed for non-prepacked food.';
+const EU_SRC = 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32011R1169';
+
+// Editorial dataset. `confidence`: high = well-sourced (EU statute / Japan & Korea
+// national rules); moderate/low = general regulatory picture, verify before relying.
+const COUNTRIES = [
+  { name: 'Portugal', slug: 'portugal',
+    archetypes: ['mediterranean','seafood-forward','farm-to-table','low-processed-food','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'rare', dairy:'occasional', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: EU_LAW, sourceUrl: EU_SRC },
+    cardioNote: 'Olive-oil, fish and vegetable pattern is broadly heart-supportive; watch salt in bacalhau (salt cod) and pastries.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'Spain', slug: 'spain',
+    archetypes: ['mediterranean','seafood-forward','farm-to-table','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'rare', dairy:'occasional', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: EU_LAW, sourceUrl: EU_SRC },
+    cardioNote: 'Mediterranean base with olive oil and legumes is supportive; cured meats (jamón, chorizo) add sodium and saturated fat.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'Greece', slug: 'greece',
+    archetypes: ['mediterranean','plant-forward','farm-to-table','low-processed-food','dairy-heavy','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'occasional', peanuts:'rare', dairy:'common', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: EU_LAW, sourceUrl: EU_SRC },
+    cardioNote: 'Legumes, greens and olive oil are strong for heart health; feta and other cheeses carry salt.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'Estonia', slug: 'estonia',
+    archetypes: ['farm-to-table','dairy-heavy','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'rare', treeNuts:'rare', peanuts:'rare', dairy:'common', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: EU_LAW, sourceUrl: EU_SRC },
+    cardioNote: 'Rye bread, dairy and pork are central; leans heavier and less Mediterranean, so balance with fish and vegetables.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'Croatia', slug: 'croatia',
+    archetypes: ['mediterranean','seafood-forward','farm-to-table','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'rare', dairy:'occasional', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: EU_LAW, sourceUrl: EU_SRC },
+    cardioNote: 'Adriatic-coast cooking with fish, olive oil and vegetables is supportive; the continental interior is meatier.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'Japan', slug: 'japan',
+    archetypes: ['seafood-forward','plant-forward','low-processed-food','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'occasional', dairy:'rare', gluten:'common', eggs:'common' },
+    labelingLaw: { text: 'Japan mandates allergen labeling on packaged food; from April 2026 the mandatory list is nine items (cashew added), with soy and sesame recommended.' },
+    cardioNote: 'Fish, soy and vegetables with low dairy is heart-supportive; sodium runs high through soy sauce, miso and pickles.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'Netherlands', slug: 'netherlands',
+    archetypes: ['dairy-heavy','farm-to-table','strict-allergen-labeling','high-processed-food'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'occasional', peanuts:'occasional', dairy:'common', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: EU_LAW, sourceUrl: EU_SRC },
+    cardioNote: 'Strong food safety and labeling; cheese and butter make dairy and saturated fat easy to over-rely on. Peanut (pindakaas, Indo-Dutch dishes) is a regular presence.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'high' },
+
+  { name: 'South Korea', slug: 'south-korea',
+    archetypes: ['seafood-forward','plant-forward','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'occasional', dairy:'rare', gluten:'occasional', eggs:'common' },
+    labelingLaw: { text: 'South Korea (MFDS) requires allergen labeling on processed foods against an extensive national allergen list.' },
+    cardioNote: 'Vegetables, fermented foods, soy and fish are supportive; sodium is high through kimchi, soy sauce and jang pastes.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'moderate' },
+
+  { name: 'Mexico', slug: 'mexico',
+    archetypes: ['plant-forward','farm-to-table','high-processed-food'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'occasional', peanuts:'occasional', dairy:'occasional', gluten:'occasional', eggs:'common' },
+    labelingLaw: { text: 'Packaged-food labeling (NOM-051) requires allergen declaration; enforcement and everyday-food practice vary.' },
+    cardioNote: 'Beans, corn and vegetables form a supportive base; watch fried dishes, processed snacks and sodium. Peanuts appear in some moles and sauces.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'moderate' },
+
+  { name: 'Costa Rica', slug: 'costa-rica',
+    archetypes: ['plant-forward','farm-to-table','low-processed-food'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'rare', peanuts:'occasional', dairy:'occasional', gluten:'occasional', eggs:'common' },
+    labelingLaw: { text: 'General Central American / national labeling standards apply to packaged food; treat as a general picture, not statute-level verification.' },
+    cardioNote: 'Rice, beans (gallo pinto), tropical fruit and vegetables are supportive and lightly processed.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'low' },
+
+  { name: 'Colombia', slug: 'colombia',
+    archetypes: ['farm-to-table','plant-forward'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'rare', peanuts:'occasional', dairy:'occasional', gluten:'occasional', eggs:'common' },
+    labelingLaw: { text: 'National packaged-food labeling rules require allergen information; verify current requirements before relying.' },
+    cardioNote: 'Abundant fruit, vegetables and legumes are supportive; watch fried staples (empanadas, arepas with cheese) and added sugar.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'low' },
+
+  { name: 'Malaysia', slug: 'malaysia',
+    archetypes: ['seafood-forward','nut-heavy','plant-forward','high-processed-food'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'common', dairy:'rare', gluten:'occasional', eggs:'common' },
+    labelingLaw: { text: 'Food regulations require declaration of known allergens on labels; everyday street and restaurant food is a bigger exposure than labels.' },
+    cardioNote: 'Fish, herbs and vegetables feature, but coconut milk adds saturated fat. Peanut is heavy (satay, sauces) — a real consideration for peanut allergy.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'moderate' },
+
+  { name: 'Thailand', slug: 'thailand',
+    archetypes: ['seafood-forward','nut-heavy','plant-forward','low-processed-food'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'common', dairy:'rare', gluten:'occasional', eggs:'common' },
+    labelingLaw: { text: 'Thai FDA requires allergen labeling on prepackaged food; fresh-cooked street food carries higher unlabeled exposure.' },
+    cardioNote: 'Fresh herbs, vegetables and fish are supportive; coconut milk adds saturated fat and fish sauce adds sodium. Peanut is common.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'moderate' },
+
+  { name: 'Ghana', slug: 'ghana',
+    archetypes: ['plant-forward','nut-heavy','low-processed-food'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'rare', peanuts:'common', dairy:'rare', gluten:'occasional', eggs:'occasional' },
+    labelingLaw: { text: 'National food authority labeling applies to packaged goods; treat as a general picture, not statute-level verification.' },
+    cardioNote: 'Plant-based stews, plantain, cassava and fish are wholesome; groundnut (peanut) soup and stews are staples — significant for peanut allergy. Watch palm oil and sodium.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'low' },
+
+  { name: 'Mauritius', slug: 'mauritius',
+    archetypes: ['seafood-forward','plant-forward','farm-to-table'],
+    allergenPrevalence: { shellfish:'common', treeNuts:'occasional', peanuts:'occasional', dairy:'occasional', gluten:'occasional', eggs:'occasional' },
+    labelingLaw: { text: 'Packaged-food labeling standards apply; verify current allergen requirements before relying.' },
+    cardioNote: 'Island fish, vegetable curries and legumes are supportive; watch oil and sugar in Creole and street dishes.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'low' },
+
+  { name: 'United Arab Emirates', slug: 'uae',
+    archetypes: ['high-processed-food','nut-heavy','dairy-heavy','strict-allergen-labeling'],
+    allergenPrevalence: { shellfish:'occasional', treeNuts:'common', peanuts:'occasional', dairy:'occasional', gluten:'common', eggs:'occasional' },
+    labelingLaw: { text: 'Gulf (GSO) standards require allergen labeling on prepackaged food; the import-heavy, dining-out food culture is the larger exposure.' },
+    cardioNote: 'Wide choice but rich meats, nuts/tahini and sweets are easy to over-rely on; dates and desserts add sugar. Tree nuts and sesame are frequent.',
+    assessmentType: 'kolmari-editorial', lastReviewed: '2026-08-08', confidence: 'moderate' },
+];
+
+class Component extends DCLogic {
+  state = { archetypes: [], allergens: [] };
+
+  componentDidMount() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('kolmari:foodfilter') || '{}');
+      this.setState({
+        archetypes: Array.isArray(saved.archetypes) ? saved.archetypes : [],
+        allergens: Array.isArray(saved.allergens) ? saved.allergens : [],
+      });
+    } catch (e) {}
+  }
+
+  persist(next) {
+    try { localStorage.setItem('kolmari:foodfilter', JSON.stringify(next)); } catch (e) {}
+  }
+
+  toggleArchetype(key) {
+    this.setState((s) => {
+      const has = s.archetypes.includes(key);
+      const archetypes = has ? s.archetypes.filter((k) => k !== key) : s.archetypes.concat(key);
+      this.persist({ archetypes: archetypes, allergens: s.allergens });
+      return { archetypes: archetypes };
+    });
+  }
+
+  toggleAllergen(key) {
+    this.setState((s) => {
+      const has = s.allergens.includes(key);
+      const allergens = has ? s.allergens.filter((k) => k !== key) : s.allergens.concat(key);
+      this.persist({ archetypes: s.archetypes, allergens: allergens });
+      return { allergens: allergens };
+    });
+  }
+
+  clearAll() {
+    this.persist({ archetypes: [], allergens: [] });
+    this.setState({ archetypes: [], allergens: [] });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const self = this;
+    const PREV_WEIGHT = { common: 2, occasional: 1, rare: 0 };
+
+    const matchCount = (c) => s.archetypes.filter((k) => c.archetypes.includes(k)).length;
+    const flagScore = (c) => s.allergens.reduce((sum, a) => sum + (PREV_WEIGHT[c.allergenPrevalence[a]] || 0), 0);
+
+    // Sort: archetype match count desc → fewer flagged-allergen hits (safety) → alphabetical.
+    const ranked = COUNTRIES.slice().sort((a, b) => {
+      const mc = matchCount(b) - matchCount(a);
+      if (mc) return mc;
+      const fs = flagScore(a) - flagScore(b);
+      if (fs) return fs;
+      return a.name.localeCompare(b.name);
+    });
+
+    const chipBase = 'font-family:inherit;font-size:13px;font-weight:600;border-radius:999px;padding:8px 14px;cursor:pointer;border:1.5px solid ';
+    const archChip = (on) => chipBase + (on ? '#f3c516;background:#fdf1c2;color:#17305b' : '#dde3ec;background:#fff;color:#42536e');
+    const alrgChip = (on) => chipBase + (on ? '#e6a23c;background:#fff5e6;color:#8a5a12' : '#dde3ec;background:#fff;color:#42536e');
+
+    const confMeta = {
+      high: { label: 'Well-sourced', style: 'font-size:10.5px;font-weight:700;color:#1f7a4d;background:#e4f6ec;border:1px solid #b7e4c9;border-radius:999px;padding:4px 9px;white-space:nowrap' },
+      moderate: { label: 'General picture', style: 'font-size:10.5px;font-weight:700;color:#8a5a12;background:#fdf1c2;border:1px solid #f3d97a;border-radius:999px;padding:4px 9px;white-space:nowrap' },
+      low: { label: 'Verify first', style: 'font-size:10.5px;font-weight:700;color:#a23b2e;background:#fdecea;border:1px solid #f5c6c3;border-radius:999px;padding:4px 9px;white-space:nowrap' },
+    };
+
+    const archLabel = {};
+    ARCHETYPES.forEach((a) => { archLabel[a.key] = a.label; });
+    const prevLabel = { common: 'common', occasional: 'sometimes', rare: 'rare' };
+
+    const cards = ranked.map((c) => {
+      const mc = matchCount(c);
+      const archetypeTags = c.archetypes.map((k) => {
+        const on = s.archetypes.includes(k);
+        return {
+          label: archLabel[k] || k,
+          style: 'font-size:11.5px;font-weight:600;border-radius:8px;padding:4px 9px;' +
+            (on ? 'background:#fdf1c2;color:#17305b;border:1px solid #f3d97a' : 'background:#f4f6fa;color:#5a6a83;border:1px solid #e7ebf1'),
+        };
+      });
+      const allergenRows = ALLERGENS.map((a) => {
+        const prev = c.allergenPrevalence[a.key];
+        const flagged = s.allergens.includes(a.key);
+        const caution = flagged && (prev === 'common' || prev === 'occasional');
+        const safe = flagged && prev === 'rare';
+        let style = 'font-size:11.5px;font-weight:600;border-radius:8px;padding:4px 9px;border:1px solid ';
+        if (caution) style += '#f0b1a8;background:#fdecea;color:#a23b2e';
+        else if (safe) style += '#b7e4c9;background:#e4f6ec;color:#1f7a4d';
+        else if (flagged) style += '#e7ebf1;background:#f4f6fa;color:#5a6a83';
+        else style += '#eef1f6;background:#fbfcfe;color:#8a97ab';
+        return { label: a.label + ' · ' + (prevLabel[prev] || prev), style: style };
+      });
+      const cm = confMeta[c.confidence] || confMeta.moderate;
+      const verify = c.confidence === 'high' ? '' : ' Verify official sources before relying on this for an allergy-critical decision.';
+      return {
+        name: c.name,
+        matchLabel: s.archetypes.length ? (mc + ' of your ' + s.archetypes.length + ' fits') : (c.archetypes.length + ' food-culture tags'),
+        confidenceLabel: cm.label,
+        confidenceStyle: cm.style,
+        archetypeTags: archetypeTags,
+        allergenRows: allergenRows,
+        cardioNote: c.cardioNote,
+        labelingText: c.labelingLaw.text,
+        sourceUrl: c.labelingLaw.sourceUrl || '',
+        disclosure: 'Kolmari editorial assessment · reviewed ' + c.lastReviewed + '.' + verify,
+      };
+    });
+
+    const archetypeChips = ARCHETYPES.map((a) => ({
+      label: a.label, desc: a.desc,
+      style: archChip(s.archetypes.includes(a.key)),
+      toggle: () => self.toggleArchetype(a.key),
+    }));
+    const allergenChips = ALLERGENS.map((a) => ({
+      label: a.label,
+      style: alrgChip(s.allergens.includes(a.key)),
+      toggle: () => self.toggleAllergen(a.key),
+    }));
+
+    const parts = [];
+    if (s.archetypes.length) parts.push(s.archetypes.length + ' food-culture fit' + (s.archetypes.length === 1 ? '' : 's'));
+    if (s.allergens.length) parts.push(s.allergens.length + ' allergen' + (s.allergens.length === 1 ? '' : 's') + ' flagged');
+    const summaryLabel = parts.length ? (parts.join(' · ') + ' — ' + COUNTRIES.length + ' countries, ranked') : (COUNTRIES.length + ' countries · pick filters to rank them');
+
+    return {
+      archetypeChips: archetypeChips,
+      allergenChips: allergenChips,
+      cards: cards,
+      summaryLabel: summaryLabel,
+      clearAll: () => self.clearAll(),
+    };
+  }
+}
+</script>
+</body>
+</html>
