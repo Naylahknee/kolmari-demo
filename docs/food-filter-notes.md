@@ -85,6 +85,12 @@ version that overrides git-based deploys. Verify in the Deployments tab after pu
 
 ## Not yet built (follow-ons)
 - Prefill filters from the onboarding quiz answers.
-- Optional 6th "health" checklist category in the Command Center (the food-fit panel is done;
-  a checklist category would make it actionable per-destination).
 - Discoverability from `app.html`'s own sidebar (blocked without the bundle source).
+
+## Done since the handoff
+- Built as DC Logic (not vanilla) and linked from the Command Center sidebar.
+- Food-fit panel per destination inside the Command Center (`food-data.js` shared module).
+- **6th "Health & Food" checklist category** in the Command Center (`CATEGORIES` +
+  `DEFAULT_ITEMS.health` in `src/index.js`). New destinations seed health defaults; the one
+  pre-existing destination was backfilled in D1. Categories are server-driven, so the
+  frontend renders the new card automatically once the Worker deploys.
