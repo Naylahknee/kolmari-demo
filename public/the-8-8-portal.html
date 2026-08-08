@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 8/8 Portal · Your Lion's Gate focus, decoded</title>
+<meta name="description" content="It's 8/8. Where should your energy actually go? Get your Lion's Gate focus, then run the Iter8 8/8 Reset.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+<style>
+  :root {
+    --gold: #F3DFA6;
+    --gold-deep: #EACB74;
+    --red: #F4B7AC;
+    --yellow: #FBEBAE;
+    --orange: #F7C89C;
+    --cream: #FFFBF3;
+    --ink: #6B3A2E;
+    --ink-soft: #8C5A47;
+    --line: rgba(107, 58, 46, 0.18);
+    --line-soft: rgba(107, 58, 46, 0.10);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: block; }
+  .shell { max-width: 640px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .gate-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--gold);
+    border-radius: 999px;
+    padding: 7px 16px;
+    width: fit-content;
+    margin: 0 auto 18px;
+  }
+  .gate-status.closed { background: transparent; border: 1px solid var(--ink-soft); color: var(--ink-soft); }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.12;
+    text-align: center;
+    margin: 0 0 14px;
+  }
+  .sub {
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 460px;
+    margin: 0 auto 34px;
+  }
+
+  .gate-mark {
+    width: 74px; height: 74px;
+    border-radius: 37px 37px 8px 8px;
+    border: 2px solid var(--ink);
+    background: linear-gradient(160deg, var(--gold), var(--cream));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 24px; font-weight: 600;
+    margin: 0 auto 20px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1.5px solid var(--line-soft);
+    border-radius: 22px;
+    padding: 26px;
+    margin-bottom: 18px;
+    box-shadow: 0 12px 34px -22px rgba(107,58,46,0.28);
+  }
+  .card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 600; margin: 0 0 4px;
+  }
+  .card .hint { font-size: 13px; color: var(--ink-soft); margin: 0 0 16px; }
+
+  label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 6px; }
+  input[type="date"], input[type="time"], input[type="text"], select, textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .15s, background .15s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--ink-soft); background: #fff; }
+  textarea { resize: vertical; min-height: 74px; }
+
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
+
+  .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .tab {
+    flex: 1; padding: 12px 8px;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--ink-soft);
+    cursor: pointer; text-align: center;
+    transition: all .15s;
+  }
+  .tab.on { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+  .concern-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+  @media (max-width: 480px) { .concern-grid { grid-template-columns: 1fr; } }
+  .concern {
+    padding: 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    font-size: 14px; font-weight: 500;
+    transition: all .15s;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+  }
+  .concern.on { border-color: var(--ink); background: linear-gradient(160deg, var(--yellow), #fff); font-weight: 600; }
+
+  .btn {
+    display: block; width: 100%;
+    padding: 17px;
+    border: none; border-radius: 999px;
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px; font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: transform .12s, opacity .15s;
+    margin-top: 8px;
+  }
+  .btn:hover { opacity: .92; }
+  .btn:active { transform: scale(.985); }
+  .btn.ghost {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--line);
+  }
+  .btn.warm { background: linear-gradient(120deg, var(--gold-deep), var(--orange)); color: var(--ink); }
+
+  .note { font-size: 12.5px; color: var(--ink-soft); text-align: center; margin-top: 14px; }
+  .err {
+    display: none;
+    background: linear-gradient(160deg, var(--red), #fff);
+    border: 1.5px solid rgba(107,58,46,.25);
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px; font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .err.show { display: block; }
+
+  #map {
+    height: 190px;
+    border-radius: 14px;
+    margin-top: 12px;
+    display: none;
+    border: 1.5px solid var(--line-soft);
+  }
+  .geo-results {
+    position: relative;
+  }
+  .geo-list {
+    position: absolute; left: 0; right: 0; top: calc(100% + 4px);
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    z-index: 50;
+    box-shadow: 0 16px 40px -18px rgba(107,58,46,.35);
+    display: none;
+  }
+  .geo-list button {
+    display: block; width: 100%;
+    text-align: left;
+    padding: 12px 14px;
+    border: none; background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; color: var(--ink);
+    cursor: pointer;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .geo-list button:hover { background: var(--yellow); }
+  .geo-list button:last-child { border-bottom: none; }
+
+  details.adv { margin-top: 16px; }
+  details.adv summary {
+    cursor: pointer; font-size: 13px; font-weight: 600; color: var(--ink-soft);
+    list-style: none;
+  }
+  details.adv summary::before { content: "+ "; }
+  details.adv[open] summary::before { content: "− "; }
+
+  /* ============ RESULT ============ */
+  .focus-hero {
+    border-radius: 26px;
+    padding: 40px 30px;
+    text-align: center;
+    background: linear-gradient(160deg, var(--gold), var(--orange) 55%, var(--cream));
+    border: 1.5px solid var(--line-soft);
+    margin-bottom: 18px;
+  }
+  .focus-hero .flame { font-size: 34px; }
+  .focus-hero h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 6vw, 38px);
+    font-weight: 700; margin: 8px 0 14px;
+  }
+  .focus-line { font-size: 15px; }
+  .focus-line strong { font-weight: 700; }
+  .instruction {
+    margin: 22px auto 0;
+    max-width: 420px;
+    background: rgba(255,255,255,.68);
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  .why-list { margin: 8px 0 0; padding: 0; list-style: none; }
+  .why-list li {
+    font-size: 13.5px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line-soft);
+    display: flex; justify-content: space-between; gap: 12px;
+  }
+  .why-list li:last-child { border-bottom: none; }
+  .why-list .pts {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .q-box {
+    background: linear-gradient(160deg, var(--yellow), #fff);
+    border-radius: 14px;
+    padding: 16px 18px;
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-style: italic;
+    margin-top: 12px;
+  }
+  .anchor-chip {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+  }
+  .cusp-flag {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--cream);
+    border: 1px dashed var(--line);
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-top: 12px;
+  }
+  .placements {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+  }
+  .placement {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    background: var(--cream);
+    border: 1px solid var(--line-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+  }
+
+  /* ============ RITUAL ============ */
+  .step-card {
+    background: #fff;
+    border: 1.5px solid var(--line-soft);
+    border-radius: 22px;
+    padding: 28px 26px;
+    margin-bottom: 16px;
+  }
+  .step-card .num {
+    width: 54px; height: 54px;
+    border-radius: 27px 27px 6px 6px;
+    border: 2px solid var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .step-card:nth-child(4n+1) .num { background: linear-gradient(160deg, var(--gold), var(--cream)); }
+  .step-card:nth-child(4n+2) .num { background: linear-gradient(160deg, var(--orange), var(--cream)); }
+  .step-card:nth-child(4n+3) .num { background: linear-gradient(160deg, var(--yellow), var(--cream)); }
+  .step-card:nth-child(4n+4) .num { background: linear-gradient(160deg, var(--red), var(--cream)); }
+  .step-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 600; margin: 0;
+  }
+  .step-card .theme {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-soft); margin: 2px 0 14px;
+  }
+  .step-card .ask {
+    font-family: 'Fraunces', serif;
+    font-size: 17px; font-style: italic;
+    margin: 0 0 12px;
+  }
+
+  /* ============ DECLARATION ============ */
+  .decl {
+    background: linear-gradient(160deg, var(--gold), var(--orange) 60%, var(--red));
+    border-radius: 26px;
+    padding: 40px 30px;
+    text-align: center;
+    border: 1.5px solid var(--line-soft);
+  }
+  .decl p {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    margin: 0 0 12px;
+  }
+  .decl .big {
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 700;
+    letter-spacing: .01em;
+    margin-top: 24px;
+  }
+
+  /* ============ JOURNEY ============ */
+  .journey { list-style: none; padding: 0; margin: 12px 0 0; }
+  .journey li {
+    padding: 12px 0 12px 30px;
+    position: relative;
+    border-left: 2px solid var(--line);
+    margin-left: 10px;
+    font-size: 14.5px;
+  }
+  .journey li::before {
+    content: "";
+    position: absolute; left: -7px; top: 18px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--gold-deep);
+    border: 2px solid var(--cream);
+  }
+  .journey li.done::before { background: var(--ink); }
+  .journey li strong { font-family: 'Fraunces', serif; font-size: 16px; }
+  .journey li span { display: block; color: var(--ink-soft); font-size: 13px; }
+
+  .bridge {
+    text-align: center;
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--ink);
+    margin: 30px auto;
+    max-width: 400px;
+  }
+  footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding: 26px 20px 40px;
+  }
+  .progress {
+    position: sticky; top: 0; z-index: 100;
+    height: 4px; background: var(--line-soft);
+  }
+  .progress .bar {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--orange));
+    transition: width .4s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+
+<!-- ================= SCREEN 1: ENTER THE PORTAL ================= -->
+<section class="screen active" id="s-enter">
+  <div class="shell">
+    <div class="gate-mark">8</div>
+    <div class="eyebrow" id="heroEyebrow">The 8/8 Portal</div>
+    <div class="gate-status" id="gateStatus" style="display:none;"></div>
+    <h1 id="heroTitle">It's 8/8. Where should your energy actually go?</h1>
+    <p class="sub" id="heroSub">Lion's Gate gets talked about as a day to manifest everything. Your chart may be telling you to focus on one thing.</p>
+
+    <div class="err" id="enterErr"></div>
+
+    <div class="tabs">
+      <button class="tab on" id="tabBirth" onclick="setMode('birth')">Full birth details</button>
+      <button class="tab" id="tabBig3" onclick="setMode('big3')">I know my Big Three</button>
+    </div>
+
+    <!-- Path A: birth data -->
+    <div class="card" id="pathBirth">
+      <h3>Your birth details</h3>
+      <p class="hint">We compute your placements in your browser. Nothing is stored or sent anywhere.</p>
+      <div class="row">
+        <div>
+          <label for="bDate">Birth date</label>
+          <input type="date" id="bDate" min="1900-01-01" max="2026-08-08">
+        </div>
+        <div>
+          <label for="bTime">Birth time</label>
+          <input type="time" id="bTime" value="12:00">
+        </div>
+      </div>
+      <label for="bCity">Birth city</label>
+      <div class="geo-results">
+        <input type="text" id="bCity" placeholder="Start typing a city..." autocomplete="off">
+        <div class="geo-list" id="geoList"></div>
+      </div>
+      <div id="map"></div>
+      <div class="row" style="margin-top:12px;">
+        <div>
+          <label for="bTz">Time zone of birth (UTC offset)</label>
+          <select id="bTz"></select>
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <div class="note" style="text-align:left; margin-top:0;">If daylight saving was in effect at your birth, pick the DST offset (one hour ahead).</div>
+        </div>
+      </div>
+      <div class="note" id="mapNote" style="text-align:left;"></div>
+    </div>
+
+    <!-- Path B: big three -->
+    <div class="card" id="pathBig3" style="display:none;">
+      <h3>Already know your Big Three?</h3>
+      <p class="hint">Sun, Moon, Rising. Add the advanced fields if you know them and the reading gets sharper.</p>
+      <div class="row">
+        <div>
+          <label for="g3sun">Sun sign</label>
+          <select id="g3sun" class="signsel"></select>
+        </div>
+        <div>
+          <label for="g3moon">Moon sign</label>
+          <select id="g3moon" class="signsel"></select>
+        </div>
+      </div>
+      <label for="g3rising">Rising sign</label>
+      <select id="g3rising" class="signsel"></select>
+
+      <details class="adv">
+        <summary>Advanced placements (optional)</summary>
+        <div class="row">
+          <div><label for="g3mars">Mars sign</label><select id="g3mars" class="signsel opt"></select></div>
+          <div><label for="g3jupiter">Jupiter sign</label><select id="g3jupiter" class="signsel opt"></select></div>
+        </div>
+        <div class="row">
+          <div><label for="g3venus">Venus sign</label><select id="g3venus" class="signsel opt"></select></div>
+          <div><label for="g3mc">Midheaven sign</label><select id="g3mc" class="signsel opt"></select></div>
+        </div>
+        <div class="row">
+          <div><label for="g3h2">2nd house sign</label><select id="g3h2" class="signsel opt"></select></div>
+          <div><label for="g3h6">6th house sign</label><select id="g3h6" class="signsel opt"></select></div>
+        </div>
+        <div class="row">
+          <div><label for="g3h10">10th house sign</label><select id="g3h10" class="signsel opt"></select></div>
+          <div><label for="g3nn">North Node sign</label><select id="g3nn" class="signsel opt"></select></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <h3>What needs the most attention right now?</h3>
+      <div class="concern-grid" id="concernGrid">
+        <button class="concern" data-c="Health">Health / Energy</button>
+        <button class="concern" data-c="Wealth">Money / Wealth</button>
+        <button class="concern" data-c="Career">Career / Purpose</button>
+        <button class="concern" data-c="Relationships">Relationships</button>
+        <button class="concern" data-c="Growth">Personal Growth</button>
+        <button class="concern" data-c="Unknown">I honestly don't know</button>
+      </div>
+    </div>
+
+    <button class="btn" id="btnRun" onclick="runPortal()">Show Me My 8/8 Focus</button>
+    <p class="note">A reflection tool, not a prediction machine. Astronomy computed in your browser with Meeus and JPL approximation methods.</p>
+  </div>
+</section>
+
+<!-- ================= SCREEN 2: RESULT ================= -->
+<section class="screen" id="s-result">
+  <div class="shell">
+    <div class="eyebrow" id="focusEyebrow">Your 8/8 Focus</div>
+    <div class="focus-hero">
+      <div class="flame">🔥</div>
+      <h2 id="focusTitle">Concentrate the Fire</h2>
+      <p class="focus-line"><strong>Primary:</strong> <span id="focusPrimary"></span></p>
+      <p class="focus-line"><strong>Supporting:</strong> <span id="focusSupporting"></span></p>
+      <div class="instruction" id="focusInstruction"></div>
+    </div>
+
+    <div class="card">
+      <h3>Your reading</h3>
+      <p id="readingBody" style="font-size:15px;"></p>
+      <div class="q-box" id="primaryQuestion"></div>
+    </div>
+
+    <div class="card" id="supportCard">
+      <h3 id="supportTitle"></h3>
+      <p id="supportBody" style="font-size:15px;"></p>
+      <div class="q-box" id="supportQuestion"></div>
+    </div>
+
+    <div class="card">
+      <span class="anchor-chip">Your Iter8 Anchor</span>
+      <h3 id="anchorName"></h3>
+      <p id="anchorBody" style="font-size:15px; margin-bottom:0;"></p>
+    </div>
+
+    <div class="card">
+      <h3>Why you got this</h3>
+      <p class="hint">Deterministic scoring. Same inputs, same result, every time.</p>
+      <div class="placements" id="placementChips"></div>
+      <ul class="why-list" id="whyList"></ul>
+      <div class="cusp-flag" id="cuspFlag" style="display:none;"></div>
+    </div>
+
+    <button class="btn warm" id="btnBegin" onclick="go('s-ritual')">Begin the 8/8 Reset →</button>
+    <button class="btn ghost" onclick="go('s-enter')">Start over</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN 3: RITUAL ================= -->
+<section class="screen" id="s-ritual">
+  <div class="shell">
+    <div class="eyebrow" id="ritualEyebrow">Iter8: The 8/8 Reset</div>
+    <h1 style="font-size:clamp(26px,5vw,36px);">Eight minutes. One decision.</h1>
+    <p class="sub">Don't give today eight activities. Give it one short ritual. Answer honestly, move slowly.</p>
+
+    <div class="err" id="ritualErr"></div>
+
+    <div class="step-card">
+      <div class="num">1</div>
+      <h3>Locate</h3>
+      <p class="theme">Where are you actually?</p>
+      <p class="ask">If your life made the front page this morning, what would the headline say?</p>
+      <textarea id="r1" placeholder="Write the headline..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">2</div>
+      <h3>Differentiate</h3>
+      <p class="theme">What's yours and what's performance?</p>
+      <p class="ask">What have you been pursuing because you genuinely want it, and what have you been pursuing because you think you should?</p>
+      <textarea id="r2" placeholder="Mine: ...  Performance: ..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">3</div>
+      <h3>Evaluate</h3>
+      <p class="theme">What is repetition costing you?</p>
+      <p class="ask" id="askCost">If nothing changes between today and 8/8/2028, what will this pattern cost you in time, money, energy or peace?</p>
+      <textarea id="r3" placeholder="The real cost..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">4</div>
+      <h3>Authorize</h3>
+      <p class="theme">Make the decision.</p>
+      <p class="ask">Complete the sentence: I choose ____________.</p>
+      <textarea id="r4" placeholder="I choose..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">5</div>
+      <h3>Regulate</h3>
+      <p class="theme">Make it survivable.</p>
+      <p class="ask">What is one action small enough that you can actually repeat it?</p>
+      <textarea id="r5" placeholder="One small repeatable action..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">6</div>
+      <h3>Calibrate</h3>
+      <p class="theme">Reduce the friction.</p>
+      <p class="ask">What needs to become easier, smaller, earlier, later, automated, delegated or removed?</p>
+      <textarea id="r6" placeholder="The friction I am removing..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">7</div>
+      <h3>Activate</h3>
+      <p class="theme">Move something today.</p>
+      <p class="ask">What can you do before you go to sleep that makes your decision real? Not plan. Not research. Move.</p>
+      <textarea id="r7" placeholder="Before I sleep tonight, I will..."></textarea>
+    </div>
+
+    <div class="step-card">
+      <div class="num">8</div>
+      <h3>Integrate</h3>
+      <p class="theme" id="themeClose">Close the gate behind you.</p>
+      <p class="ask">Finish this: The version of me entering 8/9 no longer ____________.</p>
+      <textarea id="r8" placeholder="...no longer..."></textarea>
+    </div>
+
+    <button class="btn" id="btnCompose" onclick="composeDeclaration()">Compose My 8/8 Declaration</button>
+  </div>
+</section>
+
+<!-- ================= SCREEN 4: DECLARATION ================= -->
+<section class="screen" id="s-decl">
+  <div class="shell">
+    <div class="eyebrow" id="declEyebrow">Your 8/8 Declaration</div>
+    <div class="decl" id="declCard">
+      <p id="d1"></p>
+      <p id="d2"></p>
+      <p id="d3"></p>
+      <p id="d4"></p>
+      <p id="d5"></p>
+      <p class="big">THIS IS WHAT GETS MY ENERGY NOW.</p>
+    </div>
+    <button class="btn" id="btnSave" onclick="downloadCard()">Save My 8/8 Declaration</button>
+    <button class="btn ghost" onclick="go('s-upgrade')">You opened the door. Keep going →</button>
+    <canvas id="cardCanvas" width="1080" height="1350" style="display:none;"></canvas>
+  </div>
+</section>
+
+<!-- ================= SCREEN 5: UPGRADE ================= -->
+<section class="screen" id="s-upgrade">
+  <div class="shell">
+    <div class="eyebrow">Continue Your Iter8</div>
+    <h1 style="font-size:clamp(26px,5vw,36px);">You opened the door. Want to keep going?</h1>
+    <p class="sub">Today gave you a decision. Iter8 gives you the process for becoming the person who follows through on it.</p>
+
+    <div class="card">
+      <h3>Today</h3>
+      <ul class="journey">
+        <li class="done"><strong id="ckPortal">8/8 Portal</strong><span>Complete</span></li>
+        <li class="done"><strong>Your Focus</strong><span id="jFocus"></span></li>
+        <li class="done"><strong id="ckReset">8/8 Reset</strong><span>Complete</span></li>
+        <li class="done"><strong>Declaration</strong><span>Saved</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Next</h3>
+      <ul class="journey">
+        <li><strong>Locate</strong><span>See the pattern clearly.</span></li>
+        <li><strong>Differentiate</strong><span>Separate yourself from the role you've been performing.</span></li>
+        <li><strong>Evaluate</strong><span>Calculate what staying stuck is actually costing.</span></li>
+        <li><strong>Authorize</strong><span>Make the choice.</span></li>
+        <li><strong>Regulate</strong><span>Create behavior you can repeat.</span></li>
+        <li><strong>Calibrate</strong><span>Adjust without starting over.</span></li>
+        <li><strong>Activate</strong><span>Create movement.</span></li>
+        <li><strong>Integrate</strong><span>Make the change part of who you are.</span></li>
+      </ul>
+    </div>
+
+    <div class="card" style="background:linear-gradient(160deg, var(--yellow), #fff);">
+      <span class="anchor-chip">Your Iter8 Anchor</span>
+      <h3 id="upgradeAnchorName"></h3>
+      <p id="upgradeAnchorBody" style="font-size:15px; margin-bottom:0;"></p>
+    </div>
+
+    <p class="bridge" id="bridgeLine">Lion's Gate is the invitation. Iter8 is what happens after you decide.</p>
+
+    <h2 style="font-family:'Fraunces',serif; text-align:center; font-size:clamp(24px,5vw,32px); margin:0 0 6px;">Don't stop at the portal. Iter8 it.</h2>
+    <p class="sub" style="margin-bottom:22px;" id="upgradeSub">Continue from 8/8 through 8/26. One activity a day, most under 30 minutes.</p>
+    <a href="https://iter8me.com" target="_blank" rel="noopener" style="text-decoration:none;">
+      <button class="btn warm">Continue My Iter8 →</button>
+    </a>
+    <button class="btn ghost" onclick="go('s-enter')">Run the portal for someone else</button>
+  </div>
+</section>
+
+<footer>
+  The 8/8 Portal is a reflection tool. Placements are computed in your browser using standard astronomical approximation methods (Meeus solar and lunar theory, JPL planetary elements, whole-sign houses). Nothing you enter is stored or transmitted, except the city lookup sent to Mapbox if you use the map.
+</footer>
+
+<script>
+/* ============================================================
+   CONFIG
+   ============================================================ */
+// Paste your Mapbox public token (starts with pk.) between the quotes.
+// Get one free at https://account.mapbox.com/access-tokens/
+const MAPBOX_TOKEN = "";
+
+/* ============================================================
+   PORTAL WINDOW
+   The Lion's Gate window runs July 26 through August 12 every
+   year. Inside the window the app runs in full 8/8 gate mode.
+   Outside it, it automatically reverts to the evergreen
+   "Where Should My Energy Go?" tool, then reopens itself as
+   the 8/8 Portal next July 26. No redeploys needed.
+   Preview either mode any day with ?mode=gate or ?mode=evergreen
+   ============================================================ */
+const GATE_OPEN_MONTH = 7,  GATE_OPEN_DAY = 26;   // July 26
+const GATE_CLOSE_MONTH = 8, GATE_CLOSE_DAY = 12;  // August 12
+
+function portalState(now = new Date()) {
+  const y = now.getFullYear();
+  const open  = new Date(y, GATE_OPEN_MONTH - 1, GATE_OPEN_DAY);
+  const close = new Date(y, GATE_CLOSE_MONTH - 1, GATE_CLOSE_DAY, 23, 59, 59);
+  let inWindow = now >= open && now <= close;
+  const forced = new URLSearchParams(location.search).get("mode");
+  if (forced === "gate") inWindow = true;
+  if (forced === "evergreen") inWindow = false;
+  const peak = inWindow && now.getMonth() === 7 && now.getDate() === 8;
+  const nextOpen = now > close ? new Date(y + 1, GATE_OPEN_MONTH - 1, GATE_OPEN_DAY) : open;
+  const dayMs = 86400000;
+  return {
+    mode: inWindow ? "gate" : "evergreen",
+    peak,
+    daysToClose: Math.max(0, Math.ceil((close - now) / dayMs)),
+    daysToOpen:  Math.max(0, Math.ceil((nextOpen - now) / dayMs))
+  };
+}
+
+const PS = portalState();
+const IS_GATE = PS.mode === "gate";
+
+const MODECOPY = IS_GATE ? {
+  title: "The 8/8 Portal · Your Lion's Gate focus, decoded",
+  eyebrow: "The 8/8 Portal",
+  heroTitle: PS.peak
+    ? "It's 8/8. Where should your energy actually go?"
+    : "The portal is open. Where should your energy actually go?",
+  heroSub: "Lion's Gate gets talked about as a day to manifest everything. Your chart may be telling you to focus on one thing.",
+  status: PS.peak
+    ? "8/8 · The portal peaks today"
+    : "Portal open · closes August 12 · " + PS.daysToClose + (PS.daysToClose === 1 ? " day left" : " days left"),
+  statusClosed: false,
+  btnRun: "Show Me My 8/8 Focus",
+  focusEyebrow: "Your 8/8 Focus",
+  btnBegin: "Begin the 8/8 Reset →",
+  ritualEyebrow: "Iter8: The 8/8 Reset",
+  askCost: "If nothing changes between today and 8/8/2028, what will this pattern cost you in time, money, energy or peace?",
+  themeClose: "Close the gate behind you.",
+  btnCompose: "Compose My 8/8 Declaration",
+  declEyebrow: "Your 8/8 Declaration",
+  btnSave: "Save My 8/8 Declaration",
+  ckPortal: "8/8 Portal",
+  ckReset: "8/8 Reset",
+  bridge: "Lion's Gate is the invitation. Iter8 is what happens after you decide.",
+  upgradeSub: "Continue from 8/8 through 8/26. One activity a day, most under 30 minutes.",
+  instructionPrefix: "Your Lion's Gate instruction: ",
+  quietChart: "A quiet chart today. Lion's Gate itself sets the focus.",
+  leoSignal: "Sun in Leo, the Lion's Gate sign itself",
+  step8Err: 'Step 8 closes the gate. Finish "no longer..."',
+  cardHeader: "8 / 8  L I O N ' S  G A T E",
+  cardFile: "my-8-8-declaration.png"
+} : {
+  title: "Where Should My Energy Go? · An Iter8 tool",
+  eyebrow: "An Iter8 Tool",
+  heroTitle: "Where should your energy actually go?",
+  heroSub: "You don't need a cosmic deadline to focus. Your chart may be telling you to pick one thing and build it.",
+  status: "The next Lion's Gate opens July 26 · " + PS.daysToOpen + (PS.daysToOpen === 1 ? " day" : " days"),
+  statusClosed: true,
+  btnRun: "Show Me My Focus",
+  focusEyebrow: "Your Focus",
+  btnBegin: "Begin the Reset →",
+  ritualEyebrow: "Iter8: The Reset",
+  askCost: "If nothing changes between today and two years from now, what will this pattern cost you in time, money, energy or peace?",
+  themeClose: "Close the door behind you.",
+  btnCompose: "Compose My Declaration",
+  declEyebrow: "Your Declaration",
+  btnSave: "Save My Declaration",
+  ckPortal: "Energy Portal",
+  ckReset: "The Reset",
+  bridge: "Clarity is the invitation. Iter8 is what happens after you decide.",
+  upgradeSub: "Continue for the next 18 days. One activity a day, most under 30 minutes.",
+  instructionPrefix: "Your instruction: ",
+  quietChart: "A quiet chart. We default your focus to visibility work.",
+  leoSignal: "Sun in Leo, built for visibility",
+  step8Err: 'Step 8 closes it out. Finish "no longer..."',
+  cardHeader: "W H E R E   M Y   E N E R G Y   G O E S",
+  cardFile: "my-energy-declaration.png"
+};
+
+function applyMode() {
+  document.title = MODECOPY.title;
+  const set = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+  set("heroEyebrow", MODECOPY.eyebrow);
+  set("heroTitle", MODECOPY.heroTitle);
+  set("heroSub", MODECOPY.heroSub);
+  set("btnRun", MODECOPY.btnRun);
+  set("focusEyebrow", MODECOPY.focusEyebrow);
+  set("btnBegin", MODECOPY.btnBegin);
+  set("ritualEyebrow", MODECOPY.ritualEyebrow);
+  set("askCost", MODECOPY.askCost);
+  set("themeClose", MODECOPY.themeClose);
+  set("btnCompose", MODECOPY.btnCompose);
+  set("declEyebrow", MODECOPY.declEyebrow);
+  set("btnSave", MODECOPY.btnSave);
+  set("ckPortal", MODECOPY.ckPortal);
+  set("ckReset", MODECOPY.ckReset);
+  set("bridgeLine", MODECOPY.bridge);
+  set("upgradeSub", MODECOPY.upgradeSub);
+  const st = document.getElementById("gateStatus");
+  if (st) {
+    st.textContent = MODECOPY.status;
+    st.style.display = "block";
+    st.classList.toggle("closed", MODECOPY.statusClosed);
+  }
+}
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const SIGNS = ["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+const ELEMENT = { Aries:"Fire", Leo:"Fire", Sagittarius:"Fire",
+                  Taurus:"Earth", Virgo:"Earth", Capricorn:"Earth",
+                  Gemini:"Air", Libra:"Air", Aquarius:"Air",
+                  Cancer:"Water", Scorpio:"Water", Pisces:"Water" };
+
+const state = {
+  mode: "birth",
+  concern: null,
+  lat: null, lon: null, placeName: null,
+  chart: null,        // { placements:{Sun:...}, asc, houses, cusps }
+  scores: null,       // { domains, signals, primary, supporting, anchor }
+  ritual: {}
+};
+
+/* ============================================================
+   ASTRONOMY ENGINE
+   Meeus, "Astronomical Algorithms" 2nd ed. + JPL approximate
+   planetary elements (valid 1800 to 2050). Sign-level accuracy.
+   ============================================================ */
+const D2R = Math.PI/180, R2D = 180/Math.PI;
+const norm360 = d => ((d % 360) + 360) % 360;
+
+function julianDay(y, m, d, utHours) {
+  if (m <= 2) { y -= 1; m += 12; }
+  const A = Math.floor(y/100);
+  const B = 2 - A + Math.floor(A/4);
+  return Math.floor(365.25*(y+4716)) + Math.floor(30.6001*(m+1)) + d + B - 1524.5 + utHours/24;
+}
+
+function obliquity(T) {
+  return 23.43929111 - 0.0130041667*T - 1.6667e-7*T*T + 5.02778e-7*T*T*T;
+}
+
+/* ---- Sun (Meeus ch. 25) ---- */
+function sunLongitude(JD) {
+  const T = (JD - 2451545.0)/36525;
+  const L0 = norm360(280.46646 + 36000.76983*T + 0.0003032*T*T);
+  const M  = norm360(357.52911 + 35999.05029*T - 0.0001537*T*T);
+  const Mr = M*D2R;
+  const C = (1.914602 - 0.004817*T - 0.000014*T*T)*Math.sin(Mr)
+          + (0.019993 - 0.000101*T)*Math.sin(2*Mr)
+          + 0.000289*Math.sin(3*Mr);
+  const trueLon = L0 + C;
+  const omega = 125.04 - 1934.136*T;
+  return norm360(trueLon - 0.00569 - 0.00478*Math.sin(omega*D2R));
+}
+
+/* ---- Moon (Meeus ch. 47, principal longitude terms) ---- */
+function moonLongitude(JD) {
+  const T = (JD - 2451545.0)/36525;
+  const Lp = norm360(218.3164477 + 481267.88123421*T - 0.0015786*T*T + T*T*T/538841 - T*T*T*T/65194000);
+  const D  = norm360(297.8501921 + 445267.1114034*T - 0.0018819*T*T + T*T*T/545868 - T*T*T*T/113065000);
+  const M  = norm360(357.5291092 + 35999.0502909*T - 0.0001536*T*T + T*T*T/24490000);
+  const Mp = norm360(134.9633964 + 477198.8675055*T + 0.0087414*T*T + T*T*T/69699 - T*T*T*T/14712000);
+  const F  = norm360(93.2720950 + 483202.0175233*T - 0.0036539*T*T - T*T*T/3526000 + T*T*T*T/863310000);
+  const E = 1 - 0.002516*T - 0.0000074*T*T;
+  // [coeff(1e-6 deg), d, m, mp, f]
+  const terms = [
+    [6288774,0,0,1,0],[1274027,2,0,-1,0],[658314,2,0,0,0],[213618,0,0,2,0],
+    [-185116,0,1,0,0],[-114332,0,0,0,2],[58793,2,0,-2,0],[57066,2,-1,-1,0],
+    [53322,2,0,1,0],[45758,2,-1,0,0],[-40923,0,1,-1,0],[-34720,1,0,0,0],
+    [-30383,0,1,1,0],[15327,2,0,0,-2],[-12528,0,0,1,2],[10980,0,0,1,-2],
+    [10675,4,0,-1,0],[10034,0,0,3,0],[8548,4,0,-2,0],[-7888,2,1,-1,0],
+    [-6766,2,1,0,0],[-5163,1,0,-1,0],[4987,1,1,0,0],[4036,2,-1,1,0],
+    [3994,2,0,2,0],[3861,4,0,0,0],[3665,2,0,-3,0],[-2689,0,1,-2,0],
+    [-2602,2,0,-1,2],[2390,2,-1,-2,0],[-2348,1,0,1,0],[2236,2,-2,0,0]
+  ];
+  let sum = 0;
+  for (const [c, cd, cm, cmp, cf] of terms) {
+    let coeff = c;
+    if (Math.abs(cm) === 1) coeff *= E;
+    if (Math.abs(cm) === 2) coeff *= E*E;
+    sum += coeff * Math.sin((cd*D + cm*M + cmp*Mp + cf*F)*D2R);
+  }
+  return norm360(Lp + sum*1e-6);
+}
+
+/* ---- Planets: JPL approximate Keplerian elements, 1800-2050 ---- */
+// [a, e, I, L, longPeri, longNode] + per-century rates
+const JPL = {
+  Mercury:{ el:[0.38709927,0.20563593,7.00497902,252.25032350,77.45779628,48.33076593],
+            rt:[0.00000037,0.00001906,-0.00594749,149472.67411175,0.16047689,-0.12534081] },
+  Venus:  { el:[0.72333566,0.00677672,3.39467605,181.97909950,131.60246718,76.67984255],
+            rt:[0.00000390,-0.00004107,-0.00078890,58517.81538729,0.00268329,-0.27769418] },
+  Earth:  { el:[1.00000261,0.01671123,-0.00001531,100.46457166,102.93768193,0.0],
+            rt:[0.00000562,-0.00004392,-0.01294668,35999.37244981,0.32327364,0.0] },
+  Mars:   { el:[1.52371034,0.09339410,1.84969142,-4.55343205,-23.94362959,49.55953891],
+            rt:[0.00001847,0.00007882,-0.00813131,19140.30268499,0.44441088,-0.29257343] },
+  Jupiter:{ el:[5.20288700,0.04838624,1.30439695,34.39644051,14.72847983,100.47390909],
+            rt:[-0.00011607,-0.00013253,-0.00183714,3034.74612775,0.21252668,0.20469106] },
+  Saturn: { el:[9.53667594,0.05386179,2.48599187,49.95424423,92.59887831,113.66242448],
+            rt:[-0.00125060,-0.00050991,0.00193609,1222.49362201,-0.41897216,-0.28867794] },
+  Uranus: { el:[19.18916464,0.04725744,0.77263783,313.23810451,170.95427630,74.01692503],
+            rt:[-0.00196176,-0.00004397,-0.00242939,428.48202785,0.40805281,0.04240589] },
+  Neptune:{ el:[30.06992276,0.00859048,1.77004347,-55.12002969,44.96476227,131.78422574],
+            rt:[0.00026291,0.00005105,0.00035372,218.45945325,-0.32241464,-0.00508664] },
+  Pluto:  { el:[39.48211675,0.24882730,17.14001206,238.92903833,224.06891629,110.30393684],
+            rt:[-0.00031596,0.00005170,0.00004818,145.20780515,-0.04062942,-0.01183482] }
+};
+
+function heliocentric(name, T) {
+  const p = JPL[name];
+  const a = p.el[0] + p.rt[0]*T;
+  const e = p.el[1] + p.rt[1]*T;
+  const I = (p.el[2] + p.rt[2]*T)*D2R;
+  const L = p.el[3] + p.rt[3]*T;
+  const w_ = p.el[4] + p.rt[4]*T;   // longitude of perihelion
+  const O = (p.el[5] + p.rt[5]*T)*D2R;
+  const w = w_*D2R - O;             // argument of perihelion
+  let M = norm360(L - w_);
+  if (M > 180) M -= 360;
+  const Mr = M*D2R;
+  // Solve Kepler
+  let E = Mr + e*Math.sin(Mr);
+  for (let i = 0; i < 8; i++) {
+    const dE = (Mr - (E - e*Math.sin(E))) / (1 - e*Math.cos(E));
+    E += dE;
+    if (Math.abs(dE) < 1e-8) break;
+  }
+  const xp = a*(Math.cos(E) - e);
+  const yp = a*Math.sqrt(1 - e*e)*Math.sin(E);
+  // Rotate to J2000 ecliptic
+  const cw = Math.cos(w), sw = Math.sin(w);
+  const cO = Math.cos(O), sO = Math.sin(O);
+  const cI = Math.cos(I), sI = Math.sin(I);
+  const x = (cw*cO - sw*sO*cI)*xp + (-sw*cO - cw*sO*cI)*yp;
+  const y = (cw*sO + sw*cO*cI)*xp + (-sw*sO + cw*cO*cI)*yp;
+  const z = (sw*sI)*xp + (cw*sI)*yp;
+  return [x, y, z];
+}
+
+function planetLongitude(name, JD) {
+  const T = (JD - 2451545.0)/36525;
+  const ph = heliocentric(name, T);
+  const eh = heliocentric("Earth", T);
+  const gx = ph[0]-eh[0], gy = ph[1]-eh[1];
+  return norm360(Math.atan2(gy, gx)*R2D);
+}
+
+/* ---- Sidereal time and Ascendant ---- */
+function gmstDeg(JD) {
+  const T = (JD - 2451545.0)/36525;
+  return norm360(280.46061837 + 360.98564736629*(JD - 2451545.0) + 0.000387933*T*T - T*T*T/38710000);
+}
+
+// Robust ascendant: scan the ecliptic for the point crossing the
+// eastern horizon. No quadrant bugs, works at all latitudes short
+// of polar extremes.
+function ascendantLongitude(JD, latDeg, lonDeg) {
+  const eps = obliquity((JD-2451545)/36525)*D2R;
+  const lst = norm360(gmstDeg(JD) + lonDeg);
+  const phi = latDeg*D2R;
+  function altAndEast(lam) {
+    const l = lam*D2R;
+    const dec = Math.asin(Math.sin(eps)*Math.sin(l));
+    const ra = Math.atan2(Math.cos(eps)*Math.sin(l), Math.cos(l))*R2D;
+    let H = norm360(lst - ra);
+    if (H > 180) H -= 360;                     // H in (-180,180]
+    const alt = Math.asin(Math.sin(phi)*Math.sin(dec) + Math.cos(phi)*Math.cos(dec)*Math.cos(H*D2R))*R2D;
+    return { alt, east: H < 0 };
+  }
+  let best = null;
+  for (let lam = 0; lam < 360; lam += 0.5) {
+    const r = altAndEast(lam);
+    if (r.east && (best === null || Math.abs(r.alt) < best.absAlt)) {
+      best = { lam, absAlt: Math.abs(r.alt) };
+    }
+  }
+  // refine
+  let lo = best.lam - 0.6, hi = best.lam + 0.6, bestLam = best.lam, bestAbs = best.absAlt;
+  for (let lam = lo; lam <= hi; lam += 0.01) {
+    const r = altAndEast(norm360(lam));
+    if (r.east && Math.abs(r.alt) < bestAbs) { bestAbs = Math.abs(r.alt); bestLam = norm360(lam); }
+  }
+  return bestLam;
+}
+
+function midheavenLongitude(JD, lonDeg) {
+  const eps = obliquity((JD-2451545)/36525)*D2R;
+  const ramc = norm360(gmstDeg(JD) + lonDeg)*D2R;
+  let mc = Math.atan2(Math.sin(ramc), Math.cos(ramc)*Math.cos(eps))*R2D;
+  return norm360(mc);
+}
+
+function signOf(lon) { return SIGNS[Math.floor(norm360(lon)/30)]; }
+function degInSign(lon) { return norm360(lon) % 30; }
+
+function computeChart(y, m, d, hh, mm, tzOffset, lat, lon) {
+  const utHours = hh + mm/60 - tzOffset;
+  const JD = julianDay(y, m, d, utHours);
+  const placements = {
+    Sun:     { lon: sunLongitude(JD) },
+    Moon:    { lon: moonLongitude(JD) },
+    Mercury: { lon: planetLongitude("Mercury", JD) },
+    Venus:   { lon: planetLongitude("Venus", JD) },
+    Mars:    { lon: planetLongitude("Mars", JD) },
+    Jupiter: { lon: planetLongitude("Jupiter", JD) },
+    Saturn:  { lon: planetLongitude("Saturn", JD) },
+    Uranus:  { lon: planetLongitude("Uranus", JD) },
+    Neptune: { lon: planetLongitude("Neptune", JD) },
+    Pluto:   { lon: planetLongitude("Pluto", JD) }
+  };
+  for (const k in placements) {
+    placements[k].sign = signOf(placements[k].lon);
+    placements[k].degIn = degInSign(placements[k].lon);
+  }
+  const ascLon = ascendantLongitude(JD, lat, lon);
+  const mcLon = midheavenLongitude(JD, lon);
+  const ascSign = signOf(ascLon);
+  const ascIdx = SIGNS.indexOf(ascSign);
+  for (const k in placements) {
+    placements[k].house = ((SIGNS.indexOf(placements[k].sign) - ascIdx + 12) % 12) + 1;
+  }
+  return { placements, asc: { lon: ascLon, sign: ascSign, degIn: degInSign(ascLon) },
+           mc: { lon: mcLon, sign: signOf(mcLon) }, computed: true };
+}
+
+function chartFromBigThree(v) {
+  const ascIdx = SIGNS.indexOf(v.rising);
+  const houseOf = sign => ((SIGNS.indexOf(sign) - ascIdx + 12) % 12) + 1;
+  const placements = {
+    Sun:  { sign: v.sun,  house: houseOf(v.sun) },
+    Moon: { sign: v.moon, house: houseOf(v.moon) }
+  };
+  if (v.mars)    placements.Mars    = { sign: v.mars,    house: houseOf(v.mars) };
+  if (v.venus)   placements.Venus   = { sign: v.venus,   house: houseOf(v.venus) };
+  if (v.jupiter) placements.Jupiter = { sign: v.jupiter, house: houseOf(v.jupiter) };
+  const chart = { placements, asc: { sign: v.rising }, computed: false };
+  chart.mc = { sign: v.mc || SIGNS[(ascIdx + 9) % 12] };
+  chart.houseOverrides = {};
+  if (v.h2)  chart.houseOverrides[2]  = v.h2;
+  if (v.h6)  chart.houseOverrides[6]  = v.h6;
+  if (v.h10) chart.houseOverrides[10] = v.h10;
+  if (v.nn)  placements.NorthNode = { sign: v.nn, house: houseOf(v.nn) };
+  // If house signs were given directly, re-place planets against them
+  if (Object.keys(chart.houseOverrides).length) {
+    for (const k in placements) {
+      for (const hn in chart.houseOverrides) {
+        if (placements[k].sign === chart.houseOverrides[hn]) placements[k].house = parseInt(hn);
+      }
+    }
+  }
+  return chart;
+}
+
+/* ============================================================
+   DETERMINISTIC SCORING ENGINE
+   Astrology signals + user-selected concern = focus.
+   ============================================================ */
+function scoreChart(chart, concern) {
+  const S = { Wealth:0, Health:0, Career:0, Relationships:0, Transformation:0, Spiritual:0 };
+  const signals = [];
+  const add = (domain, pts, why) => { S[domain] += pts; signals.push({ domain, pts, why }); };
+  const P = chart.placements;
+
+  const inHouse = (name, h) => P[name] && P[name].house === h;
+  const inSign = (name, arr) => P[name] && arr.includes(P[name].sign);
+
+  // --- Wealth: 2nd house and Jupiter activation ---
+  for (const k in P) if (P[k].house === 2) add("Wealth", k === "Jupiter" ? 3 : 2, `${k} in your 2nd house`);
+  if (inHouse("Jupiter", 10)) { add("Career", 2, "Jupiter in your 10th house"); add("Wealth", 1, "Jupiter elevated near your Midheaven"); }
+  if (inHouse("Jupiter", 8)) add("Wealth", 2, "Jupiter in your 8th house");
+  if (inSign("Jupiter", ["Sagittarius","Pisces","Cancer"])) add("Wealth", 1, `Jupiter dignified in ${P.Jupiter.sign}`);
+
+  // --- Health: 6th house and Mars activation ---
+  for (const k in P) if (P[k].house === 6) add("Health", k === "Mars" ? 3 : 2, `${k} in your 6th house`);
+  if (inHouse("Mars", 1)) add("Health", 2, "Mars in your 1st house");
+  if (inSign("Mars", ["Aries","Scorpio","Capricorn"])) add("Health", 1, `Mars strong in ${P.Mars.sign}`);
+
+  // --- Career: 10th house, Midheaven, Leo (Lion's Gate resonance) ---
+  for (const k in P) if (P[k].house === 10) add("Career", k === "Sun" ? 3 : 2, `${k} in your 10th house`);
+  if (chart.mc && chart.mc.sign === "Leo") add("Career", 2, "Leo on your Midheaven");
+  if (P.Sun.sign === "Leo") add("Career", 2, MODECOPY.leoSignal);
+  if (chart.asc.sign === "Leo") add("Career", 1, "Leo rising");
+
+  // --- Relationships: 7th house and Venus activation ---
+  for (const k in P) if (P[k].house === 7) add("Relationships", k === "Venus" ? 3 : 2, `${k} in your 7th house`);
+  if (inSign("Venus", ["Taurus","Libra","Pisces"])) add("Relationships", 1, `Venus dignified in ${P.Venus ? P.Venus.sign : ""}`);
+  if (inHouse("Moon", 7)) add("Relationships", 1, "Moon seeking partnership");
+
+  // --- Transformation: 8th house, Pluto ---
+  for (const k in P) if (P[k].house === 8 && k !== "Jupiter") add("Transformation", k === "Pluto" ? 3 : 2, `${k} in your 8th house`);
+  if (inHouse("Pluto", 2)) { add("Transformation", 2, "Pluto in your 2nd house"); add("Wealth", 2, "Pluto rebuilding your money story"); }
+
+  // --- Spiritual / Rest: 12th house, Neptune ---
+  for (const k in P) if (P[k].house === 12) add("Spiritual", k === "Neptune" ? 3 : 2, `${k} in your 12th house`);
+  if (inHouse("Neptune", 1)) add("Spiritual", 2, "Neptune on your Ascendant");
+
+  // --- North Node nudges (Big Three advanced path) ---
+  if (P.NorthNode) {
+    const nh = P.NorthNode.house;
+    if (nh === 2) add("Wealth", 2, "North Node pointing at your 2nd house");
+    if (nh === 6) add("Health", 2, "North Node pointing at your 6th house");
+    if (nh === 10) add("Career", 2, "North Node pointing at your 10th house");
+    if (nh === 7) add("Relationships", 2, "North Node pointing at your 7th house");
+  }
+
+  // --- User concern ---
+  const concernMap = { Health:"Health", Wealth:"Wealth", Career:"Career", Relationships:"Relationships", Growth:"Transformation" };
+  if (concern && concernMap[concern]) add(concernMap[concern], 3, "You named this as what needs attention");
+
+  // --- Elements: dominance flavors the result, weakest element sets the anchor ---
+  const counted = ["Sun","Moon","Mercury","Venus","Mars","Jupiter"].filter(k => P[k]);
+  const elCount = { Fire:0, Earth:0, Air:0, Water:0 };
+  counted.forEach(k => elCount[ELEMENT[P[k].sign]]++);
+  elCount[ELEMENT[chart.asc.sign]]++;
+  const domEl = Object.keys(elCount).sort((a,b) => elCount[b]-elCount[a])[0];
+  const weakEl = Object.keys(elCount).sort((a,b) => elCount[a]-elCount[b])[0];
+  if (domEl === "Earth") add("Health", 1, "Earth-dominant chart: the body is your instrument");
+  if (domEl === "Water") add("Relationships", 1, "Water-dominant chart: connection carries you");
+  if (domEl === "Air")   add("Career", 1, "Air-dominant chart: ideas want a public outlet");
+  if (domEl === "Fire")  add("Career", 1, "Fire-dominant chart: made for visible action");
+
+  const anchorMap = { Earth:"Physical", Air:"Intellectual", Water:"Emotional", Fire:"Spiritual" };
+  const anchor = anchorMap[weakEl];
+
+  // --- Rank ---
+  const ranked = Object.keys(S).sort((a,b) => S[b]-S[a]);
+  let primary = ranked[0], supporting = ranked[1];
+  if (S[primary] === 0) { primary = "Career"; supporting = "Health"; } // zero-signal fallback: Lion's Gate default
+  if (S[supporting] === 0) supporting = primary === "Health" ? "Career" : "Health";
+
+  return { S, signals: signals.sort((a,b)=>b.pts-a.pts), primary, supporting, anchor, domEl, weakEl, elCount };
+}
+
+/* ============================================================
+   COPY: TRANSLATION LAYER (deterministic templates)
+   ============================================================ */
+const DOMAIN_COPY = {
+  Wealth: {
+    label: "Wealth",
+    hero: "Concentrate the Fire",
+    instruction: "Choose what deserves your life force next.",
+    body: "Your wealth pattern favors systems, networks and compounding work rather than chasing every available opportunity. Don't use today to generate another ten possibilities. Choose the intellectual asset, company, body of work, system or expertise you want to become substantially more valuable over the next three years.",
+    question: IS_GATE ? "If I could only seriously build one thing until 8/8/2029, what would I want to own?" : "If I could only seriously build one thing for the next three years, what would I want to own?"
+  },
+  Health: {
+    label: "Health + Capacity",
+    hero: "Protect the Vessel",
+    instruction: "Your capacity is the strategy.",
+    body: "Your body is infrastructure. Today isn't asking for a dramatic transformation. Choose one small repeatable practice that protects your capacity to do the work you're choosing.",
+    question: "What routine would make everything else easier if I actually maintained it?"
+  },
+  Career: {
+    label: "Career + Purpose",
+    hero: "Step Into the Light",
+    instruction: "Stop auditioning. Start occupying.",
+    body: "Your chart carries strong activation around career, leadership and public contribution. The invitation today is not to work harder in private. It is to claim the visible role you have been circling and let people see the work.",
+    question: "What am I already good at that I keep treating like a side note?"
+  },
+  Relationships: {
+    label: "Relationships",
+    hero: "Tend the Bond",
+    instruction: "Choose depth over breadth today.",
+    body: "Your chart concentrates energy in the connection houses. Today is not about meeting more people. It is about choosing which relationships get your best hours and telling one person the true thing you have been softening.",
+    question: "Which relationship would change if I stopped managing it and started meeting it?"
+  },
+  Transformation: {
+    label: "Transformation",
+    hero: "Burn the Old Pattern",
+    instruction: "Let the ending finish so the beginning can start.",
+    body: "Your chart is weighted toward the deep-change houses. Something has already ended and you have been keeping it on life support. Today is for naming what is over and reclaiming the energy you have been spending on its maintenance.",
+    question: "What have I already outgrown that I am still paying rent on?"
+  },
+  Spiritual: {
+    label: "Spiritual + Rest",
+    hero: "Return to the Well",
+    instruction: "Recovery is not the reward. It is the practice.",
+    body: "Your chart routes power through the quiet houses. The move today is not more output. It is restoring the inner signal you have been overriding: rest, ritual, solitude, prayer, art, whatever refills you without an audience.",
+    question: "What would I hear if I gave myself one genuinely quiet hour?"
+  }
+};
+
+const ANCHOR_COPY = {
+  Physical: "Your chart runs light on Earth. Your capacity, not your ambition, is currently the constraint. For your Iter8 cycle, Physical becomes your anchor: one small bodily practice that continues every day.",
+  Intellectual: "Your chart runs light on Air. You don't need more motivation. You need clarity and a decision architecture. For your Iter8 cycle, Intellectual becomes your anchor: one daily practice of thinking on paper.",
+  Emotional: "Your chart runs light on Water. The feelings are carrying data you have been outrunning. For your Iter8 cycle, Emotional becomes your anchor: one daily practice of naming what is actually going on in there.",
+  Spiritual: "Your chart runs light on Fire. Meaning, not mechanics, is the missing fuel. For your Iter8 cycle, Spiritual becomes your anchor: one daily practice that reconnects the work to why it matters."
+};
+
+/* ============================================================
+   UI WIRING
+   ============================================================ */
+function go(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0, 0);
+  const order = ["s-enter","s-result","s-ritual","s-decl","s-upgrade"];
+  const pct = ((order.indexOf(id)) / (order.length - 1)) * 100;
+  document.getElementById("progressBar").style.width = pct + "%";
+}
+
+function setMode(m) {
+  state.mode = m;
+  document.getElementById("tabBirth").classList.toggle("on", m === "birth");
+  document.getElementById("tabBig3").classList.toggle("on", m === "big3");
+  document.getElementById("pathBirth").style.display = m === "birth" ? "" : "none";
+  document.getElementById("pathBig3").style.display = m === "big3" ? "" : "none";
+}
+
+// Sign selects
+document.querySelectorAll(".signsel").forEach(sel => {
+  const opt = sel.classList.contains("opt");
+  sel.innerHTML = (opt ? '<option value="">Not sure</option>' : '<option value="">Choose...</option>')
+    + SIGNS.map(s => `<option value="${s}">${s}</option>`).join("");
+});
+
+// Timezone select
+(function buildTz() {
+  const sel = document.getElementById("bTz");
+  const opts = [];
+  for (let o = -12; o <= 14; o += 0.5) {
+    const sign = o >= 0 ? "+" : "−";
+    const abs = Math.abs(o);
+    const hh = Math.floor(abs), mm = abs % 1 ? "30" : "00";
+    opts.push(`<option value="${o}">UTC ${sign}${hh}:${mm}</option>`);
+  }
+  sel.innerHTML = opts.join("");
+  sel.value = "-8"; // sensible default; auto-updated on city pick
+})();
+
+// Concern buttons
+document.querySelectorAll(".concern").forEach(b => {
+  b.addEventListener("click", () => {
+    document.querySelectorAll(".concern").forEach(x => x.classList.remove("on"));
+    b.classList.add("on");
+    state.concern = b.dataset.c;
+  });
+});
+
+/* ---- Mapbox geocoding + map ---- */
+let map = null, marker = null, geoTimer = null;
+const cityInput = document.getElementById("bCity");
+const geoList = document.getElementById("geoList");
+const mapNote = document.getElementById("mapNote");
+
+if (!MAPBOX_TOKEN) {
+  mapNote.innerHTML = "City search needs a Mapbox token (free). Open this file and paste your <b>pk.</b> token into <code>MAPBOX_TOKEN</code> at the top of the script. Until then, type your city and pick your UTC offset manually, or use the Big Three path.";
+}
+
+cityInput.addEventListener("input", () => {
+  state.lat = null; state.lon = null; state.placeName = null;
+  if (!MAPBOX_TOKEN) return;
+  clearTimeout(geoTimer);
+  const q = cityInput.value.trim();
+  if (q.length < 3) { geoList.style.display = "none"; return; }
+  geoTimer = setTimeout(async () => {
+    try {
+      const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(q)}.json?access_token=${MAPBOX_TOKEN}&types=place&limit=5`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data.features || !data.features.length) { geoList.style.display = "none"; return; }
+      geoList.innerHTML = data.features.map(f =>
+        `<button data-lon="${f.center[0]}" data-lat="${f.center[1]}" data-name="${f.place_name.replace(/"/g,'&quot;')}">${f.place_name}</button>`
+      ).join("");
+      geoList.style.display = "block";
+      geoList.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("click", () => pickPlace(parseFloat(btn.dataset.lat), parseFloat(btn.dataset.lon), btn.dataset.name));
+      });
+    } catch(e) { geoList.style.display = "none"; }
+  }, 350);
+});
+
+function pickPlace(lat, lon, name) {
+  state.lat = lat; state.lon = lon; state.placeName = name;
+  cityInput.value = name;
+  geoList.style.display = "none";
+  // Suggest a UTC offset from longitude (solar approximation; user can adjust)
+  const suggested = Math.round(lon / 15);
+  const sel = document.getElementById("bTz");
+  sel.value = String(suggested);
+  if (sel.value !== String(suggested)) sel.value = String(Math.max(-12, Math.min(14, suggested)));
+  mapNote.innerHTML = `Suggested time zone from longitude: UTC ${suggested >= 0 ? "+" : ""}${suggested}. Adjust if your birthplace keeps a different civil time or daylight saving was in effect.`;
+  if (MAPBOX_TOKEN && window.mapboxgl) {
+    const mapEl = document.getElementById("map");
+    mapEl.style.display = "block";
+    if (!map) {
+      mapboxgl.accessToken = MAPBOX_TOKEN;
+      map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/light-v11",
+        center: [lon, lat],
+        zoom: 6,
+        attributionControl: true
+      });
+      marker = new mapboxgl.Marker({ color: "#EACB74" }).setLngLat([lon, lat]).addTo(map);
+    } else {
+      map.setCenter([lon, lat]);
+      marker.setLngLat([lon, lat]);
+    }
+  }
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".geo-results")) geoList.style.display = "none";
+});
+
+/* ---- Run the portal ---- */
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add("show");
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  setTimeout(() => el.classList.remove("show"), 6000);
+}
+
+function runPortal() {
+  let chart;
+  if (state.mode === "birth") {
+    const dateVal = document.getElementById("bDate").value;
+    const timeVal = document.getElementById("bTime").value || "12:00";
+    if (!dateVal) return showErr("enterErr", "Add your birth date to open the portal.");
+    if (state.lat === null || state.lon === null) {
+      return showErr("enterErr", MAPBOX_TOKEN
+        ? "Pick your birth city from the list so we can compute your rising sign."
+        : "City search needs a Mapbox token, or switch to the Big Three path above.");
+    }
+    const [y, mo, d] = dateVal.split("-").map(Number);
+    const [hh, mm] = timeVal.split(":").map(Number);
+    const tz = parseFloat(document.getElementById("bTz").value);
+    chart = computeChart(y, mo, d, hh, mm, tz, state.lat, state.lon);
+  } else {
+    const v = {
+      sun: document.getElementById("g3sun").value,
+      moon: document.getElementById("g3moon").value,
+      rising: document.getElementById("g3rising").value,
+      mars: document.getElementById("g3mars").value,
+      jupiter: document.getElementById("g3jupiter").value,
+      venus: document.getElementById("g3venus").value,
+      mc: document.getElementById("g3mc").value,
+      h2: document.getElementById("g3h2").value,
+      h6: document.getElementById("g3h6").value,
+      h10: document.getElementById("g3h10").value,
+      nn: document.getElementById("g3nn").value
+    };
+    if (!v.sun || !v.moon || !v.rising) return showErr("enterErr", "Sun, Moon and Rising are the minimum to open the portal.");
+    chart = chartFromBigThree(v);
+  }
+  if (!state.concern) return showErr("enterErr", "Tell the portal what needs the most attention right now. \"I honestly don't know\" counts.");
+
+  state.chart = chart;
+  state.scores = scoreChart(chart, state.concern);
+  renderResult();
+  go("s-result");
+}
+
+function renderResult() {
+  const sc = state.scores;
+  const P = DOMAIN_COPY[sc.primary];
+  const Su = DOMAIN_COPY[sc.supporting];
+  document.getElementById("focusTitle").textContent = P.hero;
+  document.getElementById("focusPrimary").textContent = P.label;
+  document.getElementById("focusSupporting").textContent = Su.label;
+  document.getElementById("focusInstruction").textContent = MODECOPY.instructionPrefix + P.instruction;
+  document.getElementById("readingBody").textContent = P.body;
+  document.getElementById("primaryQuestion").textContent = "Your question: " + P.question;
+  document.getElementById("supportTitle").textContent = "Supporting: " + Su.label;
+  document.getElementById("supportBody").textContent = Su.body;
+  document.getElementById("supportQuestion").textContent = "Your question: " + Su.question;
+  document.getElementById("anchorName").textContent = sc.anchor;
+  document.getElementById("anchorBody").textContent = ANCHOR_COPY[sc.anchor];
+  document.getElementById("upgradeAnchorName").textContent = sc.anchor;
+  document.getElementById("upgradeAnchorBody").textContent = ANCHOR_COPY[sc.anchor];
+  document.getElementById("jFocus").textContent = P.label;
+
+  // placement chips
+  const chips = [];
+  const C = state.chart;
+  chips.push(`ASC ${C.asc.sign}`);
+  if (C.mc) chips.push(`MC ${C.mc.sign}`);
+  for (const k of ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Uranus","Neptune","Pluto","NorthNode"]) {
+    if (C.placements[k]) {
+      const nm = k === "NorthNode" ? "NN" : k;
+      chips.push(`${nm} ${C.placements[k].sign} · H${C.placements[k].house}`);
+    }
+  }
+  document.getElementById("placementChips").innerHTML = chips.map(c => `<span class="placement">${c}</span>`).join("");
+
+  // why list: top 8 signals
+  const list = sc.signals.slice(0, 8).map(s =>
+    `<li><span>${s.why} → ${DOMAIN_COPY[s.domain].label}</span><span class="pts">+${s.pts}</span></li>`
+  ).join("");
+  document.getElementById("whyList").innerHTML = list ||
+    `<li><span>${MODECOPY.quietChart}</span><span class="pts">+0</span></li>`;
+
+  // cusp flags (computed path only)
+  const flags = [];
+  if (C.computed) {
+    for (const k of ["Sun","Moon"]) {
+      const d = C.placements[k].degIn;
+      if (d < 1.5 || d > 28.5) flags.push(`${k} sits within 1.5° of a sign boundary. If your birth time is uncertain, verify this placement.`);
+    }
+    if (C.asc.degIn !== undefined && (C.asc.degIn < 2 || C.asc.degIn > 28)) {
+      flags.push("Your Ascendant is near a sign boundary. Rising signs are sensitive to birth time; a few minutes can shift it.");
+    }
+  }
+  const cf = document.getElementById("cuspFlag");
+  if (flags.length) { cf.style.display = "block"; cf.innerHTML = flags.join("<br>"); }
+  else cf.style.display = "none";
+}
+
+/* ---- Ritual → Declaration ---- */
+function composeDeclaration() {
+  const vals = {};
+  for (let i = 1; i <= 8; i++) vals["r"+i] = document.getElementById("r"+i).value.trim();
+  if (!vals.r4) return showErr("ritualErr", "Step 4 is the ritual. Complete \"I choose...\" before composing your declaration.");
+  if (!vals.r5) return showErr("ritualErr", "Step 5 makes it survivable. Name one repeatable action.");
+  if (!vals.r7) return showErr("ritualErr", "Step 7 makes it real. Name one move you can make before sleep.");
+  if (!vals.r8) return showErr("ritualErr", MODECOPY.step8Err);
+  state.ritual = vals;
+
+  const clean = (t, strip) => {
+    let s = t.replace(/^i\s+choose\s+/i, m => strip === "choose" ? "" : m)
+             .replace(/^(\.\.\.)?\s*no\s+longer\s+/i, m => strip === "nolonger" ? "" : m)
+             .replace(/^before\s+i\s+sleep\s+(tonight,?\s*)?i\s+will\s+/i, m => strip === "will" ? "" : m);
+    return s.replace(/\.$/, "");
+  };
+  const decision = clean(vals.r4, "choose");
+  const release  = clean(vals.r8, "nolonger");
+  const action   = vals.r5.replace(/\.$/, "");
+  const move     = clean(vals.r7, "will");
+  const focus    = DOMAIN_COPY[state.scores.primary].label;
+
+  document.getElementById("d1").textContent = `I am choosing ${decision}.`;
+  document.getElementById("d2").textContent = `I am releasing ${release}.`;
+  document.getElementById("d3").textContent = `My focus is ${focus}.`;
+  document.getElementById("d4").textContent = `I will protect it through ${action}.`;
+  document.getElementById("d5").textContent = `Before today ends, I will ${move}.`;
+  go("s-decl");
+}
+
+/* ---- Shareable card (canvas → PNG) ---- */
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(" ");
+  let line = "", yy = y;
+  for (const w of words) {
+    const test = line ? line + " " + w : w;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, yy);
+      line = w; yy += lineHeight;
+    } else line = test;
+  }
+  ctx.fillText(line, x, yy);
+  return yy + lineHeight;
+}
+
+function downloadCard() {
+  const cv = document.getElementById("cardCanvas");
+  const ctx = cv.getContext("2d");
+  const W = 1080, H = 1350;
+
+  const grad = ctx.createLinearGradient(0, 0, W * 0.4, H);
+  grad.addColorStop(0, "#F3DFA6");
+  grad.addColorStop(0.55, "#F7C89C");
+  grad.addColorStop(1, "#F4B7AC");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // gate arch watermark
+  ctx.strokeStyle = "rgba(107,58,46,0.16)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.arc(W/2, 330, 210, Math.PI, 0);
+  ctx.lineTo(W/2 + 210, 560);
+  ctx.lineTo(W/2 - 210, 560);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.fillStyle = "#6B3A2E";
+  ctx.textAlign = "center";
+  ctx.font = "500 30px 'JetBrains Mono', monospace";
+  ctx.fillText(MODECOPY.cardHeader, W/2, 130);
+
+  ctx.font = "600 64px 'Fraunces', serif";
+  let y = 300;
+  const lines = [
+    document.getElementById("d1").textContent,
+    document.getElementById("d2").textContent,
+    document.getElementById("d3").textContent,
+    document.getElementById("d4").textContent,
+    document.getElementById("d5").textContent
+  ];
+  ctx.font = "500 40px 'Fraunces', serif";
+  for (const t of lines) {
+    y = wrapText(ctx, t, W/2, y, 860, 52) + 26;
+  }
+
+  ctx.font = "700 58px 'Fraunces', serif";
+  wrapText(ctx, "THIS IS WHAT GETS MY ENERGY NOW.", W/2, Math.max(y + 60, 1040), 880, 68);
+
+  ctx.font = "500 26px 'JetBrains Mono', monospace";
+  ctx.fillStyle = "rgba(107,58,46,0.75)";
+  ctx.fillText("iter8me.com", W/2, H - 70);
+
+  const a = document.createElement("a");
+  a.download = MODECOPY.cardFile;
+  a.href = cv.toDataURL("image/png");
+  a.click();
+}
+applyMode();
+</script>
+</body>
+</html>
