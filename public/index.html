@@ -297,12 +297,15 @@ class Component extends DCLogic {
   var peak = now.getMonth()===7 && now.getDate()===8;
   var daysLeft = Math.max(0, Math.ceil((close-now)/86400000));
   var tag = peak ? "peaks today" : ("closes Aug 12 · "+daysLeft+(daysLeft===1?" day left":" days left"));
-  var hook = "Feeling the pull to start over somewhere new? Aim that big-move energy at a real destination.";
+  var st=document.createElement('style');
+  st.textContent='#cc-lg-banner{font-size:13px}@media(max-width:640px){#cc-lg-banner{font-size:12px;padding:8px 12px!important;line-height:1.35}#cc-lg-banner .cc-b-extra{display:none}}';
+  document.head.appendChild(st);
   var a=document.createElement('a');
+  a.id='cc-lg-banner';
   a.href='energy.html';
   a.setAttribute('aria-label','Where should your energy go? Point it at a relocation.');
-  a.style.cssText="display:block;text-decoration:none;text-align:center;font-family:'Geist',system-ui,sans-serif;font-size:13px;font-weight:600;color:#6B3A2E;background:linear-gradient(90deg,#F3DFA6,#F7C89C 55%,#F4B7AC);padding:9px 16px";
-  a.innerHTML='<span style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:10px;margin-right:8px;white-space:nowrap">Lion’s Gate · '+tag+'</span>'+hook+' <span style="text-decoration:underline;margin-left:6px;white-space:nowrap">Find your focus →</span>';
+  a.style.cssText="display:block;text-decoration:none;text-align:center;font-family:'Geist',system-ui,sans-serif;font-weight:600;color:#6B3A2E;background:linear-gradient(90deg,#F3DFA6,#F7C89C 55%,#F4B7AC);padding:9px 16px";
+  a.innerHTML='<span style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:10px;margin-right:8px;white-space:nowrap">Lion’s Gate · '+tag+'</span>Feeling the pull to start over somewhere new?<span class="cc-b-extra"> Aim that big-move energy at a real destination.</span> <span style="text-decoration:underline;margin-left:6px;white-space:nowrap">Find your focus →</span>';
   document.body.insertBefore(a, document.body.firstChild);
 })();
 </script>
