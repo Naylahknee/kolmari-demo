@@ -103,6 +103,17 @@
           </div>
         </div>
 
+        <sc-if value="{{ hasPlan }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:18px;padding:11px 15px;background:#fff;border:1px solid #e7ebf1;border-radius:12px">
+            <span style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Your plan</span>
+            <span style="font-size:13.5px;font-weight:600;color:#17305b">{{ planSummary }}</span>
+            <sc-if value="{{ hasPriorityLabel }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:12.5px;color:#5a6a83">· Priorities: {{ priorityLabel }}</span>
+            </sc-if>
+            <a href="quiz.html" style="margin-left:auto;font-size:12.5px;font-weight:600;color:#42536e">Retake quiz</a>
+          </div>
+        </sc-if>
+
         <div style="background:#0d1b39;border-radius:16px;padding:20px 22px;color:#fff;margin-bottom:22px">
           <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
             <div>
@@ -148,7 +159,12 @@
             <sc-for list="{{ categoryCards }}" as="cat" hint-placeholder-count="5">
               <div style="background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:16px 17px">
                 <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-                  <h3 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:15.5px">{{ cat.label }}</h3>
+                  <div style="display:flex;align-items:center;gap:8px;min-width:0">
+                    <h3 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:15.5px">{{ cat.label }}</h3>
+                    <sc-if value="{{ cat.isPriority }}" hint-placeholder-val="{{ true }}">
+                      <span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a7d0a;background:#fdf1c2;border:1px solid #f3d97a;border-radius:999px;padding:2px 7px;white-space:nowrap">Priority</span>
+                    </sc-if>
+                  </div>
                   <span style="font-size:12px;font-weight:600;color:#5a6a83">{{ cat.countLabel }}</span>
                 </div>
                 <div style="margin:11px 0 13px;height:6px;background:#eef1f6;border-radius:4px;overflow:hidden">
@@ -229,6 +245,12 @@
               </sc-for>
             </div>
 
+            <sc-if value="{{ hasHouseholdPrompt }}" hint-placeholder-val="{{ true }}">
+              <div style="margin-top:12px;padding:11px 13px;background:#fdf1c2;border:1px solid #f3d97a;border-radius:10px">
+                <p style="margin:0;font-size:12.5px;line-height:1.5;color:#5a4a12">{{ householdPrompt }}</p>
+              </div>
+            </sc-if>
+
             <div style="margin-top:14px;padding-top:14px;border-top:1px solid #eef1f6;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
               <input value="{{ mfName }}" sc-camel-on-input="{{ setMfName }}" placeholder="Name" style="flex:2;min-width:120px;font-size:13.5px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:9px;padding:9px 11px;outline:none" style-focus="border-color:#f3c516" />
               <input value="{{ mfAge }}" sc-camel-on-input="{{ setMfAge }}" type="number" placeholder="Age" style="flex:0 0 82px;width:82px;font-size:13.5px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:9px;padding:9px 11px;outline:none" style-focus="border-color:#f3c516" />
@@ -264,10 +286,41 @@ class Component extends DCLogic {
     memberNoteDraft: {},  // key: memberId|destId -> text
     mfName: '',
     mfAge: '',
+    quiz: null,           // onboarding answers (kolmari:quiz), for context + seeding
   };
 
   componentDidMount() {
-    this.refresh().catch((e) => this.setState({ loading: false, error: e.message }));
+    let quiz = null;
+    try { quiz = JSON.parse(localStorage.getItem('kolmari:quiz') || 'null'); } catch (e) {}
+    this.setState({ quiz: quiz });
+    this.refresh()
+      .then(() => this.seedFromQuiz(quiz))
+      .catch((e) => this.setState({ loading: false, error: e.message }));
+  }
+
+  // One-time handoff from the quiz: create the destinations the user named, into an
+  // empty board only. Guarded by kolmari:cc-seeded (keyed to the quiz timestamp) so
+  // a revisit never re-creates them. Household/budget/timeline/priorities stay as
+  // display context (see renderVals) — no people are fabricated.
+  async seedFromQuiz(quiz) {
+    if (!quiz) return;
+    let seededTs = null;
+    try { seededTs = localStorage.getItem('kolmari:cc-seeded'); } catch (e) {}
+    if (seededTs && String(quiz.ts) === String(seededTs)) return;
+    const dests = Array.isArray(quiz.destinations) ? quiz.destinations : [];
+    if (dests.length && this.state.destinations.length === 0) {
+      try {
+        let firstId = null;
+        for (const name of dests) {
+          const res = await window.CCApi.addDestination(name);
+          if (!firstId && res && res.id) firstId = res.id;
+        }
+        await this.refresh(firstId ? { selectedDest: firstId } : undefined);
+      } catch (e) {
+        this.fail(e);
+      }
+    }
+    try { localStorage.setItem('kolmari:cc-seeded', String(quiz.ts || '1')); } catch (e) {}
   }
 
   // Rebuild draft maps from server data, preserving any keys the user is
@@ -405,6 +458,33 @@ class Component extends DCLogic {
     const pct = (checked, total) => (total ? Math.round((checked / total) * 100) : 0);
     const barStyle = (p, color) => 'height:100%;width:' + p + '%;background:' + (color || '#f3c516') + ';border-radius:inherit;transition:width .2s';
 
+    // Quiz-derived context (display only — no fabricated data). Plan summary strip,
+    // which categories the user's priorities emphasize, and a household nudge.
+    const quiz = s.quiz;
+    const PRIORITY_CATS = {
+      'Lowest cost': [],
+      'Safety & belonging': ['safety', 'community'],
+      'Easiest visa path': ['visa'],
+      'Community': ['community'],
+      'Healthcare quality': ['health'],
+    };
+    const priorityCats = {};
+    if (quiz && Array.isArray(quiz.priorities)) {
+      quiz.priorities.forEach((p) => (PRIORITY_CATS[p] || []).forEach((k) => { priorityCats[k] = true; }));
+    }
+    const planBits = [];
+    if (quiz) {
+      if (quiz.household) planBits.push(quiz.household);
+      if (quiz.budget) planBits.push(quiz.budget);
+      if (quiz.timeline) planBits.push(quiz.timeline);
+    }
+    const hasPlan = planBits.length > 0;
+    const planSummary = planBits.join(' · ');
+    const priorityLabel = (quiz && Array.isArray(quiz.priorities) && quiz.priorities.length) ? quiz.priorities.join(' · ') : '';
+    const householdPrompt = (quiz && quiz.household && s.members.length === 0)
+      ? ('You told us: ' + quiz.household + '. Add each person so we can note what every destination needs for them.')
+      : '';
+
     // Overall (household-wide across all destinations)
     const totalItems = s.items.length;
     const checkedItems = s.items.filter((i) => i.checked).length;
@@ -441,6 +521,7 @@ class Component extends DCLogic {
       return {
         key: c.key,
         label: c.label,
+        isPriority: !!priorityCats[c.key],
         countLabel: done + '/' + its.length,
         barStyle: barStyle(p),
         items: its.map((i) => ({
@@ -560,6 +641,12 @@ class Component extends DCLogic {
 
       categoryCards: categoryCards,
       members: members,
+      hasPlan: hasPlan,
+      planSummary: planSummary,
+      priorityLabel: priorityLabel,
+      hasPriorityLabel: !!priorityLabel,
+      householdPrompt: householdPrompt,
+      hasHouseholdPrompt: !!householdPrompt,
       hasFoodFit: !!foodFit,
       foodFit: foodFit,
       foodFitMissing: foodFitMissing,
