@@ -1,275 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xwsd371zfp");
-</script>
-</head>
-<body>
-<x-dc>
-<helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Start your plan · Kolmari</title>
-<link rel="icon" type="image/png" sizes="32x32" href="assets/kolmari-favicon-32.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="assets/kolmari-favicon-512.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
-<meta name="theme-color" content="#0D1B39" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
-<style>
-  html, body { margin: 0; padding: 0; }
-  body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
-  a { color: #17305b; text-decoration: none; }
-  ::selection { background: #f3c516; color: #17305b; }
-
-  *, *::before, *::after { box-sizing: border-box; }
-  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
-  body { overflow-x: hidden; }
-  button, a { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
-  [data-mobile="quiz-page"] { min-height: 100dvh !important; }
-  @media (max-width: 600px) {
-    header { padding: 14px 18px !important; }
-    [data-mobile="quiz-shell"] { align-items: flex-start !important; padding: 18px 16px calc(32px + env(safe-area-inset-bottom)) !important; }
-    [data-mobile="quiz-shell"] h1 { font-size: clamp(24px, 7.5vw, 28px) !important; line-height: 1.2; overflow-wrap: anywhere; }
-    [data-mobile="quiz-shell"] button, [data-mobile="quiz-shell"] a { min-height: 48px; }
-    [data-mobile="quiz-actions"] { flex-wrap: wrap; align-items: stretch !important; }
-    [data-mobile="quiz-actions"] > button:first-child { flex: 1 1 100%; text-align: center; }
-    [data-mobile="quiz-actions"] > button:last-child { flex: 1 1 100%; text-align: center; }
-  }
-  @media (max-width: 380px) {
-    [data-mobile="quiz-shell"] { padding-inline: 13px !important; }
-    [data-mobile="quiz-shell"] [style*="flex-wrap:wrap"] button { flex: 1 1 100%; text-align: center; }
-  }
-</style>
-</helmet>
-
-<div data-mobile="quiz-page" style="font-family:Geist,system-ui,sans-serif;color:#17305b;background:#f7f8fb;min-height:100vh;display:flex;flex-direction:column">
-
-  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px">
-    <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
-    A working preview of Kolmari — the real product isn't launched yet
-  </div>
-
-  <header style="padding:16px 32px;display:flex;align-items:center;gap:9px">
-    <a href="index.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
-      <img src="assets/kolmari-butterfly.png" alt="" width="26" height="19" style="display:block;width:26px;height:19px;object-fit:contain" />
-      <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
-    </a>
-  </header>
-
-  <div data-mobile="quiz-shell" style="flex:1;display:flex;align-items:center;justify-content:center;padding:16px 20px 48px">
-    <div style="width:100%;max-width:560px">
-
-      <div style="display:flex;gap:7px;margin-bottom:28px">
-        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="4">
-          <div style="{{ d.style }}"></div>
-        </sc-for>
-      </div>
-
-      <sc-if value="{{ showDisclaimer }}" hint-placeholder-val="{{ true }}">
-        <div style="padding:14px 16px;background:#fdf1c2;border:1px solid #f3d97a;border-radius:12px;margin-bottom:22px">
-          <p style="margin:0;font-size:13.5px;line-height:1.6;color:#5a4a12">
-            <strong>This is a demo build, not the live product.</strong> Every country match, cost figure, timeline, and name you see (including "Jordan" on the dashboard) is placeholder content for demonstration only — none of it reflects real users, real pricing, or real data.
-          </p>
-        </div>
-        <h1 style="margin:0 0 10px;font-family:Poppins,sans-serif;font-weight:700;font-size:26px;letter-spacing:-.015em">Before you look around</h1>
-        <p style="margin:0 0 24px;font-size:14.5px;line-height:1.6;color:#5a6a83">You'll answer four quick questions, then land on a preview dashboard. Nothing you enter is verified against anything real, and no account is created.</p>
-        <button sc-camel-on-click="{{ startQuiz }}" style="font-family:inherit;font-size:14.5px;font-weight:700;color:#17305b;background:#f3c516;border:none;padding:13px 26px;border-radius:999px;cursor:pointer" style-hover="background:#ffd633">I understand, continue</button>
-      </sc-if>
-
-      <sc-if value="{{ showQ1 }}" hint-placeholder-val="{{ true }}">
-        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Step 1 of 4</p>
-        <h1 style="margin:0 0 8px;font-family:Poppins,sans-serif;font-weight:700;font-size:28px;letter-spacing:-.015em">Who's moving?</h1>
-        <p style="margin:0 0 28px;font-size:14.5px;color:#5a6a83">This shapes which routes and costs apply to you.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <sc-for list="{{ householdOpts }}" as="o" hint-placeholder-count="3">
-            <button sc-camel-on-click="{{ o.go }}" style="{{ o.style }}" style-hover="border-color:#17305b">{{ o.label }}</button>
-          </sc-for>
-        </div>
-      </sc-if>
-
-      <sc-if value="{{ showQ2 }}" hint-placeholder-val="{{ true }}">
-        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Step 2 of 4</p>
-        <h1 style="margin:0 0 8px;font-family:Poppins,sans-serif;font-weight:700;font-size:28px;letter-spacing:-.015em">What's your monthly budget?</h1>
-        <p style="margin:0 0 28px;font-size:14.5px;color:#5a6a83">Rough is fine — this narrows down realistic destinations.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <sc-for list="{{ budgetOpts }}" as="o" hint-placeholder-count="3">
-            <button sc-camel-on-click="{{ o.go }}" style="{{ o.style }}" style-hover="border-color:#17305b">{{ o.label }}</button>
-          </sc-for>
-        </div>
-        <button sc-camel-on-click="{{ back }}" style="margin-top:18px;font-size:13px;font-weight:600;color:#7a879c;background:none;border:none;padding:6px 0;cursor:pointer">&larr; Back</button>
-      </sc-if>
-
-      <sc-if value="{{ showQ3 }}" hint-placeholder-val="{{ true }}">
-        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Step 3 of 4</p>
-        <h1 style="margin:0 0 8px;font-family:Poppins,sans-serif;font-weight:700;font-size:28px;letter-spacing:-.015em">When do you want to move?</h1>
-        <p style="margin:0 0 28px;font-size:14.5px;color:#5a6a83">No pressure — this just adjusts urgency in your plan.</p>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <sc-for list="{{ timelineOpts }}" as="o" hint-placeholder-count="3">
-            <button sc-camel-on-click="{{ o.go }}" style="{{ o.style }}" style-hover="border-color:#17305b">{{ o.label }}</button>
-          </sc-for>
-        </div>
-        <button sc-camel-on-click="{{ back }}" style="margin-top:18px;font-size:13px;font-weight:600;color:#7a879c;background:none;border:none;padding:6px 0;cursor:pointer">&larr; Back</button>
-      </sc-if>
-
-      <sc-if value="{{ showQ4 }}" hint-placeholder-val="{{ true }}">
-        <p style="margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Step 4 of 4</p>
-        <h1 style="margin:0 0 8px;font-family:Poppins,sans-serif;font-weight:700;font-size:28px;letter-spacing:-.015em">What matters most?</h1>
-        <p style="margin:0 0 28px;font-size:14.5px;color:#5a6a83">Pick up to two. This is what we'll weigh first.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:22px">
-          <sc-for list="{{ priorityOpts }}" as="o" hint-placeholder-count="5">
-            <button sc-camel-on-click="{{ o.go }}" style="{{ o.style }}" style-hover="border-color:#17305b">{{ o.label }}</button>
-          </sc-for>
-        </div>
-        <div data-mobile="quiz-actions" style="display:flex;gap:10px;align-items:center">
-          <button sc-camel-on-click="{{ submit }}" style="{{ submitStyle }}">{{ submitLabel }}</button>
-          <button sc-camel-on-click="{{ back }}" style="font-size:13px;font-weight:600;color:#7a879c;background:none;border:none;padding:6px 0;cursor:pointer">&larr; Back</button>
-        </div>
-      </sc-if>
-
-      <sc-if value="{{ showDone }}" hint-placeholder-val="{{ true }}">
-        <div style="text-align:center;padding:20px 0">
-          <span style="display:inline-grid;place-items:center;width:46px;height:46px;border-radius:9999px;background:#d6f3e4;color:#1f7a4d;margin-bottom:16px">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" width="22" height="22"><path d="M20 6L9 17l-5-5"></path></svg>
-          </span>
-          <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:24px">Got it — building your shortlist.</h1>
-          <p style="margin:10px 0 0;font-size:14.5px;color:#5a6a83;max-width:400px;margin-left:auto;margin-right:auto">See how a real plan would look for someone in your situation.</p>
-          <div style="margin-top:18px;display:inline-block;padding:10px 18px;background:#f7f8fb;border:1px solid #e7ebf1;border-radius:10px">
-            <p style="margin:0;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Your access code</p>
-            <p style="margin:4px 0 0;font-size:20px;font-weight:700;letter-spacing:.12em;font-family:ui-monospace,monospace;color:#17305b">{{ accessCode }}</p>
-          </div>
-          <a href="app.html" style="display:block;margin:20px auto 0;max-width:220px;text-align:center;font-size:14.5px;font-weight:700;color:#17305b;background:#f3c516;padding:13px 26px;border-radius:999px" style-hover="background:#ffd633">Continue to dashboard</a>
-        </div>
-      </sc-if>
-
-    </div>
-  </div>
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  state = { step: 0, household: '', budget: '', timeline: '', priorities: [] };
-
-  choose(field, value) {
-    this.setState({ [field]: value, step: this.state.step + 1 });
-  }
-
-  togglePriority(value) {
-    const s = this.state;
-    const has = s.priorities.includes(value);
-    let next;
-    if (has) {
-      next = s.priorities.filter(p => p !== value);
-    } else if (s.priorities.length < 2) {
-      next = [...s.priorities, value];
-    } else {
-      next = s.priorities;
-    }
-    this.setState({ priorities: next });
-  }
-
-  back() {
-    this.setState(s => ({ step: Math.max(1, s.step - 1) }));
-  }
-
-  post(payload) {
-    try {
-      const url = 'https://kolmari-collect.madincrease.workers.dev/';
-      const body = JSON.stringify(payload);
-      fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
-    } catch (e) {}
-  }
-
-  genCode() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let code = '';
-    for (let i = 0; i < 6; i++) code += chars[Math.floor(Math.random() * chars.length)];
-    return code;
-  }
-
-  submit() {
-    const s = this.state;
-    const accessCode = this.genCode();
-    this.post({
-      type: 'quiz',
-      kind: 'quiz',
-      page: 'Quiz',
-      household: s.household,
-      budget: s.budget,
-      stage: s.timeline,
-      comment: s.priorities.join(', ') + ' | code: ' + accessCode,
-      at: new Date().toISOString(),
-    });
-    try {
-      localStorage.setItem('kolmari:quiz', JSON.stringify({
-        household: s.household, budget: s.budget, timeline: s.timeline, priorities: s.priorities, accessCode,
-      }));
-    } catch (e) {}
-    this.setState({ step: 5, accessCode });
-  }
-
-  renderVals() {
-    const s = this.state;
-    const dotStyle = (active) => 'flex:1;height:4px;border-radius:2px;background:' + (active ? '#f3c516' : '#e4e8f0');
-    const dots = [1, 2, 3, 4].map(n => ({ style: dotStyle(n <= s.step) }));
-
-    const optStyle = (selected) =>
-      'text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#17305b;background:#fff;'
-      + 'border:1.5px solid ' + (selected ? '#f3c516' : '#dde3ec') + ';border-radius:12px;padding:15px 18px;cursor:pointer';
-
-    const chipStyle = (selected) =>
-      'font-family:inherit;font-size:13.5px;font-weight:600;color:' + (selected ? '#17305b' : '#42536e') + ';'
-      + 'background:' + (selected ? '#fdf1c2' : '#fff') + ';border:1.5px solid ' + (selected ? '#f3c516' : '#dde3ec')
-      + ';border-radius:999px;padding:10px 16px;cursor:pointer';
-
-    return {
-      dots,
-      showDisclaimer: s.step === 0,
-      startQuiz: () => this.setState({ step: 1 }),
-      showQ1: s.step === 1,
-      showQ2: s.step === 2,
-      showQ3: s.step === 3,
-      showQ4: s.step === 4,
-      showDone: s.step === 5,
-      accessCode: s.accessCode || '',
-      back: () => this.back(),
-      submit: () => this.submit(),
-      submitLabel: s.priorities.length ? 'See my shortlist' : 'Pick at least one',
-      submitStyle: 'font-family:inherit;font-size:14.5px;font-weight:700;padding:13px 24px;border-radius:999px;border:none;'
-        + (s.priorities.length ? 'color:#17305b;background:#f3c516;cursor:pointer' : 'color:#aab4c4;background:#eef1f6;cursor:not-allowed'),
-      householdOpts: [
-        { label: 'Just me', go: () => this.choose('household', 'Just me') },
-        { label: 'Me and a partner', go: () => this.choose('household', 'Me and a partner') },
-        { label: 'Family with kids', go: () => this.choose('household', 'Family with kids') },
-      ].map(o => ({ ...o, style: optStyle(s.household === o.label) })),
-      budgetOpts: [
-        { label: 'Under $2,000 / month', go: () => this.choose('budget', 'Under $2,000/mo') },
-        { label: '$2,000 – $4,000 / month', go: () => this.choose('budget', '$2,000-$4,000/mo') },
-        { label: '$4,000+ / month', go: () => this.choose('budget', '$4,000+/mo') },
-      ].map(o => ({ ...o, style: optStyle(s.budget && o.label.includes(s.budget.replace('/mo', ''))) })),
-      timelineOpts: [
-        { label: 'Within 6 months', go: () => this.choose('timeline', 'Within 6 months') },
-        { label: 'Within a year', go: () => this.choose('timeline', 'Within a year') },
-        { label: 'Just exploring for now', go: () => this.choose('timeline', 'Just exploring') },
-      ].map(o => ({ ...o, style: optStyle(s.timeline === o.label || s.timeline === o.label.replace(' for now', '')) })),
-      priorityOpts: [
-        { label: 'Lowest cost', val: 'Lowest cost' },
-        { label: 'Safety & belonging', val: 'Safety & belonging' },
-        { label: 'Easiest visa path', val: 'Easiest visa path' },
-        { label: 'Community', val: 'Community' },
-        { label: 'Healthcare quality', val: 'Healthcare quality' },
-      ].map(o => ({ label: o.label, go: () => this.togglePriority(o.val), style: chipStyle(s.priorities.includes(o.val)) })),
-    };
-  }
-}
-</script>
-</body>
-</html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Start your plan · Kolmari</title><link rel="icon" href="assets/kolmari-favicon-32.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet"><style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#f7f8fb;color:#17305b;font-family:Geist,system-ui,sans-serif}button,input{font:inherit}.preview{background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px}.preview b{color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px}.head{padding:16px 32px}.brand{display:flex;align-items:center;gap:9px;color:#17305b;text-decoration:none}.brand img{width:26px;height:19px;object-fit:contain}.brand span{font:700 18px Poppins,sans-serif}.shell{min-height:calc(100vh - 88px);display:flex;justify-content:center;align-items:center;padding:16px 20px 48px}.card{width:100%;max-width:600px}.progress{height:6px;background:#e7ebf1;border-radius:6px;overflow:hidden;margin-bottom:28px}.bar{height:100%;background:#f3c516;transition:width .2s}.eyebrow{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a}h1{margin:0 0 8px;font:700 28px/1.2 Poppins,sans-serif;letter-spacing:-.015em}p.sub{margin:0 0 26px;font-size:14.5px;line-height:1.6;color:#5a6a83}.options{display:grid;gap:10px}.two{grid-template-columns:1fr 1fr}.opt{width:100%;text-align:left;color:#17305b;background:#fff;border:1.5px solid #dde3ec;border-radius:12px;padding:14px 16px;cursor:pointer;font-weight:600;min-height:50px}.opt:hover{border-color:#17305b}.opt.selected{border-color:#f3c516;background:#fdf8df;box-shadow:0 0 0 2px rgba(243,197,22,.12)}.opt .icon{display:block;font-size:23px;margin-bottom:7px}.actions{display:flex;gap:10px;align-items:center;margin-top:22px}.next{border:0;border-radius:999px;background:#f3c516;color:#17305b;font-weight:700;padding:13px 25px;cursor:pointer}.next:disabled{opacity:.45;cursor:not-allowed}.back{border:0;background:none;color:#7a879c;font-weight:600;padding:10px 4px;cursor:pointer}.notice{padding:14px 16px;background:#fdf1c2;border:1px solid #f3d97a;border-radius:12px;margin-bottom:22px;color:#5a4a12;font-size:13.5px;line-height:1.6}.counterbox{margin-top:16px;background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:6px 16px}.counter{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #eef1f6}.counter:last-child{border:0}.counter div{display:flex;align-items:center;gap:10px}.round{width:34px;height:34px;border-radius:50%;border:1px solid #d8deE8;background:#fff;color:#17305b;font-size:20px;cursor:pointer}.count{width:24px;text-align:center;font-weight:700}.insight{background:#0d1b39;color:#fff;border-radius:16px;padding:25px}.insight .eyebrow{color:#f3c516}.insight p{color:#c8d3e6;line-height:1.65;margin:8px 0 0}.summary{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.pill{background:#fff;border:1px solid #e0e5ed;border-radius:999px;padding:8px 12px;font-size:13px;font-weight:600}.range .opt{display:flex;justify-content:space-between}.hair .opt{min-height:110px;padding-top:18px}.input{width:100%;padding:13px 15px;border:1.5px solid #dde3ec;border-radius:12px;outline:none;background:#fff;color:#17305b}.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.chip{border:1px solid #f3d97a;background:#fdf1c2;border-radius:999px;padding:7px 11px;font-size:13px}.done{background:#fff;border:1px solid #e7ebf1;border-radius:16px;padding:22px}.done h2{font:700 18px Poppins;margin:0 0 12px}.row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid #eef1f6;font-size:13.5px}.row:last-child{border:0}.row span:last-child{text-align:right;font-weight:600}.hidden{display:none!important}@media(max-width:600px){.head{padding:14px 18px}.shell{align-items:flex-start;padding:18px 16px 36px}.two{grid-template-columns:1fr}h1{font-size:26px}.actions{flex-wrap:wrap}.next{width:100%;min-height:48px}.back{width:100%;order:2}.hair.two{grid-template-columns:1fr 1fr}.hair .opt{font-size:13px;padding:12px;min-height:95px}}
+</style></head><body>
+<div class="preview"><b>Preview</b>A working preview of Kolmari — the real product isn't launched yet</div><header class="head"><a class="brand" href="index.html"><img src="assets/kolmari-butterfly.png" alt=""><span>Kolmari</span></a></header><main class="shell"><section class="card"><div class="progress"><div id="bar" class="bar"></div></div><div id="page"></div></section></main>
+<script>
+const P={household:{status:null,adults:1,dependents:0,pets:0},planningStage:null,priorities:[],mustHaves:[],preferredRegions:[],regionRequirement:false,fundingSources:[],remoteWorkIntent:null,pathwayInterests:[],connectionSignals:[],connectionStatus:null,housingBudgetBand:null,relocationSavingsBand:null,timeline:null,lifestyleNeeds:{haircare:null},primaryObstacle:null,destinationsAlreadyConsidering:[]};
+let step=0;const total=15;const $=s=>document.querySelector(s);const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function save(){try{localStorage.setItem('kolmari:move-profile',JSON.stringify({version:1,source:'demo_quiz',updatedAt:new Date().toISOString(),profile:P}))}catch(e){}}
+function opt(label,value,field,multi=false,icon=''){const selected=multi?(P[field]||[]).includes(value):P[field]===value;return `<button class="opt ${selected?'selected':''}" onclick="pick('${field}','${value}',${multi})">${icon?`<span class="icon">${icon}</span>`:''}${label}</button>`}
+function pick(field,value,multi){if(multi){let a=P[field]||[];P[field]=a.includes(value)?a.filter(x=>x!==value):[...a,value]}else P[field]=value;save();render()}
+function next(){step=Math.min(total,step+1);render()}function back(){step=Math.max(0,step-1);render()}function nav(ok=true,label='Continue'){return `<div class="actions"><button class="next" ${ok?'':'disabled'} onclick="next()">${label}</button>${step>0?'<button class="back" onclick="back()">← Back</button>':''}</div>`}
+function head(n,title,sub){return `<p class="eyebrow">Step ${n} of 13</p><h1>${title}</h1><p class="sub">${sub}</p>`}
+function count(k,d){P.household[k]=Math.max(k==='adults'?1:0,P.household[k]+d);save();render()}
+function household(){return head(1,"Who's coming with you?","This changes costs, paperwork and what your move actually needs.")+`<div class="options two">${[['Just me','solo','👤'],['Me + partner','partner','👩🏾‍🤝‍👨🏽'],['Family','family','👨‍👩‍👧'],["I'm only exploring",'exploring','🌍']].map(x=>`<button class="opt ${P.household.status===x[1]?'selected':''}" onclick="P.household.status='${x[1]}';save();render()"><span class="icon">${x[2]}</span>${x[0]}</button>`).join('')}</div>${P.household.status==='family'?`<div class="counterbox">${['adults','dependents','pets'].map(k=>`<div class="counter"><strong>${k==='dependents'?'Kids / dependents':k[0].toUpperCase()+k.slice(1)}</strong><div><button class="round" onclick="count('${k}',-1)">−</button><span class="count">${P.household[k]}</span><button class="round" onclick="count('${k}',1)">+</button></div></div>`).join('')}</div>`:''}${nav(!!P.household.status)}`}
+const defs={
+1:()=>head(2,'Where are you in this thing?',"No judgment. Kolmari should meet you where you actually are.")+`<div class="options">${[['I’m dreaming','dreaming','💭'],['I’m seriously researching','researching','🔎'],['I’m narrowing down places','shortlisting','📍'],['I’m getting ready to move','preparing','🧳']].map(x=>opt(x[0],x[1],'planningStage',false,x[2])).join('')}</div>${nav(!!P.planningStage)}`,
+2:()=>head(3,'What would make moving abroad worth it?','Choose everything that matters. We’ll narrow the true dealbreakers next.')+`<div class="options two">${[['Lower cost of living','affordability','💰'],['Safety','safety','🛡️'],['Black community / belonging','belonging','🖤'],['Healthcare','healthcare','🏥'],['Education','education','🎓'],['Work opportunity','work','💼'],['Climate / lifestyle','climate_lifestyle','☀️'],['Path to residency','residency_path','🛂'],['Walkability / daily life','walkability','🚶🏾‍♀️']].map(x=>opt(x[0],x[1],'priorities',true,x[2])).join('')}</div>${nav(P.priorities.length>0)}`,
+3:()=>head(4,'Okay. Which two can’t be negotiated?','Only your selected priorities are shown here. Pick up to two.')+`<div class="options two">${P.priorities.map(v=>`<button class="opt ${P.mustHaves.includes(v)?'selected':''}" onclick="toggleMust('${v}')">${label(v)}</button>`).join('')}</div>${nav(P.mustHaves.length>0)}`,
+4:()=>`<div class="insight"><p class="eyebrow">Auntie noticed something</p><h1 style="color:#fff">This is already more specific than “I want to move abroad.”</h1><p>You’re building around <strong>${P.mustHaves.map(label).join(' + ')}</strong>. Kolmari will keep those visible when the pretty pictures start trying to distract us.</p>${nav(true,'Keep going')}</div>`,
+5:()=>head(5,'Where are you curious about?','Pick more than one if you want. Curiosity is not a commitment.')+`<div class="options two">${[['Europe','europe','🌍'],['Latin America + Caribbean','latam_caribbean','🌴'],['Africa','africa','🌍'],['Asia + Pacific','asia_pacific','🌏'],['Surprise me / open anywhere','open','✨']].map(x=>opt(x[0],x[1],'preferredRegions',true,x[2])).join('')}</div>${nav(P.preferredRegions.length>0)}`,
+6:()=>head(6,'What might fund your life abroad?','Real life can be a mix. Choose everything that could apply.')+`<div class="options two">${[['Keep my remote job','remote_job','💻'],['Find a job there','local_job','💼'],['Run or start a business','business','🧾'],['Study','study','🎓'],['Savings / investments','savings','🏦'],['Pension / retirement','retirement','🌤️'],["I'm figuring that out",'unknown','🤔']].map(x=>opt(x[0],x[1],'fundingSources',true,x[2])).join('')}</div>${nav(P.fundingSources.length>0)}`,
+7:()=>head(7,'Any of these belong to your story?','These can change which legal pathways are worth researching later.')+`<div class="options">${[['I have another citizenship / passport','other_citizenship'],['Parent or grandparent ancestry abroad','ancestry'],['My partner has another citizenship','partner_citizenship'],['I have close family abroad','family_abroad'],['Maybe — I need to investigate','investigate'],['None that I know of','none']].map(x=>opt(x[0],x[1],'connectionSignals',true)).join('')}</div>${nav(P.connectionSignals.length>0)}`,
+8:()=>head(8,'What monthly housing cost feels realistic?','This is your comfort range, not an immigration income requirement.')+`<div class="options range">${[['Under $1,000','under_1000'],['$1,000–$2,000','1000_2000'],['$2,000–$3,500','2000_3500'],['More than $3,500','over_3500'],["I don't know yet",'unknown']].map(x=>opt(x[0],x[1],'housingBudgetBand')).join('')}</div>${nav(!!P.housingBudgetBand)}`,
+9:()=>head(9,'How are we looking on move money?','A range is enough. We are not pretending a band is an exact bank balance.')+`<div class="options range">${[["Haven't started saving",'none'],['Under $5,000','under_5000'],['$5,000–$15,000','5000_15000'],['$15,000–$30,000','15000_30000'],['$30,000+','30000_plus'],["I have no idea what I'll need",'unknown']].map(x=>opt(x[0],x[1],'relocationSavingsBand')).join('')}</div>${nav(!!P.relocationSavingsBand)}`,
+10:()=>head(10,'When would you ideally like to move?','This controls urgency. We are not ordering six-month documents for a two-year plan.')+`<div class="options">${[['0–6 months','0_6m'],['6–12 months','6_12m'],['1–2 years','1_2y'],['2+ years','2y_plus'],['No date yet','none']].map(x=>opt(x[0],x[1],'timeline')).join('')}</div>${nav(!!P.timeline)}`,
+11:()=>`<div class="insight"><p class="eyebrow">Your plan is taking shape</p><h1 style="color:#fff">Timing changes what “next” means.</h1><p>${P.timeline==='0_6m'?'You’re close enough that documents and pathway verification need to move up the list.':'You have room to research without creating fake urgency. Kolmari can sequence the expensive and time-sensitive stuff later.'}</p>${nav(true,'Next')}</div>`,
+12:()=>head(11,"Who's touching your hair?",'Think service ecosystem, not hairstyle. What needs to be easy to find where you live?')+`<div class="options two hair">${[['Quick / basic salon','basic','✂️'],['Specialist salon or barber','specialist','💈'],['Braids · wigs · weaves','braids_wigs_weaves','🪮'],['Full-service salon','full_service','✨'],['I handle my own hair','self_service','🏠'],['Not important to me','not_important','—']].map(x=>`<button class="opt ${P.lifestyleNeeds.haircare===x[1]?'selected':''}" onclick="P.lifestyleNeeds.haircare='${x[1]}';save();render()"><span class="icon">${x[2]}</span>${x[0]}</button>`).join('')}</div>${nav(!!P.lifestyleNeeds.haircare)}`,
+13:()=>head(12,"What's making this feel hardest right now?",'This tells Kolmari where to start helping — not whether you can move.')+`<div class="options two">${[['I don’t know where to go','choosing_destination'],['Visas confuse me','visas'],["I don't know what this costs",'money'],['Work / income','work_income'],['Paperwork','paperwork'],["I don't know where to start",'starting']].map(x=>opt(x[0],x[1],'primaryObstacle')).join('')}</div>${nav(!!P.primaryObstacle)}`,
+14:()=>destinationPage(),15:()=>resultPage()};
+function label(v){return ({affordability:'Lower cost of living',safety:'Safety',belonging:'Black community / belonging',healthcare:'Healthcare',education:'Education',work:'Work opportunity',climate_lifestyle:'Climate / lifestyle',residency_path:'Path to residency',walkability:'Walkability / daily life'})[v]||v.replaceAll('_',' ')}
+function toggleMust(v){if(P.mustHaves.includes(v))P.mustHaves=P.mustHaves.filter(x=>x!==v);else if(P.mustHaves.length<2)P.mustHaves.push(v);save();render()}
+function addDest(){let i=$('#dest');let v=i.value.trim();if(v&&!P.destinationsAlreadyConsidering.includes(v)){P.destinationsAlreadyConsidering.push(v);save();render()}}
+function rmDest(v){P.destinationsAlreadyConsidering=P.destinationsAlreadyConsidering.filter(x=>x!==v);save();render()}
+function destinationPage(){return head(13,'Already have somewhere in mind?','Add cities or countries you are already considering. You can also leave this blank.')+`<div style="display:flex;gap:8px"><input id="dest" class="input" placeholder="e.g. Lisbon, Belize, Mexico City" onkeydown="if(event.key==='Enter'){event.preventDefault();addDest()}"><button class="next" onclick="addDest()">Add</button></div><div class="chips">${P.destinationsAlreadyConsidering.map(v=>`<span class="chip">${esc(v)} <button style="border:0;background:none;cursor:pointer" onclick="rmDest('${esc(v)}')">×</button></span>`).join('')}</div>${nav(true,'Build my starting point')}`}
+function resultPage(){save();let hh=P.household.status==='family'?`${P.household.adults} adult${P.household.adults===1?'':'s'} · ${P.household.dependents} kid/dependent${P.household.dependents===1?'':'s'}${P.household.pets?' · '+P.household.pets+' pet'+(P.household.pets===1?'':'s'):''}`:label(P.household.status);return `<p class="eyebrow">Your Move Profile</p><h1>Okay — now we have something to work with.</h1><p class="sub">This is the context Kolmari should carry into your Command Center. You should not have to tell us all of this again.</p><div class="done"><h2>Your starting point</h2>${[['Moving',hh],['Stage',label(P.planningStage)],['Non-negotiables',P.mustHaves.map(label).join(' · ')],['Regions',P.preferredRegions.map(label).join(' · ')],['Funding',P.fundingSources.map(label).join(' · ')],['Timing',label(P.timeline)],['Biggest question',label(P.primaryObstacle)]].map(r=>`<div class="row"><span>${r[0]}</span><span>${r[1]||'Still to figure out'}</span></div>`).join('')}</div><div class="insight" style="margin-top:16px"><p class="eyebrow">Auntie is starting here</p><h1 style="color:#fff;font-size:21px">${firstAction()}</h1><p>Next, your Command Center should use this profile to organize destinations, pathway research, money and the actual sequence of the move.</p></div><div class="actions"><a class="next" style="text-decoration:none;text-align:center" href="command-center.html">Open Command Center</a><button class="back" onclick="step=0;render()">Retake quiz</button></div>`}
+function firstAction(){return ({choosing_destination:'Let’s build a shortlist that respects your non-negotiables.',visas:'Let’s identify which pathway categories are actually worth investigating.',money:'Let’s figure out the move-fund target before we romanticize anything.',work_income:'Let’s work out what can realistically fund your life abroad.',paperwork:'Let’s build the document plan in the right order.',starting:'Let’s start with the few decisions that unlock everything else.'})[P.primaryObstacle]||'Let’s turn this into a plan.'}
+function render(){if(step===0)$('#page').innerHTML=household();else $('#page').innerHTML=defs[step]();$('#bar').style.width=`${Math.min(100,(step/15)*100)}%`;window.scrollTo(0,0)}
+render();
+</script></body></html>
