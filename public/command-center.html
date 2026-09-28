@@ -4,15 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
-<script src="./cc-api.js"></script>
-<script src="./food-data.js"></script>
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "xwsd371zfp");
-</script>
 </head>
 <body>
 <x-dc>
@@ -23,271 +14,194 @@
 <link rel="icon" type="image/png" sizes="512x512" href="assets/kolmari-favicon-512.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
 <meta name="theme-color" content="#0D1B39" />
+<script src="./cc-api.js"></script>
+<script src="./food-data.js"></script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xwsd371zfp");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,700;1,800&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="food-fit.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  html, body { margin: 0; padding: 0; }
-  body { background: #f7f8fb; -webkit-font-smoothing: antialiased; }
-  a { color: #17305b; text-decoration: none; }
-  ::selection { background: #f3c516; color: #17305b; }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { overflow-x: hidden; -webkit-text-size-adjust: 100%; }
-  body { overflow-x: hidden; }
-  button, a, input { touch-action: manipulation; -webkit-tap-highlight-color: rgba(243,197,22,.18); }
-  input, textarea, button { font-family: inherit; }
-  textarea { resize: vertical; }
-  [data-cc="sidebar"] { width: 232px; flex: 0 0 232px; }
-  @media (max-width: 860px) {
-    [data-cc="sidebar"] { display: none !important; }
-    [data-cc="grid"] { grid-template-columns: 1fr !important; }
-  }
-  @media (max-width: 560px) {
-    [data-cc="main"] { padding: 18px 15px 60px !important; }
-    [data-cc="header"] { padding: 12px 16px !important; }
-  }
+html,body{margin:0;padding:0}body{background:#f4f6fa;-webkit-font-smoothing:antialiased}*,*::before,*::after{box-sizing:border-box}
+a{color:#17305b;text-decoration:none}a:hover{color:#8a6300}::selection{background:#f3c516;color:#17305b}
+p,h1,h2,h3{margin:0}
+button,a,input{touch-action:manipulation;-webkit-tap-highlight-color:rgba(243,197,22,.18)}
+input,textarea,button{font-family:inherit}textarea{resize:vertical}input::placeholder,textarea::placeholder{color:#8090a8}
+@media(max-width:860px){[data-cc="sidebar"]{display:none!important}[data-cc="grid"]{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:560px){[data-cc="main"]{padding:20px 16px 60px!important}[data-cc="header"]{padding:12px 16px!important}[data-cc="main"] h1{font-size:26px!important}}
 </style>
 </helmet>
+<div style="font-family:Poppins,system-ui,sans-serif;color:#17305b;min-height:100vh;display:flex;flex-direction:column">
+  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px"><span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>A working preview of Kolmari — placeholder demo, not the live product</div>
 
-<div style="font-family:Geist,system-ui,sans-serif;color:#17305b;min-height:100vh;display:flex;flex-direction:column">
-
-  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px">
-    <span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>
-    A working preview of Kolmari — placeholder demo, not the live product
-  </div>
-
-  <header data-cc="header" style="padding:14px 26px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid #e7ebf1">
+  <header data-cc="header" style="padding:14px 28px;display:flex;align-items:center;gap:14px;background:#fff;border-bottom:1px solid #e3e8f1;position:sticky;top:0;z-index:20">
     <a href="index.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
-      <img src="assets/kolmari-butterfly.png" alt="" width="26" height="19" style="display:block;width:26px;height:19px;object-fit:contain" />
-      <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
+      <img src="assets/kolmari-butterfly.png" alt="" width="28" height="20" style="display:block;width:28px;height:20px;object-fit:contain" />
+      <span style="font-weight:700;font-size:20px;letter-spacing:-.02em;color:#17305b">Kolmari</span>
     </a>
-    <div style="display:flex;align-items:center;gap:8px">
-      <a href="dashboard.html" style="font-size:13px;font-weight:600;color:#42536e;padding:8px 14px;border:1px solid #dde3ec;border-radius:999px">Open full dashboard</a>
-      <a href="index.html" style="font-size:13px;font-weight:600;color:#7a879c;padding:8px 12px">Sign out</a>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <a href="{{ onboardingHref }}" style="font-size:13px;font-weight:600;color:#5b6b85;padding:9px 14px;border:1px solid #e3e8f1;border-radius:999px" style-hover="color:#17305b">Edit setup</a>
+      <a href="index.html" onClick="{{ signOut }}" style="font-size:13px;font-weight:600;color:#8090a8;padding:9px 12px">Sign out</a>
     </div>
   </header>
 
   <div style="flex:1;display:flex;align-items:stretch">
-
-    <aside data-cc="sidebar" style="background:#fff;border-right:1px solid #e7ebf1;padding:22px 16px;display:flex;flex-direction:column;gap:4px">
-      <p style="margin:0 0 10px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#9aa6b8">Planning</p>
-      <span style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#17305b;background:#fdf1c2;border:1px solid #f3d97a;border-radius:10px;padding:10px 12px">Command Center</span>
-      <a href="food.html" style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#42536e;border-radius:10px;padding:10px 12px" style-hover="background:#f4f6fa">Food &amp; Health fit</a>
-      <a href="energy.html" style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#42536e;border-radius:10px;padding:10px 12px" style-hover="background:#f4f6fa">Energy focus</a>
-      <a href="dashboard.html" style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#42536e;border-radius:10px;padding:10px 12px" style-hover="background:#f4f6fa">Dashboard</a>
-      <a href="explore.html" style="display:flex;align-items:center;gap:9px;font-size:14px;font-weight:500;color:#42536e;border-radius:10px;padding:10px 12px" style-hover="background:#f4f6fa">Greenbook</a>
-      <div style="margin-top:auto;padding-top:16px">
-        <p style="margin:0;font-size:11.5px;line-height:1.5;color:#9aa6b8">Compare destinations against what your household actually needs. Everything here saves automatically.</p>
+    <aside data-cc="sidebar" style="width:248px;flex:0 0 248px;padding:30px 22px;display:flex;flex-direction:column;gap:4px">
+      <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8090a8;margin-bottom:10px">PLANNING</p>
+      <span style="display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:600;color:#17305b;background:#fdf3cf;border:1px solid #e0b93a;border-radius:10px;padding:10px 12px">Command Center<span style="margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:#8a6300">HOME</span></span>
+      <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="3">
+        <a href="{{ n.href }}" style="display:flex;align-items:center;gap:11px;font-size:13.5px;font-weight:500;color:#4a5a75;border-radius:10px;padding:10px 12px" style-hover="background:#fff;color:#17305b">{{ n.label }}<span style="{{ n.badgeStyle }}">{{ n.badge }}</span></a>
+      </sc-for>
+      <div style="margin-top:auto;padding-top:22px">
+        <p style="font-size:11px;line-height:1.6;color:#8090a8">Compare destinations against what your household needs. Everything here saves automatically.</p>
       </div>
     </aside>
 
-    <main data-cc="main" style="flex:1;min-width:0;padding:26px 30px 70px;max-width:1100px;margin:0 auto;width:100%">
+    <main data-cc="main" style="flex:1;min-width:0;padding:34px 40px 70px;max-width:1080px">
 
-      <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
-        <p style="font-size:14px;color:#7a879c">Loading your Command Center…</p>
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ false }}">
+        <p style="font-size:14px;color:#8090a8">Loading your Command Center…</p>
       </sc-if>
 
-      <sc-if value="{{ error }}" hint-placeholder-val="{{ true }}">
-        <div style="margin-bottom:18px;padding:12px 15px;background:#fdecea;border:1px solid #f5c6c3;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
+      <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-bottom:18px;padding:12px 15px;background:#fdecea;border:1px solid #f7cfcb;border-radius:10px;display:flex;justify-content:space-between;align-items:center;gap:12px">
           <span style="font-size:13.5px;color:#b3261e">{{ error }}</span>
           <button sc-camel-on-click="{{ dismissError }}" style="font-size:12px;font-weight:600;color:#b3261e;background:none;border:none;cursor:pointer">Dismiss</button>
         </div>
       </sc-if>
 
       <sc-if value="{{ ready }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8a6300">{{ eyebrow }}</p>
+        <h1 style="font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.12;margin-top:10px;max-width:26ch">{{ title }}</h1>
+        <p style="font-size:14px;line-height:1.65;color:#5b6b85;margin-top:12px;max-width:64ch">Compare the places you're considering against work, visa, schools, safety, community, and what each person in your household needs.</p>
 
-        <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-end;margin-bottom:20px">
-          <div>
-            <h1 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:27px;letter-spacing:-.02em">Relocation Command Center</h1>
-            <p style="margin:8px 0 0;font-size:14px;color:#5a6a83;max-width:560px">Compare the places you're considering against work, visa, schools, safety, community — and what each person in your household needs.</p>
-          </div>
-        </div>
-
-        <sc-if value="{{ hasPlan }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:18px;padding:11px 15px;background:#fff;border:1px solid #e7ebf1;border-radius:12px">
-            <span style="font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9a7d0a">Your plan</span>
-            <span style="font-size:13.5px;font-weight:600;color:#17305b">{{ planSummary }}</span>
-            <sc-if value="{{ hasPriorityLabel }}" hint-placeholder-val="{{ true }}">
-              <span style="font-size:12.5px;color:#5a6a83">· Priorities: {{ priorityLabel }}</span>
-            </sc-if>
-            <a href="quiz.html" style="margin-left:auto;font-size:12.5px;font-weight:600;color:#42536e">Retake quiz</a>
-          </div>
+        <sc-if value="{{ hasStart }}" hint-placeholder-val="{{ false }}">
+          <p style="display:flex;align-items:center;gap:10px;margin-top:16px;max-width:720px;background:#fdf3cf;border:1px solid #f0e2ae;border-radius:10px;padding:11px 14px;font-size:13px;line-height:1.55;color:#17305b"><span style="font-size:10px;font-weight:700;letter-spacing:.08em;background:#17305b;color:#f3c516;border-radius:5px;padding:3px 7px;flex:none">START HERE</span><span>{{ startText }}</span></p>
         </sc-if>
 
-        <div style="background:#0d1b39;border-radius:16px;padding:20px 22px;color:#fff;margin-bottom:22px">
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
-            <div>
-              <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#f3c516">Overall progress</p>
-              <p style="margin:6px 0 0;font-size:14px;color:#c8d3e6">{{ overallLabel }}</p>
+        <section style="background:#0d1b39;border-radius:14px;padding:22px 24px;margin-top:22px">
+          <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
+            <div style="flex:1;min-width:220px">
+              <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#f3c516">OVERALL PROGRESS</p>
+              <p style="font-size:14px;color:#c8d3e6;margin-top:7px">{{ overallLabel }}</p>
             </div>
-            <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:34px;line-height:1">{{ overallPct }}%</span>
+            <span style="font-size:36px;font-weight:700;color:#fff;letter-spacing:-.03em;flex:none;line-height:1">{{ overallPct }}%</span>
           </div>
-          <div style="margin-top:14px;height:8px;background:rgba(255,255,255,.14);border-radius:5px;overflow:hidden">
-            <div style="{{ overallBarStyle }}"></div>
-          </div>
+          <div style="height:8px;border-radius:4px;background:rgba(255,255,255,.14);margin-top:16px;overflow:hidden"><div style="{{ overallBarStyle }}"></div></div>
+        </section>
+
+        <sc-if value="{{ offline }}" hint-placeholder-val="{{ false }}">
+          <p style="margin-top:10px;font-size:11.5px;color:#8090a8">Offline preview: the Command Center API isn't reachable here, so changes save to this browser only.</p>
+        </sc-if>
+
+        <div style="display:flex;gap:11px;margin-top:22px;flex-wrap:wrap">
+          <input value="{{ newDestName }}" sc-camel-on-input="{{ setNewDestName }}" sc-camel-on-key-down="{{ addDestOnEnter }}" placeholder="Add a destination — e.g. Lisbon, Mexico City" style="flex:1;min-width:220px;height:48px;border:1px solid #e3e8f1;border-radius:10px;background:#fff;padding:0 15px;font-size:13.5px;color:#17305b;outline:none" style-focus="border-color:#f3c516;box-shadow:0 0 0 3px rgba(243,197,22,.2)" />
+          <button sc-camel-on-click="{{ addDestination }}" style="height:48px;padding:0 24px;border-radius:10px;background:#f3c516;color:#17305b;font-size:14px;font-weight:700;border:0;cursor:pointer;flex:none;box-shadow:0 10px 24px -14px rgba(216,169,4,.8)" style-hover="background:#ffd633">Add destination</button>
         </div>
 
-        <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:24px">
-          <input value="{{ newDestName }}" sc-camel-on-input="{{ setNewDestName }}" sc-camel-on-key-down="{{ addDestOnEnter }}" placeholder="Add a destination — e.g. Lisbon, Mexico City" style="flex:1;min-width:220px;font-size:14.5px;color:#17305b;background:#fff;border:1.5px solid #dde3ec;border-radius:12px;padding:12px 15px;outline:none" style-focus="border-color:#f3c516;box-shadow:0 0 0 3px rgba(243,197,22,.2)" />
-          <button sc-camel-on-click="{{ addDestination }}" style="font-size:14px;font-weight:700;color:#17305b;background:#f3c516;border:none;border-radius:999px;padding:12px 22px;cursor:pointer" style-hover="background:#ffd633">Add destination</button>
-        </div>
-
-        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ true }}">
-          <div style="text-align:center;padding:48px 24px;background:#fff;border:1px dashed #cfd7e3;border-radius:16px">
-            <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:20px">No destinations yet</h2>
-            <p style="margin:10px auto 0;max-width:400px;font-size:14px;color:#5a6a83;line-height:1.6">Add the first place you're considering above. We'll set up a research checklist across all five categories so you can start comparing right away.</p>
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:48px 24px;background:#fff;border:1px dashed #cfd7e3;border-radius:14px;margin-top:18px">
+            <h2 style="font-weight:700;font-size:20px;letter-spacing:-.015em">No destinations yet</h2>
+            <p style="margin:10px auto 0;max-width:400px;font-size:13.5px;color:#5b6b85;line-height:1.6">Add the first place you're considering above. We'll set up a research checklist across every category so you can start comparing right away.</p>
           </div>
         </sc-if>
 
         <sc-if value="{{ hasDestinations }}" hint-placeholder-val="{{ true }}">
-
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:22px">
             <sc-for list="{{ destTabs }}" as="d" hint-placeholder-count="3">
-              <button sc-camel-on-click="{{ d.select }}" style="{{ d.style }}">{{ d.label }}</button>
+              <button sc-camel-on-click="{{ d.select }}" style="{{ d.style }}" style-hover="border-color:#c9a227">{{ d.label }}</button>
             </sc-for>
           </div>
 
-          <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-top:22px">
             <div>
-              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:22px">{{ selDestName }}</h2>
-              <p style="margin:5px 0 0;font-size:13px;color:#5a6a83">{{ selDestLabel }}</p>
+              <h2 style="font-weight:700;font-size:24px;letter-spacing:-.02em">{{ selDestName }}</h2>
+              <p style="margin-top:4px;font-size:12.5px;color:#5b6b85">{{ selDestLabel }}</p>
             </div>
-            <button sc-camel-on-click="{{ deleteSelectedDest }}" style="font-size:12.5px;font-weight:600;color:#b3261e;background:#fff;border:1px solid #f2cfcb;border-radius:999px;padding:8px 14px;cursor:pointer">Remove destination</button>
+            <button sc-camel-on-click="{{ deleteSelectedDest }}" style="font-size:12.5px;font-weight:600;color:#b3261e;background:#fff;border:1px solid #f7cfcb;border-radius:999px;padding:8px 14px;cursor:pointer">Remove destination</button>
           </div>
 
-          <div data-cc="grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:26px">
-            <sc-for list="{{ categoryCards }}" as="cat" hint-placeholder-count="5">
-              <div style="background:#fff;border:1px solid #e7ebf1;border-radius:14px;padding:16px 17px">
-                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-                  <div style="display:flex;align-items:center;gap:8px;min-width:0">
-                    <h3 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:15.5px">{{ cat.label }}</h3>
-                    <sc-if value="{{ cat.isPriority }}" hint-placeholder-val="{{ true }}">
-                      <span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a7d0a;background:#fdf1c2;border:1px solid #f3d97a;border-radius:999px;padding:2px 7px;white-space:nowrap">Priority</span>
-                    </sc-if>
-                  </div>
-                  <span style="font-size:12px;font-weight:600;color:#5a6a83">{{ cat.countLabel }}</span>
+          <div data-cc="grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:13px;margin-top:16px">
+            <sc-for list="{{ categoryCards }}" as="cat" hint-placeholder-count="6">
+              <section style="{{ cat.cardStyle }}">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <h3 style="font-weight:700;font-size:15.5px;letter-spacing:-.01em;flex:1;min-width:0">{{ cat.label }}</h3>
+                  <sc-if value="{{ cat.priority }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:9.5px;font-weight:700;letter-spacing:.06em;color:#8a6300;background:#fdf3cf;border-radius:5px;padding:3px 7px;flex:none">YOUR LANE</span>
+                  </sc-if>
+                  <span style="font-size:12px;font-weight:600;color:#5b6b85;flex:none">{{ cat.countLabel }}</span>
                 </div>
-                <div style="margin:11px 0 13px;height:6px;background:#eef1f6;border-radius:4px;overflow:hidden">
-                  <div style="{{ cat.barStyle }}"></div>
-                </div>
-
-                <div style="display:flex;flex-direction:column;gap:7px">
+                <div style="margin:11px 0 13px;height:6px;background:#eef1f6;border-radius:4px;overflow:hidden"><div style="{{ cat.barStyle }}"></div></div>
+                <div style="display:flex;flex-direction:column;gap:8px">
                   <sc-for list="{{ cat.items }}" as="item" hint-placeholder-count="3">
                     <div style="display:flex;align-items:flex-start;gap:9px">
-                      <input type="checkbox" checked="{{ item.checked }}" sc-camel-on-change="{{ item.toggle }}" style="width:17px;height:17px;margin-top:1px;accent-color:#f3c516;cursor:pointer;flex:0 0 auto" />
+                      <input type="checkbox" checked="{{ item.checked }}" sc-camel-on-change="{{ item.toggle }}" style="width:17px;height:17px;margin:1px 0 0;accent-color:#17305b;cursor:pointer;flex:0 0 auto" />
                       <span style="{{ item.textStyle }}">{{ item.text }}</span>
-                      <button sc-camel-on-click="{{ item.remove }}" aria-label="Remove item" style="margin-left:auto;font-size:15px;line-height:1;color:#c2ccda;background:none;border:none;cursor:pointer;flex:0 0 auto">×</button>
+                      <button sc-camel-on-click="{{ item.remove }}" aria-label="Remove item" style="margin-left:auto;font-size:15px;line-height:1;color:#c2ccda;background:none;border:none;cursor:pointer;flex:0 0 auto" style-hover="color:#b3261e">×</button>
                     </div>
                   </sc-for>
                 </div>
-
-                <div style="display:flex;gap:7px;margin-top:11px">
-                  <input value="{{ cat.newText }}" sc-camel-on-input="{{ cat.setNewText }}" sc-camel-on-key-down="{{ cat.addOnEnter }}" placeholder="Add an item…" style="flex:1;min-width:0;font-size:13px;color:#17305b;background:#f7f8fb;border:1px solid #e4e8f0;border-radius:9px;padding:8px 10px;outline:none" style-focus="border-color:#f3c516" />
-                  <button sc-camel-on-click="{{ cat.addItem }}" style="font-size:13px;font-weight:600;color:#17305b;background:#eef1f6;border:none;border-radius:9px;padding:8px 12px;cursor:pointer">Add</button>
+                <div style="display:flex;gap:7px;margin-top:12px">
+                  <input value="{{ cat.newText }}" sc-camel-on-input="{{ cat.setNewText }}" sc-camel-on-key-down="{{ cat.addOnEnter }}" placeholder="Add an item…" style="flex:1;min-width:0;font-size:12.5px;color:#17305b;background:#fbfcfe;border:1px solid #e3e8f1;border-radius:9px;padding:8px 10px;outline:none" style-focus="border-color:#f3c516" />
+                  <button sc-camel-on-click="{{ cat.addItem }}" style="font-size:12.5px;font-weight:600;color:#17305b;background:#eef1f6;border:none;border-radius:9px;padding:8px 12px;cursor:pointer" style-hover="background:#e3e8f1">Add</button>
                 </div>
-
-                <textarea value="{{ cat.noteDraft }}" sc-camel-on-input="{{ cat.setNote }}" sc-camel-on-blur="{{ cat.saveNote }}" placeholder="Notes for this category…" rows="2" style="margin-top:10px;width:100%;font-size:13px;color:#42536e;background:#fbfcfe;border:1px solid #e4e8f0;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
-              </div>
+                <textarea value="{{ cat.noteDraft }}" sc-camel-on-input="{{ cat.setNote }}" sc-camel-on-blur="{{ cat.saveNote }}" placeholder="Notes for this category…" rows="2" style="margin-top:10px;width:100%;font-size:12.5px;color:#4a5a75;background:#fbfcfe;border:1px solid #e3e8f1;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
+              </section>
             </sc-for>
           </div>
 
-          <sc-if value="{{ hasFoodFit }}" hint-placeholder-val="{{ true }}">
-            <div class="ff-card ff-anim" style="margin-bottom:26px">
-              <div class="ff-head">
-                <div class="ff-head-l">
-                  <span class="ff-flag">{{ foodFit.flag }}</span>
-                  <div>
-                    <h2 class="ff-name" style="font-size:18px">Food &amp; health fit</h2>
-                    <p class="ff-sub">{{ foodFit.matchNote }}</p>
-                  </div>
-                </div>
-                <span class="{{ foodFit.badgeCls }}">{{ foodFit.confidenceLabel }}</span>
-              </div>
-
-              <div class="ff-traits">
-                <sc-for list="{{ foodFit.traits }}" as="t" hint-placeholder-count="3">
-                  <div class="{{ t.cls }}"><span class="ff-trait-ic">{{ t.icon }}</span>{{ t.label }}</div>
-                </sc-for>
-              </div>
-
-              <p class="ff-label">Allergen prevalence in everyday food</p>
-              <div class="ff-allergens">
-                <sc-for list="{{ foodFit.allergenRows }}" as="r" hint-placeholder-count="6">
-                  <details class="{{ r.wrapCls }}">
-                    <summary class="ff-allergen-sum">
-                      <span class="ff-allergen-ic">{{ r.icon }}</span>
-                      <span class="ff-allergen-name">{{ r.name }}</span>
-                      <span class="ff-allergen-state"><span class="ff-dot"></span>{{ r.stateLabel }}<span class="ff-allergen-caret">▾</span></span>
-                    </summary>
-                    <p class="ff-allergen-detail">{{ r.detail }}</p>
-                  </details>
-                </sc-for>
-              </div>
-              <p style="margin:9px 0 0;font-size:12px;color:#5a6a83">{{ foodFit.flaggedNote }}</p>
-
-              <div class="ff-inforow">
-                <span class="ff-inforow-ic ff-inforow-ic--heart">❤️</span>
-                <div><p class="ff-inforow-h">Heart note</p><p class="ff-inforow-b">{{ foodFit.cardioNote }}</p></div>
-              </div>
-
-              <div class="ff-inforow">
-                <span class="ff-inforow-ic ff-inforow-ic--label">📋</span>
+          <sc-if value="{{ hasFoodFit }}" hint-placeholder-val="{{ false }}">
+            <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px;margin-top:13px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">
                 <div>
-                  <p class="ff-inforow-h">Labeling</p>
-                  <p class="ff-inforow-b">{{ foodFit.labelingText }}</p>
-                  <sc-if value="{{ foodFit.sourceUrl }}" hint-placeholder-val="{{ true }}">
-                    <a class="ff-source" href="{{ foodFit.sourceUrl }}" target="_blank" rel="noopener">Source ↗</a>
-                  </sc-if>
+                  <h2 style="font-weight:700;font-size:17px;letter-spacing:-.015em">Food and health fit</h2>
+                  <p style="margin-top:4px;font-size:12.5px;color:#5b6b85">{{ foodFit.matchNote }}</p>
                 </div>
+                <span style="{{ foodFit.confidenceStyle }}">{{ foodFit.confidenceLabel }}</span>
               </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px">
+                <sc-for list="{{ foodFit.archetypeTags }}" as="t" hint-placeholder-count="3"><span style="{{ t.style }}">{{ t.label }}</span></sc-for>
+              </div>
+              <p style="margin:14px 0 7px;font-size:10.5px;font-weight:700;letter-spacing:.12em;color:#8090a8">ALLERGEN PREVALENCE IN EVERYDAY FOOD</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <sc-for list="{{ foodFit.allergenRows }}" as="r" hint-placeholder-count="6"><span style="{{ r.style }}">{{ r.label }}</span></sc-for>
+              </div>
+              <p style="margin-top:9px;font-size:12px;color:#5b6b85">{{ foodFit.flaggedNote }}</p>
+              <p style="margin-top:12px;font-size:12.5px;line-height:1.6;color:#4a5a75"><strong style="color:#17305b">Heart note.</strong> {{ foodFit.cardioNote }}</p>
+              <p style="margin-top:13px;padding-top:11px;border-top:1px solid #eef1f6;font-size:11px;line-height:1.5;color:#8090a8">{{ foodFit.disclosure }} · <a href="food.html" style="color:#8a6300;font-weight:600">Open Food and Health fit</a></p>
+            </section>
+          </sc-if>
 
-              <p class="ff-foot">{{ foodFit.disclosure }} · <a href="food.html" style="color:#9a7d0a;font-weight:600">Open Food &amp; Health fit</a></p>
+          <sc-if value="{{ foodFitMissing }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#fbfcfe;border:1px dashed #d9e0ea;border-radius:14px;padding:14px 16px;margin-top:13px">
+              <p style="font-size:13px;color:#5b6b85">No food and health profile matched “{{ selDestName }}” yet. Try a country name, or browse the <a href="food.html" style="color:#8a6300;font-weight:600">Food and Health fit</a> filter.</p>
             </div>
           </sc-if>
 
-          <sc-if value="{{ foodFitMissing }}" hint-placeholder-val="{{ true }}">
-            <div style="background:#fbfcfe;border:1px dashed #d7dee8;border-radius:14px;padding:14px 16px;margin-bottom:26px">
-              <p style="margin:0;font-size:13px;color:#5a6a83">No food &amp; health profile matched “{{ selDestName }}” yet. Try a country name, or browse the <a href="food.html" style="color:#9a7d0a;font-weight:600">Food &amp; Health fit</a> filter.</p>
-            </div>
-          </sc-if>
-
-          <div style="background:#fff;border:1px solid #e7ebf1;border-radius:16px;padding:18px 19px">
+          <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px;margin-top:13px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
-              <h2 style="margin:0;font-family:Poppins,sans-serif;font-weight:700;font-size:18px">Who's moving</h2>
-              <span style="font-size:12.5px;color:#7a879c">How {{ selDestName }} works for each person</span>
+              <h2 style="font-weight:700;font-size:17px;letter-spacing:-.015em">Who's moving</h2>
+              <span style="font-size:12.5px;color:#5b6b85">How {{ selDestName }} works for each person</span>
             </div>
-
-            <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
               <sc-for list="{{ members }}" as="m" hint-placeholder-count="2">
                 <div style="border:1px solid #eef1f6;border-radius:12px;padding:13px 14px;background:#fbfcfe">
                   <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
-                    <p style="margin:0;font-size:14.5px;font-weight:700;color:#17305b">{{ m.nameLabel }}</p>
+                    <p style="font-size:14px;font-weight:700;color:#17305b">{{ m.nameLabel }}</p>
                     <button sc-camel-on-click="{{ m.remove }}" style="font-size:12px;font-weight:600;color:#b3261e;background:none;border:none;cursor:pointer">Remove</button>
                   </div>
-                  <textarea value="{{ m.needsDraft }}" sc-camel-on-input="{{ m.setNeeds }}" sc-camel-on-blur="{{ m.saveNeeds }}" placeholder="What this person needs (e.g. school continuity, an established friend group)…" rows="2" style="margin-top:9px;width:100%;font-size:13px;color:#42536e;background:#fff;border:1px solid #e4e8f0;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
-                  <textarea value="{{ m.noteDraft }}" sc-camel-on-input="{{ m.setNote }}" sc-camel-on-blur="{{ m.saveNote }}" placeholder="{{ m.notePlaceholder }}" rows="2" style="margin-top:8px;width:100%;font-size:13px;color:#42536e;background:#fff;border:1px solid #e4e8f0;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
+                  <textarea value="{{ m.needsDraft }}" sc-camel-on-input="{{ m.setNeeds }}" sc-camel-on-blur="{{ m.saveNeeds }}" placeholder="What this person needs (e.g. school continuity, an established friend group)…" rows="2" style="margin-top:9px;width:100%;font-size:12.5px;color:#4a5a75;background:#fff;border:1px solid #e3e8f1;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
+                  <textarea value="{{ m.noteDraft }}" sc-camel-on-input="{{ m.setNote }}" sc-camel-on-blur="{{ m.saveNote }}" placeholder="{{ m.notePlaceholder }}" rows="2" style="margin-top:8px;width:100%;font-size:12.5px;color:#4a5a75;background:#fff;border:1px solid #e3e8f1;border-radius:9px;padding:9px 11px;outline:none;line-height:1.5" style-focus="border-color:#f3c516"></textarea>
                 </div>
               </sc-for>
             </div>
-
-            <sc-if value="{{ hasHouseholdPrompt }}" hint-placeholder-val="{{ true }}">
-              <div style="margin-top:12px;padding:11px 13px;background:#fdf1c2;border:1px solid #f3d97a;border-radius:10px">
-                <p style="margin:0;font-size:12.5px;line-height:1.5;color:#5a4a12">{{ householdPrompt }}</p>
-              </div>
-            </sc-if>
-
             <div style="margin-top:14px;padding-top:14px;border-top:1px solid #eef1f6;display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-              <input value="{{ mfName }}" sc-camel-on-input="{{ setMfName }}" placeholder="Name" style="flex:2;min-width:120px;font-size:13.5px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:9px;padding:9px 11px;outline:none" style-focus="border-color:#f3c516" />
-              <input value="{{ mfAge }}" sc-camel-on-input="{{ setMfAge }}" type="number" placeholder="Age" style="flex:0 0 82px;width:82px;font-size:13.5px;color:#17305b;background:#fff;border:1px solid #dde3ec;border-radius:9px;padding:9px 11px;outline:none" style-focus="border-color:#f3c516" />
-              <button sc-camel-on-click="{{ addMember }}" style="font-size:13.5px;font-weight:700;color:#17305b;background:#f3c516;border:none;border-radius:999px;padding:9px 18px;cursor:pointer" style-hover="background:#ffd633">Add person</button>
+              <input value="{{ mfName }}" sc-camel-on-input="{{ setMfName }}" placeholder="Name" style="flex:2;min-width:120px;height:42px;font-size:13px;color:#17305b;background:#fff;border:1px solid #e3e8f1;border-radius:9px;padding:0 11px;outline:none" style-focus="border-color:#f3c516" />
+              <input value="{{ mfAge }}" sc-camel-on-input="{{ setMfAge }}" type="number" placeholder="Age" style="flex:0 0 82px;width:82px;height:42px;font-size:13px;color:#17305b;background:#fff;border:1px solid #e3e8f1;border-radius:9px;padding:0 11px;outline:none" style-focus="border-color:#f3c516" />
+              <button sc-camel-on-click="{{ addMember }}" style="height:42px;font-size:13px;font-weight:700;color:#17305b;background:#f3c516;border:none;border-radius:10px;padding:0 18px;cursor:pointer" style-hover="background:#ffd633">Add person</button>
             </div>
-          </div>
-
+          </section>
         </sc-if>
-
       </sc-if>
-
     </main>
   </div>
 </div>
@@ -295,273 +209,168 @@
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = {
-    loading: true,
-    error: '',
-    household: null,
-    categories: [],
-    members: [],
-    destinations: [],
-    items: [],
-    notes: [],
-    memberNotes: [],
-    selectedDest: null,
-    newDestName: '',
-    newItem: {},          // key: destId|cat -> text
-    noteDraft: {},        // key: destId|cat -> text
-    needsDraft: {},       // key: memberId -> text
-    memberNoteDraft: {},  // key: memberId|destId -> text
-    mfName: '',
-    mfAge: '',
-    quiz: null,           // onboarding answers (kolmari:quiz), for context + seeding
+    loading: true, error: '', offline: false,
+    household: null, categories: [], members: [], destinations: [], items: [], notes: [], memberNotes: [],
+    selectedDest: null, newDestName: '', newItem: {}, noteDraft: {}, needsDraft: {}, memberNoteDraft: {},
+    mfName: '', mfAge: '', ob: null, quiz: null, account: null,
   };
 
-  componentDidMount() {
-    let quiz = null;
-    try { quiz = JSON.parse(localStorage.getItem('kolmari:quiz') || 'null'); } catch (e) {}
-    this.setState({ quiz: quiz });
-    // Deep link from the Dashboard: ?dest=<id> opens that destination selected.
-    let dest = null;
-    try { dest = new URLSearchParams(location.search).get('dest'); } catch (e) {}
-    this.refresh(dest ? { selectedDest: dest } : undefined)
-      .then(() => this.seedFromQuiz(quiz))
-      .catch((e) => this.setState({ loading: false, error: e.message }));
+  href(p) { return p + (/\.dc\.html$/.test(location.pathname) ? '.dc.html' : '.html'); }
+
+  // Mirrors src/index.js so the page still works where /api/cc isn't deployed (design preview, file://).
+  makeLocalApi() {
+    const KEY = 'kolmari:cc-local';
+    const CATS = [
+      { key: 'work', label: 'Work & Income' }, { key: 'visa', label: 'Visa & Immigration' }, { key: 'schools', label: 'Schools' },
+      { key: 'safety', label: 'Neighborhood & Safety' }, { key: 'community', label: 'Community' }, { key: 'health', label: 'Health & Food' },
+    ];
+    const DEF = {
+      work: ['Confirm remote-work eligibility or local job leads', 'Check the income you need to qualify for a visa', 'Understand local income-tax obligations'],
+      visa: ['Identify the visa route that fits your situation', 'List required documents, apostilles and translations', 'Note the application timeline and fees'],
+      schools: ['Shortlist schools and check enrollment windows', 'Confirm curriculum and language of instruction', 'Gather the records needed to transfer'],
+      safety: ['Research neighborhoods and typical rent', 'Review local safety and healthcare access', 'Check commute and transit options'],
+      community: ['Find expat and local community groups', 'Identify language or cultural onboarding steps', 'Pick one in-person meetup to attend'],
+      health: ['Confirm access to needed medications and nearby pharmacies', 'Find specialists for existing conditions (e.g. cardiology, allergy)', 'Check allergy-friendly food options and labeling (see Food & Health fit)', 'Understand health insurance / public coverage eligibility'],
+    };
+    const id = () => (crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()));
+    const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || null; } catch (e) { return null; } };
+    let db = load() || { members: [], destinations: [], items: [], notes: [], memberNotes: [] };
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch (e) {} };
+    const ok = (x) => Promise.resolve(Object.assign({ ok: true }, x || {}));
+    return {
+      getState: () => Promise.resolve(Object.assign({ household: { id: 'local', name: 'My household' }, categories: CATS }, JSON.parse(JSON.stringify(db)))),
+      addDestination: (name) => {
+        const d = { id: id(), name, position: db.destinations.length }; db.destinations.push(d);
+        CATS.forEach(c => (DEF[c.key] || []).forEach((text, pos) => db.items.push({ id: id(), destination_id: d.id, category: c.key, text, checked: false, is_default: true, position: pos })));
+        save(); return ok({ id: d.id, name });
+      },
+      renameDestination: (did, name) => { db.destinations.forEach(d => { if (d.id === did) d.name = name; }); save(); return ok(); },
+      deleteDestination: (did) => {
+        db.destinations = db.destinations.filter(d => d.id !== did); db.items = db.items.filter(i => i.destination_id !== did);
+        db.notes = db.notes.filter(n => n.destination_id !== did); db.memberNotes = db.memberNotes.filter(n => n.destination_id !== did); save(); return ok();
+      },
+      addItem: (did, cat, text) => { const it = { id: id(), destination_id: did, category: cat, text, checked: false, is_default: false, position: 99 }; db.items.push(it); save(); return ok(it); },
+      updateItem: (iid, patch) => { db.items.forEach(i => { if (i.id === iid) Object.assign(i, patch); }); save(); return ok(); },
+      deleteItem: (iid) => { db.items = db.items.filter(i => i.id !== iid); save(); return ok(); },
+      saveNote: (did, cat, body) => { const n = db.notes.find(x => x.destination_id === did && x.category === cat); if (n) n.body = body; else db.notes.push({ id: id(), destination_id: did, category: cat, body }); save(); return ok(); },
+      addMember: (m) => { const mm = { id: id(), name: m.name, age: m.age === '' ? null : parseInt(m.age, 10), needs: m.needs || '', position: db.members.length }; db.members.push(mm); save(); return ok({ id: mm.id }); },
+      updateMember: (mid, patch) => { db.members.forEach(m => { if (m.id === mid) Object.assign(m, patch); }); save(); return ok(); },
+      deleteMember: (mid) => { db.members = db.members.filter(m => m.id !== mid); db.memberNotes = db.memberNotes.filter(n => n.member_id !== mid); save(); return ok(); },
+      saveMemberNote: (mid, did, body) => { const n = db.memberNotes.find(x => x.member_id === mid && x.destination_id === did); if (n) n.body = body; else db.memberNotes.push({ id: id(), member_id: mid, destination_id: did, body }); save(); return ok(); },
+    };
   }
 
-  // One-time handoff from the quiz: create the destinations the user named, into an
-  // empty board only. Guarded by kolmari:cc-seeded (keyed to the quiz timestamp) so
-  // a revisit never re-creates them. Household/budget/timeline/priorities stay as
-  // display context (see renderVals) — no people are fabricated.
-  async seedFromQuiz(quiz) {
-    if (!quiz) return;
-    let seededTs = null;
-    try { seededTs = localStorage.getItem('kolmari:cc-seeded'); } catch (e) {}
-    if (seededTs && String(quiz.ts) === String(seededTs)) return;
-    const dests = Array.isArray(quiz.destinations) ? quiz.destinations : [];
-    if (dests.length && this.state.destinations.length === 0) {
-      try {
-        let firstId = null;
-        for (const name of dests) {
-          const res = await window.CCApi.addDestination(name);
-          if (!firstId && res && res.id) firstId = res.id;
-        }
-        await this.refresh(firstId ? { selectedDest: firstId } : undefined);
-      } catch (e) {
-        this.fail(e);
-      }
+  api() { return this.localApi || window.CCApi; }
+
+  async componentDidMount() {
+    let ob = null, quiz = null, account = null;
+    try { ob = JSON.parse(localStorage.getItem('kolmari:onboarding') || 'null'); } catch (e) {}
+    try { const q = JSON.parse(localStorage.getItem('kolmari.matchQuiz') || 'null'); quiz = q && q.answers; } catch (e) {}
+    try { account = JSON.parse(localStorage.getItem('kolmari:account') || 'null'); } catch (e) {}
+    this.setState({ ob, quiz, account });
+    try {
+      if (!window.CCApi) throw new Error('no api');
+      await window.CCApi.getState();
+    } catch (e) {
+      this.localApi = this.makeLocalApi();
+      this.setState({ offline: true });
+      const st = await this.localApi.getState();
+      if (!st.destinations.length && ob && ob.destinations) for (const n of ob.destinations) await this.localApi.addDestination(n);
     }
-    try { localStorage.setItem('kolmari:cc-seeded', String(quiz.ts || '1')); } catch (e) {}
+    this.refresh().catch((e) => this.setState({ loading: false, error: e.message }));
   }
 
-  // Rebuild draft maps from server data, preserving any keys the user is
-  // already editing (never clobber an in-progress edit).
   buildDrafts(data, prev) {
     const noteDraft = Object.assign({}, prev.noteDraft || {});
-    (data.notes || []).forEach((n) => {
-      const k = n.destination_id + '|' + n.category;
-      if (!(k in noteDraft)) noteDraft[k] = n.body || '';
-    });
-    (data.destinations || []).forEach((d) => {
-      (data.categories || []).forEach((c) => {
-        const k = d.id + '|' + c.key;
-        if (!(k in noteDraft)) noteDraft[k] = '';
-      });
-    });
-
+    (data.notes || []).forEach((n) => { const k = n.destination_id + '|' + n.category; if (!(k in noteDraft)) noteDraft[k] = n.body || ''; });
     const needsDraft = Object.assign({}, prev.needsDraft || {});
-    (data.members || []).forEach((m) => {
-      if (!(m.id in needsDraft)) needsDraft[m.id] = m.needs || '';
-    });
-
+    (data.members || []).forEach((m) => { if (!(m.id in needsDraft)) needsDraft[m.id] = m.needs || ''; });
     const memberNoteDraft = Object.assign({}, prev.memberNoteDraft || {});
-    (data.memberNotes || []).forEach((mn) => {
-      const k = mn.member_id + '|' + mn.destination_id;
-      if (!(k in memberNoteDraft)) memberNoteDraft[k] = mn.body || '';
-    });
-    (data.members || []).forEach((m) => {
-      (data.destinations || []).forEach((d) => {
-        const k = m.id + '|' + d.id;
-        if (!(k in memberNoteDraft)) memberNoteDraft[k] = '';
-      });
-    });
-
+    (data.memberNotes || []).forEach((mn) => { const k = mn.member_id + '|' + mn.destination_id; if (!(k in memberNoteDraft)) memberNoteDraft[k] = mn.body || ''; });
     return { noteDraft, needsDraft, memberNoteDraft };
   }
 
   async refresh(patch) {
-    const data = await window.CCApi.getState();
+    const data = await this.api().getState();
     this.setState((s) => {
       const drafts = this.buildDrafts(data, s);
       let sel = (patch && patch.selectedDest) || s.selectedDest;
-      if (!sel || !data.destinations.some((d) => d.id === sel)) {
-        sel = data.destinations[0] ? data.destinations[0].id : null;
-      }
-      return Object.assign(
-        {
-          loading: false,
-          error: '',
-          household: data.household,
-          categories: data.categories,
-          members: data.members,
-          destinations: data.destinations,
-          items: data.items,
-          notes: data.notes,
-          memberNotes: data.memberNotes,
-          selectedDest: sel,
-        },
-        drafts,
-        patch || {}
-      );
+      if (!sel || !data.destinations.some((d) => d.id === sel)) sel = data.destinations[0] ? data.destinations[0].id : null;
+      return Object.assign({ loading: false, error: '', household: data.household, categories: data.categories, members: data.members,
+        destinations: data.destinations, items: data.items, notes: data.notes, memberNotes: data.memberNotes, selectedDest: sel }, drafts, patch || {});
     });
   }
 
-  fail(e) {
-    this.setState({ error: (e && e.message) || 'Something went wrong' });
-  }
+  fail(e) { this.setState({ error: (e && e.message) || 'Something went wrong' }); }
 
-  // ---- Destinations ----
   addDestination() {
-    const name = (this.state.newDestName || '').trim();
-    if (!name) return;
+    const name = (this.state.newDestName || '').trim(); if (!name) return;
     this.setState({ newDestName: '' });
-    window.CCApi.addDestination(name)
-      .then((res) => this.refresh({ selectedDest: res.id }))
-      .catch((e) => this.fail(e));
+    this.api().addDestination(name).then((res) => this.refresh({ selectedDest: res.id })).catch((e) => this.fail(e));
   }
   deleteSelectedDest() {
-    const id = this.state.selectedDest;
-    if (!id) return;
+    const id = this.state.selectedDest; if (!id) return;
     if (!window.confirm('Remove this destination and everything under it?')) return;
-    window.CCApi.deleteDestination(id).then(() => this.refresh({ selectedDest: null })).catch((e) => this.fail(e));
+    this.api().deleteDestination(id).then(() => this.refresh({ selectedDest: null })).catch((e) => this.fail(e));
   }
-
-  // ---- Items ----
   toggleItem(item) {
     const checked = !item.checked;
-    this.setState((s) => ({ items: s.items.map((i) => (i.id === item.id ? Object.assign({}, i, { checked: checked }) : i)) }));
-    window.CCApi.updateItem(item.id, { checked: checked }).then(() => this.refresh()).catch((e) => { this.fail(e); this.refresh(); });
+    this.setState((s) => ({ items: s.items.map((i) => (i.id === item.id ? Object.assign({}, i, { checked }) : i)) }));
+    this.api().updateItem(item.id, { checked }).then(() => this.refresh()).catch((e) => { this.fail(e); this.refresh(); });
   }
   addItem(destId, cat) {
-    const k = destId + '|' + cat;
-    const text = (this.state.newItem[k] || '').trim();
-    if (!text) return;
+    const k = destId + '|' + cat, text = (this.state.newItem[k] || '').trim(); if (!text) return;
     this.setState((s) => ({ newItem: Object.assign({}, s.newItem, { [k]: '' }) }));
-    window.CCApi.addItem(destId, cat, text).then(() => this.refresh()).catch((e) => this.fail(e));
+    this.api().addItem(destId, cat, text).then(() => this.refresh()).catch((e) => this.fail(e));
   }
-  deleteItem(id) {
-    window.CCApi.deleteItem(id).then(() => this.refresh()).catch((e) => this.fail(e));
-  }
-
-  // ---- Notes ----
-  saveNote(destId, cat) {
-    const k = destId + '|' + cat;
-    window.CCApi.saveNote(destId, cat, this.state.noteDraft[k] || '').catch((e) => this.fail(e));
-  }
-
-  // ---- Members ----
-  saveNeeds(memberId) {
-    window.CCApi.updateMember(memberId, { needs: this.state.needsDraft[memberId] || '' }).catch((e) => this.fail(e));
-  }
-  deleteMember(memberId) {
-    if (!window.confirm('Remove this person?')) return;
-    window.CCApi.deleteMember(memberId).then(() => this.refresh()).catch((e) => this.fail(e));
-  }
-  saveMemberNote(memberId, destId) {
-    const k = memberId + '|' + destId;
-    window.CCApi.saveMemberNote(memberId, destId, this.state.memberNoteDraft[k] || '').catch((e) => this.fail(e));
-  }
+  deleteItem(id) { this.api().deleteItem(id).then(() => this.refresh()).catch((e) => this.fail(e)); }
+  saveNote(destId, cat) { this.api().saveNote(destId, cat, this.state.noteDraft[destId + '|' + cat] || '').catch((e) => this.fail(e)); }
+  saveNeeds(mid) { this.api().updateMember(mid, { needs: this.state.needsDraft[mid] || '' }).catch((e) => this.fail(e)); }
+  deleteMember(mid) { if (!window.confirm('Remove this person?')) return; this.api().deleteMember(mid).then(() => this.refresh()).catch((e) => this.fail(e)); }
+  saveMemberNote(mid, did) { this.api().saveMemberNote(mid, did, this.state.memberNoteDraft[mid + '|' + did] || '').catch((e) => this.fail(e)); }
   addMember() {
-    const name = (this.state.mfName || '').trim();
-    if (!name) return;
-    const age = this.state.mfAge;
-    this.setState({ mfName: '', mfAge: '' });
-    window.CCApi.addMember({ name: name, age: age, needs: '' }).then(() => this.refresh()).catch((e) => this.fail(e));
+    const name = (this.state.mfName || '').trim(); if (!name) return;
+    const age = this.state.mfAge; this.setState({ mfName: '', mfAge: '' });
+    this.api().addMember({ name, age, needs: '' }).then(() => this.refresh()).catch((e) => this.fail(e));
   }
 
   renderVals() {
-    const s = this.state;
-    const self = this;
-    const ready = !s.loading;
-    const hasDest = ready && s.destinations.length > 0;
+    const s = this.state, self = this, ready = !s.loading, hasDest = ready && s.destinations.length > 0;
+    const lanes = (s.ob && s.ob.lanes) || [];
+    const LANE_CATS = { health: ['health'], community: ['community', 'safety'], work: ['work', 'visa'], family: ['schools'], money: ['work'], energy: [] };
+    const prioCats = [];
+    lanes.forEach(l => (LANE_CATS[l] || []).forEach(c => { if (prioCats.indexOf(c) < 0) prioCats.push(c); }));
 
-    const itemsFor = (destId, catKey) => s.items.filter((i) => i.destination_id === destId && i.category === catKey);
-    const pct = (checked, total) => (total ? Math.round((checked / total) * 100) : 0);
-    const barStyle = (p, color) => 'height:100%;width:' + p + '%;background:' + (color || '#f3c516') + ';border-radius:inherit;transition:width .2s';
-
-    // Quiz-derived context (display only — no fabricated data). Plan summary strip,
-    // which categories the user's priorities emphasize, and a household nudge.
-    const quiz = s.quiz;
-    const PRIORITY_CATS = {
-      'Lowest cost': [],
-      'Safety & belonging': ['safety', 'community'],
-      'Easiest visa path': ['visa'],
-      'Community': ['community'],
-      'Healthcare quality': ['health'],
-    };
-    const priorityCats = {};
-    if (quiz && Array.isArray(quiz.priorities)) {
-      quiz.priorities.forEach((p) => (PRIORITY_CATS[p] || []).forEach((k) => { priorityCats[k] = true; }));
-    }
-    const planBits = [];
-    if (quiz) {
-      if (quiz.household) planBits.push(quiz.household);
-      if (quiz.budget) planBits.push(quiz.budget);
-      if (quiz.timeline) planBits.push(quiz.timeline);
-    }
-    const hasPlan = planBits.length > 0;
-    const planSummary = planBits.join(' · ');
-    const priorityLabel = (quiz && Array.isArray(quiz.priorities) && quiz.priorities.length) ? quiz.priorities.join(' · ') : '';
-    const householdPrompt = (quiz && quiz.household && s.members.length === 0)
-      ? ('You told us: ' + quiz.household + '. Add each person so we can note what every destination needs for them.')
-      : '';
-
-    // Overall (household-wide across all destinations)
-    const totalItems = s.items.length;
-    const checkedItems = s.items.filter((i) => i.checked).length;
-    const overallPct = pct(checkedItems, totalItems);
-
-    // Selected destination
-    let selDest = s.destinations.find((d) => d.id === s.selectedDest) || s.destinations[0] || null;
+    const itemsFor = (d, c) => s.items.filter((i) => i.destination_id === d && i.category === c);
+    const pct = (a, b) => (b ? Math.round((a / b) * 100) : 0);
+    const barStyle = (p) => 'height:100%;width:' + p + '%;background:#f3c516;border-radius:inherit;transition:width .2s';
+    const totalItems = s.items.length, checkedItems = s.items.filter((i) => i.checked).length, overallPct = pct(checkedItems, totalItems);
+    const selDest = s.destinations.find((d) => d.id === s.selectedDest) || s.destinations[0] || null;
     const selId = selDest ? selDest.id : null;
 
-    const destTabStyle = (active) =>
-      'font-size:13.5px;font-weight:600;color:' + (active ? '#17305b' : '#42536e') + ';background:' + (active ? '#fdf1c2' : '#fff') +
-      ';border:1.5px solid ' + (active ? '#f3c516' : '#dde3ec') + ';border-radius:999px;padding:8px 16px;cursor:pointer';
+    const chip = (on) => 'font-size:13px;line-height:1.4;padding:10px 16px;border-radius:999px;cursor:pointer;transition:.14s;font-weight:'
+      + (on ? '700' : '500') + ';border:1px solid ' + (on ? '#e0b93a' : '#dfe5ee') + ';background:' + (on ? '#fdf3cf' : '#fff') + ';color:' + (on ? '#17305b' : '#4a5a75');
+    const destTabs = s.destinations.map((d) => ({ label: d.name, style: chip(d.id === selId), select: () => self.setState({ selectedDest: d.id }) }));
 
-    const destTabs = s.destinations.map((d) => ({
-      label: d.name,
-      style: destTabStyle(d.id === selId),
-      select: () => self.setState({ selectedDest: d.id }),
-    }));
-
-    // Selected destination roll-up label
     let selChecked = 0, selTotal = 0;
-    if (selId) {
-      const its = s.items.filter((i) => i.destination_id === selId);
-      selTotal = its.length;
-      selChecked = its.filter((i) => i.checked).length;
-    }
+    if (selId) { const its = s.items.filter((i) => i.destination_id === selId); selTotal = its.length; selChecked = its.filter((i) => i.checked).length; }
 
-    // Category cards for the selected destination
-    const categoryCards = (s.categories || []).map((c) => {
-      const its = selId ? itemsFor(selId, c.key) : [];
-      const done = its.filter((i) => i.checked).length;
-      const p = pct(done, its.length);
-      const nk = selId + '|' + c.key;
+    const cats = (s.categories || []).slice().sort((a, b) => {
+      const ia = prioCats.indexOf(a.key), ib = prioCats.indexOf(b.key);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+    const categoryCards = cats.map((c) => {
+      const its = selId ? itemsFor(selId, c.key) : [], done = its.filter((i) => i.checked).length, nk = selId + '|' + c.key;
+      const priority = prioCats.indexOf(c.key) >= 0;
       return {
-        key: c.key,
-        label: c.label,
-        isPriority: !!priorityCats[c.key],
-        countLabel: done + '/' + its.length,
-        barStyle: barStyle(p),
-        items: its.map((i) => ({
-          text: i.text,
-          checked: i.checked,
-          textStyle: 'font-size:13px;line-height:1.45;color:' + (i.checked ? '#9aa6b8' : '#17305b') + (i.checked ? ';text-decoration:line-through' : ''),
-          toggle: () => self.toggleItem(i),
-          remove: () => self.deleteItem(i.id),
-        })),
+        label: String(c.label).replace(/&amp;/g, '&').replace(' & ', ' and '), priority,
+        cardStyle: 'background:#fff;border-radius:14px;padding:18px 20px 20px;border:' + (priority ? '1.5px solid #e0b93a' : '1px solid #e3e8f1'),
+        countLabel: done + '/' + its.length, barStyle: barStyle(pct(done, its.length)),
+        items: its.map((i) => ({ text: i.text, checked: i.checked,
+          textStyle: 'font-size:13px;line-height:1.45;color:' + (i.checked ? '#8090a8;text-decoration:line-through' : '#17305b'),
+          toggle: () => self.toggleItem(i), remove: () => self.deleteItem(i.id) })),
         newText: s.newItem[nk] || '',
-        setNewText: (e) => self.setState((st) => ({ newItem: Object.assign({}, st.newItem, { [nk]: e.target.value }) })),
+        setNewText: (e) => { const v = e.target.value; self.setState((st) => ({ newItem: Object.assign({}, st.newItem, { [nk]: v }) })); },
         addItem: () => self.addItem(selId, c.key),
         addOnEnter: (e) => { if (e.key === 'Enter') self.addItem(selId, c.key); },
         noteDraft: s.noteDraft[nk] || '',
@@ -570,12 +379,10 @@ class Component extends DCLogic {
       };
     });
 
-    // Members panel (per-selected-destination notes)
     const members = s.members.map((m) => {
       const nk = m.id + '|' + selId;
-      const ageTxt = (m.age === 0 || m.age) ? ', ' + m.age : '';
       return {
-        nameLabel: m.name + ageTxt,
+        nameLabel: m.name + ((m.age === 0 || m.age) ? ', ' + m.age : ''),
         needsDraft: s.needsDraft[m.id] || '',
         setNeeds: (e) => { const v = e.target.value; self.setState((st) => ({ needsDraft: Object.assign({}, st.needsDraft, { [m.id]: v }) })); },
         saveNeeds: () => self.saveNeeds(m.id),
@@ -587,108 +394,92 @@ class Component extends DCLogic {
       };
     });
 
-    // Food & health fit — pulls the selected destination's profile from the shared
-    // KolmariFood dataset (matched by name), honoring allergens flagged on the
-    // Food & Health page. This is how the Command Center surfaces related data.
-    let foodFit = null;
-    let foodFitMissing = false;
+    let foodFit = null, foodFitMissing = false;
     const KF = window.KolmariFood;
     if (selDest && KF) {
       const country = KF.resolveCountry(selDest.name);
       if (country) {
         const flagged = KF.getFlaggedAllergens();
-        const selArch = KF.getSelectedArchetypes();
-        const badgeClsFor = { high: 'ff-badge ff-badge--high', moderate: 'ff-badge ff-badge--moderate', low: 'ff-badge ff-badge--low' };
-        const badgeLabelFor = { high: 'Well-sourced', moderate: 'General picture', low: 'Verify first' };
-        const prevWord = { common: 'Common', occasional: 'Sometimes', rare: 'Rare' };
-        const prevSentence = { common: 'is common', occasional: 'shows up sometimes', rare: 'rarely appears' };
-        const wrapWord = { common: 'ff-allergen--common', occasional: 'ff-allergen--sometimes', rare: 'ff-allergen--rare' };
-        const nameMatches = country.name.toLowerCase() === String(selDest.name).trim().toLowerCase();
-        const traits = country.archetypes.map((k) => ({
-          icon: KF.archetypeIcon(k),
-          label: KF.archetypeLabel(k),
-          cls: selArch.indexOf(k) !== -1 ? 'ff-trait ff-trait--on' : 'ff-trait',
-        }));
-        const allergenRows = KF.ALLERGENS.map((a) => {
-          const prev = country.allergenPrevalence[a.key];
-          const isFlagged = flagged.indexOf(a.key) !== -1;
-          let wrap = 'ff-allergen ' + (wrapWord[prev] || '');
-          if (isFlagged && (prev === 'common' || prev === 'occasional')) wrap += ' ff-allergen--flagged';
-          return {
-            icon: KF.allergenIcon(a.key),
-            name: a.label,
-            stateLabel: prevWord[prev] || prev,
-            wrapCls: wrap,
-            detail: a.label + ' ' + (prevSentence[prev] || '') + ' in everyday and traditional cooking here' + (isFlagged ? ' — flagged because you asked to watch it.' : '.'),
-          };
-        });
-        let flaggedNote;
-        if (!flagged.length) {
-          flaggedNote = 'No allergens flagged yet — set them on the Food & Health fit page to highlight risks here.';
-        } else {
-          const hits = flagged.filter((a) => { const p = country.allergenPrevalence[a]; return p === 'common' || p === 'occasional'; })
-            .map((a) => KF.allergenLabel(a));
-          flaggedNote = hits.length
-            ? 'Heads up: ' + hits.join(', ') + ' ' + (hits.length === 1 ? 'is' : 'are') + ' common in everyday food here.'
-            : 'Good news: none of your flagged allergens are common in everyday food here.';
-        }
+        const prevLabel = { common: 'common', occasional: 'sometimes', rare: 'rare' };
+        const pill = 'font-size:10.5px;font-weight:700;letter-spacing:.04em;border-radius:999px;padding:4px 10px;white-space:nowrap;';
+        const confMeta = {
+          high: { label: 'Well-sourced', style: pill + 'color:#0f6b64;background:#e7f6f4;border:1px solid #c2e6e2' },
+          moderate: { label: 'General picture', style: pill + 'color:#8a6300;background:#fdf3cf;border:1px solid #f0e2ae' },
+          low: { label: 'Verify first', style: pill + 'color:#b3261e;background:#fdecea;border:1px solid #f7cfcb' },
+        };
+        const cm = confMeta[country.confidence] || confMeta.moderate;
+        const tag = 'font-size:11.5px;font-weight:600;border-radius:8px;padding:4px 9px;border:1px solid ';
         foodFit = {
-          flag: KF.flagFor(country.slug),
-          matchNote: nameMatches ? ('Everyday cuisine in ' + country.name) : ('Based on ' + country.name),
-          badgeCls: badgeClsFor[country.confidence] || badgeClsFor.moderate,
-          confidenceLabel: badgeLabelFor[country.confidence] || badgeLabelFor.moderate,
-          traits: traits,
-          allergenRows: allergenRows,
-          flaggedNote: flaggedNote,
+          matchNote: country.name.toLowerCase() === String(selDest.name).trim().toLowerCase() ? 'Everyday cuisine in ' + country.name : 'Based on ' + country.name,
+          confidenceLabel: cm.label, confidenceStyle: cm.style,
+          archetypeTags: country.archetypes.map((k) => ({ label: KF.archetypeLabel(k), style: tag + '#e3e8f1;background:#f4f6fa;color:#4a5a75' })),
+          allergenRows: KF.ALLERGENS.map((a) => {
+            const prev = country.allergenPrevalence[a.key], isF = flagged.indexOf(a.key) !== -1;
+            const st = isF && (prev === 'common' || prev === 'occasional') ? '#f7cfcb;background:#fdecea;color:#b3261e'
+              : isF && prev === 'rare' ? '#c2e6e2;background:#e7f6f4;color:#0f6b64'
+              : isF ? '#e3e8f1;background:#f4f6fa;color:#4a5a75' : '#eef1f6;background:#fbfcfe;color:#8090a8';
+            return { label: a.label + ' · ' + (prevLabel[prev] || prev), style: tag + st };
+          }),
+          flaggedNote: (() => {
+            if (!flagged.length) return 'No allergens flagged yet. Set them on the Food and Health fit page to highlight risks here.';
+            const hits = flagged.filter((a) => { const p = country.allergenPrevalence[a]; return p === 'common' || p === 'occasional'; }).map((a) => KF.allergenLabel(a));
+            return hits.length ? 'Heads up: ' + hits.join(', ') + ' ' + (hits.length === 1 ? 'is' : 'are') + ' common in everyday food here.' : 'None of your flagged allergens are common in everyday food here.';
+          })(),
           cardioNote: country.cardioNote,
-          labelingText: country.labelingLaw.text,
-          sourceUrl: country.labelingLaw.sourceUrl || '',
           disclosure: 'Kolmari editorial assessment · reviewed ' + country.lastReviewed,
         };
-      } else {
-        foodFitMissing = true;
-      }
+      } else foodFitMissing = true;
     }
 
-    return {
-      loading: s.loading,
-      error: s.error,
-      ready: ready,
-      dismissError: () => self.setState({ error: '' }),
-      hasDestinations: hasDest,
-      isEmpty: ready && s.destinations.length === 0,
+    const PAGES = [
+      { lane: 'health', label: 'Food and Health fit', href: 'food.html' },
+      { lane: 'community', label: 'Greenbook', href: 'explore.html' },
+      { lane: 'energy', label: 'Energy focus', href: 'energy.html' },
+    ];
+    const navLinks = PAGES.slice().sort((a, b) => {
+      const ia = lanes.indexOf(a.lane), ib = lanes.indexOf(b.lane);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    }).map(p => {
+      const on = lanes.indexOf(p.lane) >= 0;
+      return { label: p.label, href: p.href, badge: on ? 'YOUR LANE' : '',
+        badgeStyle: 'margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:#8a6300' };
+    });
 
-      overallPct: overallPct,
+    const OBS = {
+      'Choosing a country': 'Compare your destinations side by side. Tick off Neighborhood and Safety first.',
+      'Understanding visas': 'Open Visa and Immigration for each destination and identify the route that fits.',
+      'Money and budgeting': 'Start with Work and Income: confirm the income each visa route asks for.',
+      'Employment': 'Start with Work and Income: confirm remote-work eligibility or local job leads.',
+      'Documents and logistics': 'List the documents, apostilles and translations under Visa and Immigration.',
+      'I do not know where to begin': 'Pick one destination and finish three items in your first lane this week.',
+    };
+    const startText = s.quiz && OBS[s.quiz.mq8] ? OBS[s.quiz.mq8] : '';
+    const LANE_SHORT = { health: 'health and food', community: 'community and belonging', energy: 'astrological alignment', work: 'work and visa', family: 'family and schools', money: 'cost and runway' };
+    const name = s.account && s.account.name;
+
+    return {
+      loading: s.loading, error: s.error, ready, offline: s.offline,
+      dismissError: () => self.setState({ error: '' }),
+      eyebrow: name ? 'WELCOME BACK, ' + String(name).toUpperCase() : 'RELOCATION COMMAND CENTER',
+      title: lanes.length ? 'Your Command Center, built around ' + lanes.map(l => LANE_SHORT[l]).join(' and ') : 'Relocation Command Center',
+      hasStart: !!startText, startText,
+      hasDestinations: hasDest, isEmpty: ready && s.destinations.length === 0,
+      overallPct,
       overallLabel: checkedItems + ' of ' + totalItems + ' checklist items done across ' + s.destinations.length + ' destination' + (s.destinations.length === 1 ? '' : 's'),
       overallBarStyle: barStyle(overallPct),
-
       newDestName: s.newDestName,
       setNewDestName: (e) => self.setState({ newDestName: e.target.value }),
       addDestOnEnter: (e) => { if (e.key === 'Enter') self.addDestination(); },
       addDestination: () => self.addDestination(),
-
-      destTabs: destTabs,
-      selDestName: selDest ? selDest.name : '',
+      destTabs, selDestName: selDest ? selDest.name : '',
       selDestLabel: selTotal ? (selChecked + ' of ' + selTotal + ' done · ' + pct(selChecked, selTotal) + '%') : 'No checklist items yet',
       deleteSelectedDest: () => self.deleteSelectedDest(),
-
-      categoryCards: categoryCards,
-      members: members,
-      hasPlan: hasPlan,
-      planSummary: planSummary,
-      priorityLabel: priorityLabel,
-      hasPriorityLabel: !!priorityLabel,
-      householdPrompt: householdPrompt,
-      hasHouseholdPrompt: !!householdPrompt,
-      hasFoodFit: !!foodFit,
-      foodFit: foodFit,
-      foodFitMissing: foodFitMissing,
-
-      mfName: s.mfName,
-      setMfName: (e) => self.setState({ mfName: e.target.value }),
-      mfAge: s.mfAge,
-      setMfAge: (e) => self.setState({ mfAge: e.target.value }),
+      categoryCards, members, hasFoodFit: !!foodFit, foodFit, foodFitMissing,
+      mfName: s.mfName, setMfName: (e) => self.setState({ mfName: e.target.value }),
+      mfAge: s.mfAge, setMfAge: (e) => self.setState({ mfAge: e.target.value }),
       addMember: () => self.addMember(),
+      navLinks, onboardingHref: this.href('onboarding'),
+      signOut: () => { try { localStorage.removeItem('kolmari:access'); } catch (e) {} },
     };
   }
 }
