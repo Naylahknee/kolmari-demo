@@ -198,12 +198,30 @@
   var alrgLabel = {};
   ALLERGENS.forEach(function (a) { alrgLabel[a.key] = a.label; });
 
+  // Emoji icons (no icon-font dependency; consistent with the demo's other pages).
+  var ARCHETYPE_ICONS = {
+    mediterranean: '🫒', 'farm-to-table': '🧺', 'seafood-forward': '🐟', 'plant-forward': '🌱',
+    'strict-allergen-labeling': '🏷️', 'low-processed-food': '🥗', 'dairy-heavy': '🧀',
+    'nut-heavy': '🥜', 'high-processed-food': '📦',
+  };
+  var ALLERGEN_ICONS = {
+    shellfish: '🦐', treeNuts: '🌰', peanuts: '🥜', dairy: '🥛', gluten: '🌾', eggs: '🥚',
+  };
+  var FLAGS = {
+    portugal: '🇵🇹', spain: '🇪🇸', greece: '🇬🇷', estonia: '🇪🇪', croatia: '🇭🇷', japan: '🇯🇵',
+    netherlands: '🇳🇱', 'south-korea': '🇰🇷', mexico: '🇲🇽', 'costa-rica': '🇨🇷', colombia: '🇨🇴',
+    malaysia: '🇲🇾', thailand: '🇹🇭', ghana: '🇬🇭', mauritius: '🇲🇺', uae: '🇦🇪',
+  };
+
   window.KolmariFood = {
     ARCHETYPES: ARCHETYPES,
     ALLERGENS: ALLERGENS,
     COUNTRIES: COUNTRIES,
     archetypeLabel: function (k) { return archLabel[k] || k; },
     allergenLabel: function (k) { return alrgLabel[k] || k; },
+    archetypeIcon: function (k) { return ARCHETYPE_ICONS[k] || '•'; },
+    allergenIcon: function (k) { return ALLERGEN_ICONS[k] || '•'; },
+    flagFor: function (slug) { return FLAGS[slug] || '🌍'; },
     resolveCountry: resolveCountry,
     getFlaggedAllergens: function () { return readFilter().allergens; },
     getSelectedArchetypes: function () { return readFilter().archetypes; },

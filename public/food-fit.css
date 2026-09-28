@@ -1,0 +1,99 @@
+/* Food & Health fit — shared card styling for food.html and the Command Center
+ * panel. Kolmari tokens (navy/gold/gold-soft), emoji icons, semantic allergen
+ * treatments (green / amber / muted-rose, never a wall of red), and restrained
+ * microanimations that respect prefers-reduced-motion. */
+
+.ff-card {
+  background: #fff;
+  border: 1px solid #e7ebf1;
+  border-radius: 14px;
+  padding: 17px 18px;
+  box-shadow: 0 12px 34px -24px rgba(23, 48, 91, 0.28);
+}
+
+/* Header */
+.ff-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.ff-head-l { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.ff-flag { font-size: 30px; line-height: 1; }
+.ff-name { margin: 0; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: -.01em; color: #17305b; }
+.ff-sub { margin: 3px 0 0; font-size: 12px; color: #7a879c; }
+.ff-segs { display: inline-flex; gap: 3px; margin-top: 6px; }
+.ff-seg { height: 6px; width: 15px; border-radius: 999px; background: #e4e8f0; transform-origin: left center; }
+.ff-seg--on { background: #f3c516; }
+
+.ff-badge { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; font-size: 10.5px; font-weight: 700; border-radius: 999px; padding: 4px 9px; border: 1px solid; }
+.ff-badge--high { color: #1f7a4d; background: #e4f6ec; border-color: #b7e4c9; }
+.ff-badge--moderate { color: #8a5a12; background: #fdf1c2; border-color: #f3d97a; }
+.ff-badge--low { color: #a23b2e; background: #fdecea; border-color: #f5c6c3; }
+
+/* Trait mini-cards */
+.ff-traits { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+@media (min-width: 720px) { .ff-traits { grid-template-columns: 1fr 1fr 1fr; } }
+.ff-trait {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid #f3d97a; background: rgba(253, 241, 194, 0.35);
+  border-radius: 12px; padding: 8px 10px;
+  font-size: 12.5px; font-weight: 600; color: #17305b;
+}
+.ff-trait-ic { font-size: 15px; line-height: 1; flex: 0 0 auto; }
+.ff-trait--on { background: rgba(253, 241, 194, 0.85); border-color: #eac24b; }
+
+.ff-label { margin: 16px 0 7px; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #9aa6b8; }
+.ff-label-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+/* Allergens (native <details> — no per-card state needed) */
+.ff-allergens { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 560px) { .ff-allergens { grid-template-columns: 1fr 1fr; } }
+.ff-allergen { border: 1px solid #eef1f6; border-radius: 12px; background: #fbfcfe; overflow: hidden; }
+.ff-allergen--rare { border-color: #b7e4c9; background: rgba(228, 246, 236, 0.5); }
+.ff-allergen--sometimes { border-color: #f3d97a; background: rgba(253, 241, 194, 0.4); }
+.ff-allergen--common { border-color: #f0b1a8; background: rgba(253, 236, 234, 0.55); }
+.ff-allergen--flagged { box-shadow: inset 0 0 0 1px #f0b1a8; }
+.ff-allergen-sum { display: flex; align-items: center; gap: 8px; padding: 9px 11px; cursor: pointer; list-style: none; }
+.ff-allergen-sum::-webkit-details-marker { display: none; }
+.ff-allergen-ic { font-size: 14px; line-height: 1; }
+.ff-allergen-name { font-size: 12.5px; font-weight: 600; color: #17305b; }
+.ff-allergen-state { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; }
+.ff-allergen-state .ff-dot { width: 6px; height: 6px; border-radius: 999px; }
+.ff-allergen--rare .ff-allergen-state { color: #1f7a4d; } .ff-allergen--rare .ff-dot { background: #34a06a; }
+.ff-allergen--sometimes .ff-allergen-state { color: #8a5a12; } .ff-allergen--sometimes .ff-dot { background: #e0a11a; }
+.ff-allergen--common .ff-allergen-state { color: #a23b2e; } .ff-allergen--common .ff-dot { background: #d9553f; }
+.ff-allergen-caret { font-size: 10px; color: #9aa6b8; transition: transform .2s ease; }
+.ff-allergen[open] .ff-allergen-caret { transform: rotate(180deg); }
+.ff-allergen-detail { margin: 0; padding: 0 11px 10px; font-size: 11px; line-height: 1.5; color: #5a6a83; }
+
+/* Info rows (heart / labeling) */
+.ff-inforow { display: flex; align-items: flex-start; gap: 11px; margin-top: 14px; }
+.ff-inforow-ic { flex: 0 0 auto; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; font-size: 16px; }
+.ff-inforow-ic--heart { background: #fdecea; }
+.ff-inforow-ic--label { background: #eef2fb; }
+.ff-inforow-h { margin: 0; font-size: 13px; font-weight: 700; color: #17305b; }
+.ff-inforow-b { margin: 3px 0 0; font-size: 12.5px; line-height: 1.5; color: #5a6a83; }
+.ff-source { display: inline-flex; align-items: center; gap: 4px; margin-top: 3px; font-size: 12px; font-weight: 600; color: #9a7d0a; }
+
+.ff-foot { margin: 15px 0 0; padding-top: 11px; border-top: 1px solid #f0f2f6; font-size: 10.5px; line-height: 1.5; color: #9aa6b8; }
+
+/* ---- Microanimations (restrained; entrance + segment fill) ---- */
+@media (prefers-reduced-motion: no-preference) {
+  .ff-anim { animation: ffIn .45s ease both; }
+  .ff-anim .ff-trait { animation: ffIn .4s ease both; }
+  .ff-anim .ff-trait:nth-child(1) { animation-delay: .04s; }
+  .ff-anim .ff-trait:nth-child(2) { animation-delay: .08s; }
+  .ff-anim .ff-trait:nth-child(3) { animation-delay: .12s; }
+  .ff-anim .ff-trait:nth-child(4) { animation-delay: .16s; }
+  .ff-anim .ff-trait:nth-child(5) { animation-delay: .20s; }
+  .ff-anim .ff-trait:nth-child(6) { animation-delay: .24s; }
+  .ff-anim .ff-seg--on { animation: ffSeg .4s cubic-bezier(.22,1,.36,1) both; }
+  .ff-anim .ff-seg--on:nth-child(2) { animation-delay: .06s; }
+  .ff-anim .ff-seg--on:nth-child(3) { animation-delay: .12s; }
+  .ff-anim .ff-seg--on:nth-child(4) { animation-delay: .18s; }
+  .ff-anim .ff-seg--on:nth-child(5) { animation-delay: .24s; }
+  .ff-anim .ff-seg--on:nth-child(6) { animation-delay: .30s; }
+  .ff-anim .ff-seg--on:nth-child(7) { animation-delay: .36s; }
+  .ff-trait { transition: transform .15s ease, box-shadow .15s ease; }
+  .ff-trait:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -14px rgba(23,48,91,.55); }
+  .ff-allergen[open] .ff-allergen-detail { animation: ffFade .25s ease both; }
+}
+@keyframes ffIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes ffSeg { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ffFade { from { opacity: 0; } to { opacity: 1; } }

@@ -85,7 +85,7 @@
         <img src="assets/kolmari-butterfly.png" alt="" width="28" height="20" style="display:block;width:28px;height:20px;object-fit:contain" />
         <span style="font-family:Poppins,sans-serif;font-weight:700;font-size:20px;letter-spacing:-.01em;color:#17305b">Kolmari</span>
       </a>
-      <a data-mobile="mobile-login" href="access.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:13px;font-weight:700;color:#17305b">Log in</a>
+      <a data-mobile="mobile-login" href="sign-in.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:13px;font-weight:700;color:#17305b">Log in</a>
       <button data-mobile="menu-toggle" sc-camel-on-click="{{ toggleMenu }}" aria-expanded="{{ menuExpanded }}" aria-controls="landing-navigation" aria-label="{{ menuLabel }}" style="width:44px;height:44px;border:1px solid #dbe1ea;border-radius:10px;background:#fff;color:#17305b;place-items:center;cursor:pointer">
         <sc-if value="{{ menuClosed }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></sc-if>
         <sc-if value="{{ menuIsOpen }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="21" height="21" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></sc-if>
@@ -95,7 +95,7 @@
         <a href="#questions" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:500;color:#42536e">Why Kolmari</a>
         <a href="#club" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:500;color:#42536e">Kolmari Club</a>
         <a href="energy.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:500;color:#42536e">Energy tool</a>
-        <a data-mobile="desktop-login" href="access.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:600;color:#42536e">Log in</a>
+        <a data-mobile="desktop-login" href="sign-in.html" sc-camel-on-click="{{ closeMenu }}" style="font-size:14px;font-weight:600;color:#42536e">Log in</a>
         <a href="quiz.html" sc-camel-on-click="{{ closeMenu }}" style="background:#f3c516;color:#17305b;font-size:14px;font-weight:600;padding:10px 18px;border-radius:999px" style-hover="background:#ffd633">Get started</a>
       </nav>
     </div>
@@ -296,13 +296,16 @@ class Component extends DCLogic {
   if(!inWindow) return;
   var peak = now.getMonth()===7 && now.getDate()===8;
   var daysLeft = Math.max(0, Math.ceil((close-now)/86400000));
-  var msg = peak ? "It’s 8/8 — the portal peaks today."
-                 : ("The 8/8 Portal is open · closes Aug 12 · "+daysLeft+(daysLeft===1?" day left":" days left"));
+  var tag = peak ? "peaks today" : ("closes Aug 12 · "+daysLeft+(daysLeft===1?" day left":" days left"));
+  var st=document.createElement('style');
+  st.textContent='#cc-lg-banner{font-size:13px}@media(max-width:640px){#cc-lg-banner{font-size:12px;padding:8px 12px!important;line-height:1.35}#cc-lg-banner .cc-b-extra{display:none}}';
+  document.head.appendChild(st);
   var a=document.createElement('a');
+  a.id='cc-lg-banner';
   a.href='energy.html';
-  a.setAttribute('aria-label','Open The 8/8 Portal');
-  a.style.cssText="display:block;text-decoration:none;text-align:center;font-family:'Geist',system-ui,sans-serif;font-size:13px;font-weight:600;color:#6B3A2E;background:linear-gradient(90deg,#F3DFA6,#F7C89C 55%,#F4B7AC);padding:9px 16px";
-  a.innerHTML='<span style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:10px;margin-right:8px">Lion’s Gate</span>'+msg+' <span style="text-decoration:underline;margin-left:6px">Find your focus →</span>';
+  a.setAttribute('aria-label','Where should your energy go? Point it at a relocation.');
+  a.style.cssText="display:block;text-decoration:none;text-align:center;font-family:'Geist',system-ui,sans-serif;font-weight:600;color:#6B3A2E;background:linear-gradient(90deg,#F3DFA6,#F7C89C 55%,#F4B7AC);padding:9px 16px";
+  a.innerHTML='<span style="font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:10px;margin-right:8px;white-space:nowrap">Lion’s Gate · '+tag+'</span>Feeling the pull to start over somewhere new?<span class="cc-b-extra"> Aim that big-move energy at a real destination.</span> <span style="text-decoration:underline;margin-left:6px;white-space:nowrap">Find your focus →</span>';
   document.body.insertBefore(a, document.body.firstChild);
 })();
 </script>
