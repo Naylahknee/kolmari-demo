@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Set up your Command Center · Kolmari</title>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/kolmari-favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="assets/kolmari-favicon-180.png" />
+<meta name="theme-color" content="#0D1B39" />
+<script src="./cc-api.js"></script>
+<script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","xwsd371zfp");</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f4f6fa;font-family:Poppins,system-ui,sans-serif;color:#17305b;-webkit-font-smoothing:antialiased}
+  a{color:#17305b;text-decoration:none}a:hover{color:#8a6300}
+  button{font-family:inherit;border:0;background:none;cursor:pointer;color:inherit}
+  input{font-family:inherit}input::placeholder{color:#8090a8}
+  p,h1,h2{margin:0}
+  @media(max-width:820px){[data-ob="grid"]{grid-template-columns:minmax(0,1fr)!important}[data-ob="rail"]{display:none!important}[data-ob="main"]{padding:24px 18px 48px!important}[data-ob="main"] h1{font-size:27px!important}[data-ob="hdr"]{padding:12px 16px!important}[data-ob="hide-sm"]{display:none!important}}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <div style="background:#0d1b39;color:#c8d3e6;text-align:center;font-size:12.5px;font-weight:600;padding:7px 16px"><span style="color:#f3c516;letter-spacing:.08em;text-transform:uppercase;font-size:10px;margin-right:8px">Preview</span>A working preview of Kolmari — placeholder demo, not the live product</div>
+  <header data-ob="hdr" style="background:#fff;border-bottom:1px solid #e3e8f1;padding:16px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:20">
+    <a href="index.html" style="display:flex;align-items:center;gap:9px" aria-label="Kolmari home">
+      <img src="assets/kolmari-butterfly.png" alt="" width="28" height="20" style="display:block;width:28px;height:20px;object-fit:contain">
+      <span style="font-size:20px;font-weight:700;letter-spacing:-.02em">Kolmari</span>
+    </a>
+    <span data-ob="hide-sm" style="margin-left:auto;font-size:12px;font-weight:600;color:#8090a8">{{ greeting }}</span>
+    <a href="{{ ccHref }}" onClick="{{ saveLater }}" style="font-size:13px;font-weight:600;color:#5b6b85;padding:9px 14px;border-radius:999px;border:1px solid #e3e8f1;margin-left:auto" style-hover="color:#17305b">Save and finish later</a>
+  </header>
+
+  <div data-ob="grid" style="flex:1;display:grid;grid-template-columns:minmax(0,248px) minmax(0,1fr);gap:0;align-items:start">
+    <nav data-ob="rail" style="padding:30px 22px;position:sticky;top:71px">
+      <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8090a8">SETUP</p>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-top:14px">
+        <sc-for list="{{ rail }}" as="r" hint-placeholder-count="4">
+          <div style="{{ r.style }}">
+            <span style="{{ r.dot }}">{{ r.n }}</span>
+            <span style="min-width:0">
+              <span style="display:block;font-size:13px;font-weight:600">{{ r.label }}</span>
+              <span style="display:block;font-size:10.5px;color:#8090a8;margin-top:1px">{{ r.note }}</span>
+            </span>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:11px;line-height:1.6;color:#8090a8;margin-top:26px">Your answers set up the Command Center, then keep the country rankings honest. Everything saves automatically.</p>
+    </nav>
+
+    <main data-ob="main" style="padding:34px 40px 64px;min-width:0;max-width:1060px">
+
+      <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8a6300">QUESTION 1 — IT SETS THE REST</p>
+        <h1 style="font-size:36px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-top:10px;max-width:22ch">How do you want to approach this move?</h1>
+        <p style="font-size:14.5px;line-height:1.65;color:#5b6b85;margin-top:12px;max-width:64ch">Pick up to three, in the order you care about them. The first one becomes your primary: it opens first and leads the country rankings. Each one you add asks its own three questions. Nothing gets hidden either way.</p>
+        <sc-if value="{{ hasQuiz }}" hint-placeholder-val="{{ false }}">
+          <p style="display:flex;align-items:center;gap:10px;margin-top:16px;max-width:720px;background:#fdf3cf;border:1px solid #f0e2ae;border-radius:10px;padding:11px 14px;font-size:13px;line-height:1.55;color:#17305b"><span style="font-size:10px;font-weight:700;letter-spacing:.08em;background:#17305b;color:#f3c516;border-radius:5px;padding:3px 7px;flex:none">MATCH QUIZ</span><span>{{ quizBanner }}</span></p>
+        </sc-if>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:13px;margin-top:26px">
+          <sc-for list="{{ lanes }}" as="l" hint-placeholder-count="6">
+            <button onClick="{{ l.pick }}" style="{{ l.style }}" style-hover="border-color:#c9a227;transform:translateY(-2px)">
+              <span style="display:flex;align-items:center;gap:11px">
+                <span style="{{ l.iconStyle }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="{{ l.d }}"/></svg>
+                </span>
+                <span style="font-size:16px;font-weight:700;letter-spacing:-.01em;flex:1;min-width:0">{{ l.title }}</span>
+              </span>
+              <span style="display:block;font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:11px">{{ l.blurb }}</span>
+              <span style="{{ l.tagStyle }}">{{ l.tag }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8a6300">{{ step2Eyebrow }}</p>
+        <h1 style="font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.12;margin-top:10px;max-width:24ch">{{ step2Title }}</h1>
+        <p style="font-size:14px;line-height:1.65;color:#5b6b85;margin-top:12px;max-width:64ch">{{ step2Note }}</p>
+        <div style="display:flex;flex-direction:column;gap:26px;margin-top:24px">
+          <sc-for list="{{ laneBlocks }}" as="lb" hint-placeholder-count="1">
+            <div>
+              <div style="display:flex;align-items:center;gap:11px;flex-wrap:wrap">
+                <span style="{{ lb.iconStyle }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="17" height="17"><path d="{{ lb.d }}"/></svg>
+                </span>
+                <span style="font-size:16px;font-weight:700;letter-spacing:-.015em">{{ lb.title }}</span>
+                <span style="{{ lb.orderStyle }}">{{ lb.order }}</span>
+              </div>
+              <p style="font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:8px;max-width:70ch">{{ lb.note }}</p>
+              <div style="display:flex;flex-direction:column;gap:13px;margin-top:14px">
+                <sc-for list="{{ lb.qs }}" as="q" hint-placeholder-count="3">
+                  <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px">
+                    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+                      <h2 style="font-size:17px;font-weight:700;letter-spacing:-.015em;flex:1;min-width:220px">{{ q.q }}</h2>
+                      <sc-if value="{{ q.fromQuiz }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#8a6300;background:#fdf3cf;border-radius:5px;padding:3px 7px;flex:none">FROM YOUR QUIZ</span>
+                </sc-if>
+                <span style="font-size:11.5px;color:#8090a8;flex:none">{{ q.mode }}</span>
+                    </div>
+                    <sc-if value="{{ q.hasHelp }}" hint-placeholder-val="{{ true }}">
+                      <p style="font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:5px;max-width:70ch">{{ q.help }}</p>
+                    </sc-if>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+                      <sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="4">
+                        <button onClick="{{ o.pick }}" style="{{ o.style }}" style-hover="border-color:#c9a227">{{ o.label }}</button>
+                      </sc-for>
+                    </div>
+                    <sc-if value="{{ q.hasFoot }}" hint-placeholder-val="{{ false }}">
+                      <p style="font-size:11.5px;line-height:1.5;color:#8a6300;background:#fdf3cf;border:1px solid #f0e2ae;border-radius:8px;padding:9px 11px;margin-top:12px">{{ q.foot }}</p>
+                    </sc-if>
+                  </section>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8a6300">EVERY LANE ASKS THIS</p>
+        <h1 style="font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.12;margin-top:10px;max-width:24ch">Where you are starting from, who is moving, and when</h1>
+        <p style="font-size:14px;line-height:1.65;color:#5b6b85;margin-top:12px;max-width:64ch">Your passport and where you live now decide which visas you can apply for. Household size and timing drive the checklist dates and the cost figures. Together they are the difference between a national average and a plan you can act on.</p>
+        <sc-if value="{{ hasQuiz }}" hint-placeholder-val="{{ false }}">
+          <p style="display:flex;align-items:center;gap:10px;margin-top:16px;max-width:720px;background:#fdf3cf;border:1px solid #f0e2ae;border-radius:10px;padding:11px 14px;font-size:13px;line-height:1.55;color:#17305b"><span style="font-size:10px;font-weight:700;letter-spacing:.08em;background:#17305b;color:#f3c516;border-radius:5px;padding:3px 7px;flex:none">MATCH QUIZ</span><span>{{ quizHhNote }}</span></p>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:13px;margin-top:24px">
+          <sc-for list="{{ hqs }}" as="q" hint-placeholder-count="6">
+            <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px">
+              <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+                <h2 style="font-size:17px;font-weight:700;letter-spacing:-.015em;flex:1;min-width:220px">{{ q.q }}</h2>
+                <sc-if value="{{ q.fromQuiz }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:10px;font-weight:700;letter-spacing:.06em;color:#8a6300;background:#fdf3cf;border-radius:5px;padding:3px 7px;flex:none">FROM YOUR QUIZ</span>
+                </sc-if>
+                <span style="font-size:11.5px;color:#8090a8;flex:none">{{ q.mode }}</span>
+              </div>
+              <sc-if value="{{ q.hasHelp }}" hint-placeholder-val="{{ true }}">
+                <p style="font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:5px;max-width:70ch">{{ q.help }}</p>
+              </sc-if>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+                <sc-for list="{{ q.opts }}" as="o" hint-placeholder-count="4">
+                  <button onClick="{{ o.pick }}" style="{{ o.style }}" style-hover="border-color:#c9a227">{{ o.label }}</button>
+                </sc-for>
+              </div>
+            </section>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#8a6300">SETUP COMPLETE</p>
+        <h1 style="font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.12;margin-top:10px;max-width:26ch">Your Command Center is built around {{ laneShort }}</h1>
+        <p style="font-size:14px;line-height:1.65;color:#5b6b85;margin-top:12px;max-width:64ch">{{ sumNote }}</p>
+
+        <section style="background:#0d1b39;border-radius:14px;padding:22px 24px;margin-top:22px">
+          <div style="display:flex;align-items:flex-start;gap:20px;flex-wrap:wrap">
+            <div style="flex:1;min-width:240px">
+              <p style="font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#f3c516">OVERALL PROGRESS</p>
+              <p style="font-size:14px;color:#c8d3e6;margin-top:7px">0 of 42 checklist items done across {{ destCount }} destinations</p>
+            </div>
+            <span style="font-size:36px;font-weight:700;color:#fff;letter-spacing:-.03em;flex:none">0%</span>
+          </div>
+          <div style="height:8px;border-radius:4px;background:rgba(255,255,255,.14);margin-top:16px"></div>
+        </section>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:13px;margin-top:13px">
+          <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px">
+            <h2 style="font-size:17px;font-weight:700;letter-spacing:-.015em">Your planning rail</h2>
+            <p style="font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:4px">Pinned in the order your answers argue for.</p>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:14px">
+              <sc-for list="{{ surfaces }}" as="sf" hint-placeholder-count="5">
+                <div style="{{ sf.style }}">
+                  <span style="flex:1;min-width:0;font-size:13.5px;font-weight:600">{{ sf.label }}</span>
+                  <span style="{{ sf.badgeStyle }}">{{ sf.badge }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+
+          <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px">
+            <h2 style="font-size:17px;font-weight:700;letter-spacing:-.015em">What your answers changed</h2>
+            <p style="font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:4px">Planning notes, not eligibility decisions.</p>
+            <div style="display:flex;flex-direction:column;gap:9px;margin-top:14px">
+              <sc-for list="{{ effects }}" as="e" hint-placeholder-count="4">
+                <div style="{{ e.style }}">
+                  <p style="{{ e.titleStyle }}">{{ e.title }}</p>
+                  <p style="font-size:12px;line-height:1.55;color:#4a5a75;margin-top:4px">{{ e.body }}</p>
+                </div>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+
+        <section style="background:#fff;border:1px solid #e3e8f1;border-radius:14px;padding:20px 22px 22px;margin-top:13px">
+          <h2 style="font-size:17px;font-weight:700;letter-spacing:-.015em">First destinations to compare</h2>
+          <p style="font-size:12.5px;line-height:1.6;color:#5b6b85;margin-top:4px">Each one gets a research checklist across all five categories. Add or remove any of them.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px">
+            <sc-for list="{{ destChips }}" as="dch" hint-placeholder-count="6">
+              <button onClick="{{ dch.toggle }}" style="{{ dch.style }}" style-hover="border-color:#c9a227">{{ dch.label }}</button>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:11px;margin-top:18px;flex-wrap:wrap">
+            <input value="{{ destDraft }}" onInput="{{ setDestDraft }}" onKeyDown="{{ addDestKey }}" placeholder="Add a destination — e.g. Lisbon, Mexico City" style="flex:1;min-width:240px;height:48px;border:1px solid #e3e8f1;border-radius:10px;background:#fbfcfe;padding:0 15px;font-size:13.5px;color:#17305b;outline:none" style-focus="border-color:#f3c516;box-shadow:0 0 0 3px rgba(243,197,22,.2)" />
+            <button onClick="{{ addDest }}" style="height:48px;padding:0 24px;border-radius:10px;background:#f3c516;color:#17305b;font-size:14px;font-weight:700;flex:none" style-hover="background:#ffd633">Add destination</button>
+          </div>
+        </section>
+      </div>
+      </sc-if>
+
+      <div style="display:flex;align-items:center;gap:13px;margin-top:26px;flex-wrap:wrap">
+        <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ back }}" style="height:48px;padding:0 22px;border-radius:10px;border:1px solid #d9e0ea;background:#fff;font-size:13.5px;font-weight:600;color:#5b6b85" style-hover="border-color:#b9c4d4;color:#17305b">Back</button>
+        </sc-if>
+        <button onClick="{{ next }}" style="{{ nextStyle }}" style-hover="background:#ffd633">{{ nextLabel }}</button>
+        <span style="font-size:12px;color:#8090a8">{{ progressLabel }}</span>
+        <sc-if value="{{ saving }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;font-weight:600;color:#8a6300">Building your Command Center…</span></sc-if>
+      </div>
+
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;simulateQuiz&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { step: 1, lanes: [], ans: {}, dests: ['Portugal', 'Mexico', 'Ghana'], quiz: null, destDraft: '', saving: false, name: '' };
+  href(p) { return p + (/\.dc\.html$/.test(location.pathname) ? '.dc.html' : '.html'); }
+  persist(done) {
+    const s = this.state;
+    try { localStorage.setItem('kolmari:onboarding', JSON.stringify({ lanes: s.lanes, answers: s.ans, destinations: s.dests, step: s.step, complete: !!done, savedAt: Date.now() })); } catch (e) {}
+  }
+  async finish() {
+    this.persist(true);
+    this.setState({ saving: true });
+    const api = window.CCApi;
+    if (api) {
+      try {
+        const st = await api.getState();
+        const have = (st.destinations || []).map(d => String(d.name).toLowerCase());
+        for (const n of this.state.dests) if (have.indexOf(n.toLowerCase()) < 0) await api.addDestination(n);
+      } catch (e) {}
+    }
+    window.location.href = this.href('command-center');
+  }
+
+  static QUIZ_LANES = {
+    'Affordability': ['money'], 'Safety and belonging': ['community'], 'Career opportunities': ['work'],
+    'Healthcare and schools': ['health', 'family'], 'Quality of life': ['health', 'community'],
+  };
+  static QUIZ_DESTS = {
+    'Europe': ['Portugal', 'Spain', 'Albania'], 'Latin America and the Caribbean': ['Mexico', 'Costa Rica', 'Uruguay'],
+    'Africa': ['Ghana'], 'Asia and the Pacific': ['Malaysia'], 'I am open to anywhere': ['Portugal', 'Mexico', 'Ghana'],
+  };
+  static QUIZ_SAMPLE = { mq1: 'Me and a partner', mq2: 'Healthcare and schools', mq3: 'Latin America and the Caribbean',
+    mq4: 'I may work abroad', mq5: 'No', mq6: '$1,000\u2013$2,000', mq7: 'Within 12 months', mq8: 'I do not know where to begin' };
+
+  applyQuiz(q) {
+    const ids = ['mq1', 'mq4', 'mq5', 'mq6', 'mq7', 'mq8'];
+    const ans = {};
+    ids.forEach(k => { if (q[k]) ans[k] = q[k]; });
+    this.setState(st => ({
+      quiz: q,
+      ans: Object.assign({}, ans, st.ans),
+      lanes: st.lanes.length ? st.lanes : (Component.QUIZ_LANES[q.mq2] || []),
+      dests: Component.QUIZ_DESTS[q.mq3] || st.dests,
+    }));
+  }
+
+  componentDidMount() {
+    let q = null;
+    try { const raw = JSON.parse(localStorage.getItem('kolmari.matchQuiz') || 'null'); q = raw && raw.answers; } catch (e) {}
+    if (!q && this.props.simulateQuiz) q = Component.QUIZ_SAMPLE;
+    if (q) this.applyQuiz(q);
+    try {
+      const a = JSON.parse(localStorage.getItem('kolmari:account') || 'null'); if (a && a.name) this.setState({ name: a.name });
+      const ob = JSON.parse(localStorage.getItem('kolmari:onboarding') || 'null');
+      if (ob && !ob.complete) this.setState(st => ({ lanes: ob.lanes || [], ans: Object.assign({}, st.ans, ob.answers || {}), dests: ob.destinations || st.dests, step: ob.step || 1 }));
+    } catch (e) {}
+  }
+  componentDidUpdate() {
+    if (this._lastStep === undefined) { this._lastStep = this.state.step; return; }
+    if (this._lastStep !== this.state.step) {
+      this._lastStep = this.state.step;
+      if (!this.state.saving) { this.persist(false); try { window.scrollTo(0, 0); } catch (e) {} }
+    }
+  }
+
+
+  renderVals() {
+    const s = this.state;
+    const set = (o) => this.setState(o);
+    const ans = s.ans;
+    const picked = s.lanes || [];
+    const mChip = (css) => css.replace('font-size:13px', 'font-size:11.5px').replace('padding:10px 15px', 'padding:7px 11px');
+    const LANE_CAP = 3;
+
+    const LANES = {
+      health: { title: 'Health and food first', short: 'health and food', tag: 'Opens Food & Health fit',
+        d: 'M12 21s-7-4.6-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.4-9 9-9 9zM12 9v6M9 12h6',
+        blurb: 'Care continuity, specialist access, and what the everyday food culture does to a condition you already manage.',
+        eyebrow: 'HEALTH AND FOOD LANE · QUESTIONS 2 TO 4',
+        h1: 'What does your body need from a place?',
+        note: 'Flagged allergens never remove a country. They move riskier ones down the list so you can see the trade-off instead of a single score that buries it.',
+        qs: [
+          { id: 'h1', q: 'Which food cultures fit your health?', mode: 'Pick any', multi: true,
+            help: 'Tap the patterns that suit you.',
+            opts: ['Mediterranean', 'Farm-to-table', 'Seafood-forward', 'Plant-forward', 'Strict allergen labeling', 'Low processed food', 'Dairy-heavy', 'Nut-heavy'] },
+          { id: 'h2', q: 'Which allergens do you cook around?', mode: 'Pick any', multi: true,
+            help: 'Flagged means ranked toward safety, never removed.',
+            exclusive: ['None'],
+            opts: ['Shellfish', 'Tree nuts', 'Peanuts', 'Dairy', 'Gluten', 'Eggs', 'None'] },
+          { id: 'h3', q: 'What ongoing care does the household need?', mode: 'Pick any that apply', multi: true,
+            help: 'A household usually has more than one. Some answers pull others in with them.',
+            exclusive: ['None'],
+            implies: {
+              'A chronic condition needing a specialist': ['Routine prescriptions'],
+              'Mobility or disability support': ['Routine prescriptions'],
+            },
+            impliedFoot: 'Routine prescriptions is included automatically — a specialist condition or mobility support almost always carries one.',
+            opts: ['None', 'Routine prescriptions', 'A chronic condition needing a specialist', 'Mental health care', 'Mobility or disability support'] },
+        ] },
+      community: { title: 'Community and belonging', short: 'community and belonging', tag: 'Opens Greenbook',
+        d: 'M12 3a9 9 0 100 18 9 9 0 000-18zM3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18',
+        blurb: 'Whether you will have anyone to call. The part people underestimate, and the most common reason a move gets reversed.',
+        eyebrow: 'COMMUNITY LANE · QUESTIONS 2 TO 4',
+        h1: 'Who do you need around you?',
+        note: 'This lane opens Greenbook first: neighbourhood-level reporting, resident accounts, and the diaspora networks already in place where you are considering.',
+        qs: [
+          { id: 'c1', q: 'What matters most where you land?', mode: 'Pick any', multi: true, help: '',
+            opts: ['An existing diaspora community', 'A faith community', 'Families with children the same age', 'A professional network', 'Queer-safe everyday life', 'Quiet and privacy'] },
+          { id: 'c2', q: 'What is your language plan?', mode: 'Pick one', help: 'English-only works in some cities and fails in most bureaucracy.',
+            opts: ['Already fluent', 'Will study before moving', 'Will learn on arrival', 'Plan to live in English'] },
+          { id: 'c3', q: 'How much time have you spent there?', mode: 'Pick one', help: '',
+            opts: ['Lived there before', 'Visited more than once', 'Visited once', 'Never been'] },
+        ] },
+      energy: { title: 'Astrological alignment', short: 'astrological alignment', tag: 'Opens Energy focus',
+        d: 'M12 3l2.4 6.2L21 11l-6.6 1.8L12 19l-2.4-6.2L3 11l6.6-1.8zM18.5 4.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8L16 6.9l1.8-.7z',
+        blurb: 'Timing and placement read from your chart, held next to the practical filters rather than instead of them.',
+        eyebrow: 'ENERGY LANE · QUESTIONS 2 TO 4',
+        h1: 'Where should your energy actually go?',
+        note: 'Placements are computed in your browser and are not stored or sent anywhere. They sit alongside the visa and cost filters, never overriding them.',
+        qs: [
+          { id: 'e1', q: 'How much of your chart do you know?', mode: 'Pick one',
+            help: 'Full birth details give locational readings. The Big Three still gives a directional read.',
+            opts: ['Full birth details — date, time, city', 'I know my Big Three', 'Sun sign only', 'None of it yet'] },
+          { id: 'e2', q: 'What needs the most attention right now?', mode: 'Pick one', help: '',
+            opts: ['Health / Energy', 'Money / Wealth', 'Career / Purpose', 'Relationships', 'Home / Roots'] },
+          { id: 'e3', q: 'How should alignment weigh against the practical filters?', mode: 'Pick one',
+            help: 'This sets the ranking weight, not what you are shown.',
+            opts: ['A tiebreaker only', 'Equal weight with cost and visa', 'Lead with it, then check feasibility'] },
+        ] },
+      work: { title: 'Work, visa and income', short: 'work and visa', tag: 'Opens Pathways',
+        d: 'M3 7h18v13H3zM8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M3 12h18',
+        blurb: 'Which routes your facts actually qualify for, and where the money comes from after you land.',
+        eyebrow: 'WORK AND VISA LANE · QUESTIONS 2 TO 4',
+        h1: 'Where does the income come from?',
+        note: 'Route families are organized from official sources. This page does not determine eligibility or guarantee an outcome — it tells you which routes are worth reading.',
+        qs: [
+          { id: 'w1', q: 'Where will your income come from after the move?', mode: 'Pick one',
+            help: 'This determines which route families you can apply under at all.',
+            opts: ['Remote employment', 'Self-employment or freelance clients', 'A business I own', 'Pension, savings or investments', 'I will need local work'] },
+          { id: 'w2', q: 'Does your employer allow work from abroad?', mode: 'Pick one',
+            help: 'Verbal permission does not survive a payroll review, and consulates ask for a letter.',
+            opts: ['Yes, in writing', 'Informally, unconfirmed', 'No', 'Not applicable'] },
+          { id: 'w3', q: 'Does anyone need a professional licence to practise?', mode: 'Pick one',
+            help: 'Nursing, law, teaching, medicine, accountancy, trades.',
+            opts: ['No', 'Yes, and it transfers', 'Yes, and re-qualification is required', 'Unsure'] },
+        ] },
+      family: { title: 'Family and schools', short: 'family and schools', tag: 'Opens Schools',
+        d: 'M3 9l9-5 9 5-9 5zM7 12v5c0 1.1 2.2 2 5 2s5-.9 5-2v-5M3 9v5',
+        blurb: 'School year timing decides your move date more often than visa processing does. Fees decide your city.',
+        eyebrow: 'FAMILY LANE · QUESTIONS 2 TO 4',
+        h1: 'What do your children need?',
+        note: 'School choice sets your city, your budget, and your move month. It is the one answer that cannot be deferred past the application.',
+        qs: [
+          { id: 'f1', q: 'How old are the children moving with you?', mode: 'Pick any', multi: true,
+            help: 'Select every age band in the household.',
+            exclusive: ['No children'],
+            opts: ['No children', 'Under 5', '5 to 11', '12 to 15', '16 to 18'] },
+          { id: 'f2', q: 'What schooling would you accept?', mode: 'Pick one',
+            help: 'International fees commonly run $8,000 to $25,000 per child per year.',
+            opts: ['Public school in the local language', 'Bilingual or international, paying fees', 'Homeschool or online', 'Undecided'] },
+          { id: 'f3', q: 'Is everyone moving agreed on it?', mode: 'Pick one',
+            help: 'The most common reason a planned move stalls.',
+            opts: ['Yes, all in', 'Mostly, one person is hesitant', 'No, it is contested', 'I am deciding alone'] },
+        ] },
+      money: { title: 'Cost and runway', short: 'cost and runway', tag: 'Opens Cost Calculator',
+        d: 'M4 3h16v18H4zM8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01',
+        blurb: 'What the move costs your household specifically, and how long your savings hold if the income slips.',
+        eyebrow: 'COST LANE · QUESTIONS 2 TO 4',
+        h1: 'What does the money have to do?',
+        note: 'Every figure is built from your household and your city, so the Cost Calculator and the country pages cannot disagree with each other.',
+        qs: [
+          { id: 'm1', q: 'What monthly budget are you planning against?', mode: 'Pick one', help: 'All in, for the whole household.',
+            opts: ['Under $1,200', '$1,200 to $2,000', '$2,000 to $3,200', '$3,200 to $5,000', 'Over $5,000'] },
+          { id: 'm2', q: 'What would you trade first if it ran tight?', mode: 'Pick one', help: '',
+            opts: ['A smaller home', 'A cheaper city', 'Public healthcare instead of private', 'Delaying the move', 'Nothing — I would change country'] },
+          { id: 'm3', q: 'How exposed are you to currency swings?', mode: 'Pick one',
+            help: 'Earning in one currency and spending in another is a recurring risk, not a one-off.',
+            opts: ['Paid in USD, spending abroad', 'Paid locally after the move', 'Mixed', 'Unsure'] },
+        ] },
+    };
+
+    const LANE_ORDER = ['health', 'community', 'energy', 'work', 'family', 'money'];
+    const chip = (on) => 'text-align:left;font-size:13px;line-height:1.4;padding:10px 15px;border-radius:999px;transition:.14s;font-weight:'
+      + (on ? '700' : '500') + ';border:1px solid ' + (on ? '#e0b93a' : '#dfe5ee')
+      + ';background:' + (on ? '#fdf3cf' : '#fff') + ';color:' + (on ? '#17305b' : '#4a5a75');
+
+    const ORD = ['Primary', '2nd priority', '3rd priority'];
+    const lanes = LANE_ORDER.map(k => {
+      const L = LANES[k], idx = picked.indexOf(k), on = idx >= 0;
+      const full = picked.length >= LANE_CAP && !on;
+      return { title: L.title, blurb: L.blurb, d: L.d,
+        tag: on ? ORD[idx] + ' · ' + L.tag : (full ? 'Three is the maximum' : L.tag),
+        pick: () => this.setState(st => {
+          const cur = st.lanes || [];
+          const at = cur.indexOf(k);
+          if (at >= 0) return { lanes: cur.filter(x => x !== k) };
+          if (cur.length >= LANE_CAP) return {};
+          return { lanes: cur.concat([k]) };
+        }),
+        style: 'display:block;width:100%;text-align:left;border-radius:14px;padding:19px 21px 21px;transition:.16s;background:'
+          + (on ? '#fdf3cf' : '#fff') + ';border:' + (on ? '2px solid #e0b93a' : '1px solid #e3e8f1')
+          + ';box-shadow:' + (on ? '0 10px 26px -18px rgba(16,34,68,.5)' : '0 1px 3px 0 rgba(16,34,68,.07)')
+          + (full ? ';opacity:.55;cursor:not-allowed' : ''),
+        iconStyle: 'width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none;background:'
+          + (on ? '#17305b' : '#f1f4f9') + ';color:' + (on ? '#f3c516' : '#5b6b85'),
+        mStyle: 'display:block;width:100%;text-align:left;border-radius:12px;padding:11px 12px;background:'
+          + (on ? '#FDF3CF' : '#fff') + ';border:' + (on ? '1.5px solid #E0B93A' : '1px solid #e5e9f0') + (full ? ';opacity:.55' : ''),
+        mIconStyle: 'width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none;background:'
+          + (on ? '#17305B' : '#f1f4f9') + ';color:' + (on ? '#F3C516' : '#5b6b85'),
+        mTagStyle: 'display:block;margin-top:2px;font:' + (on ? '700' : '500') + ' 10px Poppins;color:' + (on ? '#8A6300' : '#8090a8'),
+        tagStyle: 'display:inline-block;margin-top:14px;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:'
+          + (on ? '#17305b' : '#f1f4f9') + ';color:' + (on ? '#f3c516' : '#8090a8') };
+    });
+
+    // Options another selected answer pulls in with it — shown on, not removable alone.
+    const impliedBy = (q, vals) => {
+      const out = [];
+      if (!q.implies) return out;
+      vals.forEach(v => (q.implies[v] || []).forEach(x => { if (out.indexOf(x) < 0) out.push(x); }));
+      return out;
+    };
+    const answered = (q) => {
+      const v = ans[q.id];
+      return Array.isArray(v) ? v.length > 0 : !!v;
+    };
+
+    const renderQs = (list) => list.map(q => {
+      const cur = ans[q.id];
+      const vals = Array.isArray(cur) ? cur : (cur ? [cur] : []);
+      const locked = impliedBy(q, vals);
+      return {
+        q: q.q, help: q.help, hasHelp: !!q.help, mode: q.mode,
+        fromQuiz: !!(s.quiz && s.quiz[q.id] && ans[q.id] === s.quiz[q.id]),
+        foot: q.impliedFoot || '', hasFoot: !!q.impliedFoot && locked.length > 0,
+        opts: q.opts.map(o => {
+          const isLocked = locked.indexOf(o) >= 0;
+          const on = isLocked || (q.multi ? vals.indexOf(o) >= 0 : cur === o);
+          return { label: o, style: chip(on) + (isLocked ? ';cursor:default' : ''), mStyle: mChip(chip(on)),
+            pick: () => this.setState(st => {
+              if (isLocked) return {};
+              const live = st.ans[q.id];
+              const lv = Array.isArray(live) ? live : (live ? [live] : []);
+              let nextVal;
+              if (!q.multi) nextVal = o;
+              else if (lv.indexOf(o) >= 0) nextVal = lv.filter(x => x !== o);
+              else if ((q.exclusive || []).indexOf(o) >= 0) nextVal = [o];
+              else nextVal = lv.filter(x => (q.exclusive || []).indexOf(x) < 0).concat([o]);
+              if (q.multi && q.implies) {
+                const add = impliedBy(q, nextVal);
+                add.forEach(x => { if (nextVal.indexOf(x) < 0) nextVal = nextVal.concat([x]); });
+              }
+              return { ans: Object.assign({}, st.ans, { [q.id]: nextVal }) };
+            }) };
+        }),
+      };
+    });
+
+    const HQ = [
+      { id: 'hh4', q: 'Where do you live now?', mode: 'Pick one',
+        help: 'Where you apply from affects consulate access and processing times.',
+        opts: ['United States', 'Canada', 'United Kingdom', 'European Union', 'Somewhere else'] },
+      { id: 'hh5', q: 'Which passport do you hold?', mode: 'Pick one',
+        help: 'Your nationality decides which visas you can apply for at all.',
+        opts: ['United States', 'Canadian', 'British', 'An EU passport', 'Another passport'] },
+      { id: 'mq1', q: 'Who are you planning this move for?', mode: 'Pick one',
+        help: 'Every route counts dependants differently.',
+        opts: ['Just me', 'Me and a partner', 'My family', 'I am only exploring'] },
+      { id: 'mq4', q: 'Which description is closest to your current situation?', mode: 'Pick one',
+        help: 'This decides which route families Pathways opens with.',
+        opts: ['I work remotely', 'I may work abroad', 'I want to study', 'I am retired or planning retirement', 'I run or want to start a business'] },
+      { id: 'mq5', q: 'Do you have citizenship, ancestry, or close family ties outside your current country?', mode: 'Pick one',
+        help: 'Citizenship by descent and family routes can open doors a first passport cannot.',
+        opts: ['Yes', 'No', 'I am not sure'] },
+      { id: 'mq6', q: 'What monthly housing budget feels realistic?', mode: 'Pick one', help: '',
+        opts: ['Under $1,000', '$1,000\u2013$2,000', '$2,000\u2013$3,500', 'More than $3,500', 'I am not sure yet'] },
+      { id: 'mq7', q: 'When would you ideally like to relocate?', mode: 'Pick one',
+        help: 'This sets the checklist deadlines, working backwards from arrival.',
+        opts: ['Within 12 months', 'In 1\u20133 years', 'More than 3 years', 'Someday'] },
+      { id: 'mq8', q: 'What feels like your biggest obstacle right now?', mode: 'Pick one',
+        help: 'Whatever you pick gets surfaced first on the Command Center.',
+        opts: ['Choosing a country', 'Understanding visas', 'Money and budgeting', 'Employment', 'Documents and logistics', 'I do not know where to begin'] },
+    ];
+
+    const P = picked.map(k => LANES[k]);
+    const L = P[0] || null;
+    const allBq = [].concat.apply([], P.map(x => x.qs));
+    const bqCount = allBq.length;
+    const bqDone = allBq.filter(answered).length;
+    const hqDone = HQ.filter(q => ans[q.id]).length;
+
+    const laneBlocks = P.map((x, i) => ({
+      title: x.title, note: x.note, d: x.d, order: ORD[i],
+      qs: renderQs(x.qs),
+      iconStyle: 'width:32px;height:32px;border-radius:9px;display:grid;place-items:center;flex:none;background:#17305b;color:#f3c516',
+      orderStyle: 'font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 9px;border-radius:999px;background:#fdf3cf;color:#8a6300',
+    }));
+
+    const RAIL = [
+      ['1', 'Your approach', picked.length ? P.map(x => x.short).join(' · ') : 'Not chosen yet'],
+      ['2', picked.length > 1 ? 'Your ' + picked.length + ' lanes' : 'Your lane',
+        picked.length ? bqDone + ' of ' + bqCount + ' answered' : 'Unlocks after question 1'],
+      ['3', 'Household', hqDone + ' of ' + HQ.length + ' answered'],
+      ['4', 'Command Center', 'Built from your answers'],
+    ];
+    const rail = RAIL.map(([n, label, note], i) => {
+      const step = i + 1, on = s.step === step, past = s.step > step;
+      return { n: past ? '✓' : n, label, note,
+        style: 'display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;background:'
+          + (on ? '#fdf3cf' : 'transparent') + ';color:' + (on || past ? '#17305b' : '#5b6b85'),
+        dot: 'width:24px;height:24px;border-radius:999px;display:grid;place-items:center;flex:none;font-size:11.5px;font-weight:700;background:'
+          + (on ? '#17305b' : past ? '#dff0ec' : '#eef1f6') + ';color:' + (on ? '#f3c516' : past ? '#0f6b64' : '#8090a8') };
+    });
+
+    const SURF = {
+      health: 'Food & Health fit', community: 'Greenbook', energy: 'Energy focus',
+      work: 'Pathways', family: 'Schools', money: 'Cost Calculator',
+    };
+    const surfaces = [{ label: 'Command Center', badge: 'Home', hi: false }]
+      .concat(picked.map((k, i) => ({ label: SURF[k], badge: i === 0 ? 'Opens first' : ORD[i], hi: true })))
+      .concat(LANE_ORDER.filter(k => picked.indexOf(k) < 0).slice(0, 4 - picked.length)
+        .map(k => ({ label: SURF[k], badge: 'Available', hi: false })))
+      .concat([{ label: 'Dashboard', badge: 'Available', hi: false }])
+      .map(r => ({
+        label: r.label, badge: r.badge,
+        style: 'display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:10px;background:'
+          + (r.hi ? '#fdf3cf' : '#fbfcfe') + ';border:1px solid ' + (r.hi ? '#e0b93a' : '#eef1f6'),
+        badgeStyle: 'flex:none;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:'
+          + (r.hi ? '#8a6300' : '#8090a8'),
+      }));
+
+    const TONE = { stop: ['#b3261e', '#fdecea', '#f7cfcb'], warn: ['#8a6300', '#fdf3cf', '#f0e2ae'], ok: ['#0f6b64', '#e7f6f4', '#c2e6e2'] };
+    const F = (tone, title, body) => ({ title, body,
+      style: 'border:1px solid ' + TONE[tone][2] + ';background:' + TONE[tone][1] + ';border-radius:10px;padding:12px 14px',
+      titleStyle: 'font-size:12.5px;font-weight:700;letter-spacing:-.01em;color:' + TONE[tone][0] });
+
+    const has = (id, v) => { const x = ans[id]; return Array.isArray(x) ? x.indexOf(v) >= 0 : x === v; };
+    const eff = [];
+    if (L) eff.push(F('ok', SURF[picked[0]] + ' is pinned first',
+      picked.length > 1
+        ? 'Rankings weight ' + P.map(x => x.short).join(', then ') + '. Each lane generates its own checklist items for every destination you add.'
+        : 'Country rankings are ordered by this lane, and its checklist items are generated for every destination you add.'));
+    if (has('h3', 'A chronic condition needing a specialist') || has('h3', 'Mobility or disability support')) eff.push(F('stop', 'Care continuity became a filter', 'Specialist availability and medication equivalents are checked before a country is ranked, not after. Prescription continuity is included with it.'));
+    if (Array.isArray(ans.h2) && ans.h2.length && ans.h2.indexOf('None') < 0) eff.push(F('warn', ans.h2.length + (ans.h2.length === 1 ? ' allergen flagged' : ' allergens flagged'), 'Riskier food cultures rank lower. Nothing is removed, and each country card shows its confidence level.'));
+    if (has('h3', 'Mental health care')) eff.push(F('warn', 'Mental health access is tracked', 'Waiting times and English-language provision vary far more than general care. Both are surfaced per city.'));
+    if (ans.c2 === 'Plan to live in English') eff.push(F('warn', 'English-only limits the map', 'It works in some cities and fails in most bureaucracy. It also correlates strongly with moving back.'));
+    if (ans.c3 === 'Never been') eff.push(F('stop', 'Visit before you commit', 'A scouting trip in the least pleasant season is the cheapest de-risking available.'));
+    if (ans.e1 === 'None of it yet') eff.push(F('warn', 'Chart data is missing', 'Energy focus stays directional until you add a birth date, time, and city. Everything is computed in your browser.'));
+    if (ans.e3 === 'Lead with it, then check feasibility') eff.push(F('warn', 'Alignment leads the ranking', 'Visa and cost filters still run — they move to a second pass rather than disappearing.'));
+    if (ans.w1 === 'I will need local work') eff.push(F('stop', 'Needing local work narrows the routes', 'Most income-based and passive-income visas assume you arrive already earning. Employment routes need a sponsor first.'));
+    if (ans.w2 === 'Informally, unconfirmed') eff.push(F('warn', 'Get the permission in writing', 'Consulates ask for an employer letter. An informal arrangement cannot be evidenced.'));
+    if (ans.w3 === 'Yes, and re-qualification is required') eff.push(F('warn', 'Re-qualification takes years', 'Plan for the income gap while licensing runs, and confirm the recognition route before moving.'));
+    if (ans.f2 === 'Bilingual or international, paying fees') eff.push(F('warn', 'Fees changed the budget', 'School fees are added to every cost comparison. They are rarely in published cost-of-living figures.'));
+    if (ans.f2 === 'Undecided' && Array.isArray(ans.f1) && ans.f1.indexOf('No children') < 0 && ans.f1.length) eff.push(F('stop', 'Schooling is undecided', 'School choice sets your city, your budget, and your move month. The Command Center will keep asking.'));
+    if (ans.f3 === 'No, it is contested') eff.push(F('stop', 'Household alignment comes first', 'A contested move fails at the paperwork stage, not the decision stage. Resolve it before spending on applications.'));
+    if (ans.m3 === 'Paid in USD, spending abroad') eff.push(F('warn', 'Currency exposure is on', 'Cost figures carry a swing range instead of a single number, so a bad quarter does not surprise you.'));
+    if (ans.mq5 === 'Yes') eff.push(F('ok', 'Family and ancestry routes are checked first', 'Citizenship-by-descent and family routes are added to Pathways alongside visas. Gathering lineage documents early is usually the long step.'));
+    if (ans.mq7 === 'Within 12 months') eff.push(F('warn', 'Twelve months goes quickly', 'Apostilles and translations are the usual bottleneck, so those tasks move to the front of the checklist.'));
+    if (ans.mq8 === 'I do not know where to begin') eff.push(F('ok', 'Your first week is laid out', 'The Command Center opens on three starter tasks instead of the full checklist.'));
+    const effects = eff.slice(0, 5);
+
+    const BASE = ['Portugal', 'Spain', 'Uruguay', 'Mexico', 'Costa Rica', 'Ghana', 'Malaysia', 'Albania'];
+    const ALLDEST = BASE.concat(s.dests.filter(n => BASE.indexOf(n) < 0));
+    const addDest = () => { const v = (s.destDraft || '').trim(); if (!v) return; this.setState(st => ({ destDraft: '', dests: st.dests.some(x => x.toLowerCase() === v.toLowerCase()) ? st.dests : st.dests.concat([v]) })); };
+    const destChips = ALLDEST.map(n => {
+      const on = s.dests.indexOf(n) >= 0;
+      return { label: n, style: chip(on), mStyle: mChip(chip(on)),
+        toggle: () => this.setState(st => ({
+          dests: st.dests.indexOf(n) >= 0 ? st.dests.filter(x => x !== n) : st.dests.concat([n]),
+        })) };
+    });
+
+    const step = s.step;
+    const canNext = step === 1 ? picked.length > 0 : step === 2 ? bqDone === bqCount : step === 3 ? hqDone === HQ.length : true;
+    const nextLabel = step === 1
+      ? (picked.length > 1 ? 'Continue with ' + picked.length + ' lanes' : 'Continue')
+      : step === 2 ? 'Household next' : step === 3 ? 'Build my Command Center' : 'Open Command Center';
+    const totalDone = (picked.length ? 1 : 0) + bqDone + hqDone;
+    const totalQs = 1 + bqCount + HQ.length;
+    const laneShort = picked.length === 0 ? 'your priorities'
+      : picked.length === 1 ? L.short
+      : P.slice(0, -1).map(x => x.short).join(', ') + ' and ' + P[P.length - 1].short;
+
+    return {
+      rail, lanes, laneBlocks,
+      hasQuiz: !!s.quiz,
+      quizBanner: s.quiz
+        ? 'From your Match Quiz: you said ' + (s.quiz.mq2 || 'several things').toLowerCase() + ' matters most, so ' + (picked.length ? P.map(x => x.short).join(' and ') + (picked.length > 1 ? ' are' : ' is') : 'nothing is') + ' preselected. Change it freely.'
+        : '',
+      quizHhNote: s.quiz ? 'Six of these came from your Match Quiz and are already filled in. Check them, then answer the two passport questions.' : '',
+      greeting: s.name ? 'Setting up ' + s.name + '\u2019s Command Center' : 'Setting up your Command Center',
+      ccHref: this.href('command-center'),
+      saveLater: () => this.persist(false),
+      destDraft: s.destDraft, setDestDraft: (e) => set({ destDraft: e.target.value }),
+      addDest, addDestKey: (e) => { if (e.key === 'Enter') addDest(); },
+      saving: s.saving,
+      isStep1: step === 1, isStep2: step === 2, isStep3: step === 3, isStep4: step === 4,
+      step2Eyebrow: picked.length > 1
+        ? 'YOUR ' + picked.length + ' LANES · QUESTIONS 2 TO ' + (1 + bqCount)
+        : (L ? L.eyebrow : ''),
+      step2Title: picked.length > 1 ? 'What each of your lanes needs to know' : (L ? L.h1 : ''),
+      step2Note: picked.length > 1
+        ? 'One set of questions per lane, in your priority order. Later lanes break ties rather than override the first.'
+        : (L ? L.note : ''),
+      laneShort,
+      sumNote: L
+        ? totalQs + ' answers in. ' + SURF[picked[0]] + ' opens first, the checklist is generated for every destination below, and the country rankings now read your household rather than a national average.'
+        : 'Your rail and rankings are set.',
+      hqs: renderQs(HQ),
+      surfaces, effects, destChips, destCount: String(s.dests.length),
+      canBack: step > 1,
+      back: () => set({ step: Math.max(1, step - 1) }),
+      next: () => { if (!canNext || s.saving) return; if (step === 4) this.finish(); else set({ step: Math.min(4, step + 1) }); },
+      nextLabel,
+      nextStyle: 'height:48px;padding:0 26px;border-radius:10px;font-size:14px;font-weight:700;transition:.14s;'
+        + (canNext ? 'background:#f3c516;color:#17305b;box-shadow:0 10px 24px -14px rgba(216,169,4,.8)'
+                   : 'background:#eef1f6;color:#a9b4c6;cursor:not-allowed'),
+      progressLabel: step === 4 ? 'All ' + totalQs + ' answered' : totalDone + ' of ' + totalQs + ' answered',
+    };
+  }
+}
+</script>
+</body>
+</html>
